@@ -69,9 +69,9 @@ public class ManagerController {
     }
 
     @FXML
-    public void extendedNavigationBar(ActionEvent actionEvent) {
+    public void extendedNavigationBar(MouseEvent actionEvent) {
         Node node = navigationBar;
-        TranslateTransition translateTransition = new TranslateTransition(Duration.millis(500), node);
+        TranslateTransition translateTransition = new TranslateTransition(Duration.millis(300), node);
         navigateBool = !navigateBool;
         if (navigateBool){
             translateTransition.setToX(0);
