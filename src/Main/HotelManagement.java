@@ -10,15 +10,13 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class HotelManagement {
-    static int transID = 0;
-    ArrayList<Room> rooms = new ArrayList<>();
-    SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH");
-    ArrayList<Reservation> reservations = new ArrayList<>();
+    static ArrayList<Room> rooms = new ArrayList<>();
+    private SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH");
+    static ArrayList<Reservation> reservations = new ArrayList<>();
 
-
-    public void addReservation(Room room,String from,String to,Owner owner) throws Exception {
+    public void addReservation(Room room, String from, String to, Owner owner) throws Exception {
         if (this.checkingReservation(room,from,this.getAvailableTime(to))){
-            reservations.add(new Reservation(String.valueOf(transID),from,to,owner,room));
+            reservations.add(new Reservation(String.valueOf(Reservation.getTransID()),from,to,owner,room));
         }
     }
 
@@ -67,6 +65,7 @@ public class HotelManagement {
 
 // Main.Main.Reservation Class
 class Reservation {
+    private static int transID = 0;
     String id, availableTime;
     ReservedStatus reservedStatus;
     String from, to;
@@ -77,8 +76,12 @@ class Reservation {
     boolean isOverDay;
     SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH");
 
+    public static int getTransID() {
+        return transID;
+    }
+
     public Reservation(String id, String from, String to, Owner owner, Room room) throws Exception {
-        HotelManagement.transID += 1;
+        Reservation.transID += 1;
         this.id = id;
         this.owner = owner;
         this.room = room;

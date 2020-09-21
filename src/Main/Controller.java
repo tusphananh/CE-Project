@@ -24,8 +24,6 @@ import java.util.TimerTask;
 
 public class Controller {
     private String password = "123";
-    double x,y;
-    double opacity = 1;
     @FXML
     private AnchorPane loginPane;
 
@@ -84,18 +82,6 @@ public class Controller {
         System.exit(-1);
     }
 
-    @FXML
-    public void mousePressed(MouseEvent mouseEvent){
-        x = mouseEvent.getSceneX();
-        y = mouseEvent.getSceneY();
-    }
-
-    @FXML
-    public void mouseDraged(MouseEvent mouseEvent){
-        Stage stage = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
-        stage.setX(mouseEvent.getScreenX() - x );
-        stage.setY(mouseEvent.getScreenY() - y );
-    }
 
     @FXML
     public void enterPressed(KeyEvent event){
@@ -104,8 +90,5 @@ public class Controller {
         }
     }
 
-    @FXML
-    public void minimize(ActionEvent actionEvent){
-        Navigation.minimize(actionEvent);
-    }
+
 }
