@@ -4,10 +4,7 @@ import java.sql.SQLOutput;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Scanner;
+import java.util.*;
 
 public class HotelManagement {
     static ArrayList<Room> rooms = new ArrayList<>();
@@ -20,27 +17,26 @@ public class HotelManagement {
         }
     }
 
-    public Room findRoom(String roomID){
-        for (Room r: rooms
-             ) {
-            if (r.id.equals(roomID)) return r ;
-        }
-
-        return null;
+    public Room findRoom(String id){
+        return Finder.search(rooms,id);
     }
-    public boolean checkingReservation(Room room,String from1, String availableTime1) throws Exception {
-        Date d1 = format.parse(from1);
-        Date available1 = format.parse(availableTime1);
+    public Reservation findReservations(String id){
+        return Finder.search(reservations,id);
+    }
+
+    public boolean checkingReservation(Room room,String from1, String to1) throws Exception {
+        Date f1 = format.parse(from1);
+        Date t1 = format.parse(to1);
         if (room.reservations.isEmpty()) {
             System.out.println("Success");
             return true;
         } else {
             for (Reservation r : room.reservations
             ) {
-                Date d2 = format.parse(r.from);
-                Date available2 = format.parse(r.availableTime);
+                Date f2 = format.parse(r.from);
+                Date t2 = format.parse(r.to);
 
-                if ((available1.after(d2) && (available1.before(available2) || available1.equals(available2))) || (d1.before(available2) && (d1.after(d2) || d1.equals(d2)))){
+                if ((t1.after(f2) && (t1.before(t2) || t1.equals(t2))) || (f1.before(t2) && (f1.after(f2) || f1.equals(f2)))){
                     System.out.println("Fail");
                     return false;
                 }
@@ -64,16 +60,15 @@ public class HotelManagement {
 
 
 // Main.Main.Reservation Class
-class Reservation {
+class Reservation implements Identifier {
     private static int transID = 0;
-    String id, availableTime;
+    private String id;
+    public String availableTime;
     ReservedStatus reservedStatus;
     String from, to;
     Owner owner;
     Room room;
-    long totalTime;
     int totalPrice;
-    boolean isOverDay;
     SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH");
 
     public static int getTransID() {
@@ -137,6 +132,11 @@ class Reservation {
                 ", isOverDay=" + isOverDay +
                 '}';
     }
+
+    @Override
+    public String getID() {
+        return id;
+    }
 }
 
 class ReservationOnline extends Reservation {
@@ -153,7 +153,7 @@ class ReservationOnline extends Reservation {
     @Override
     public String toString() {
         return "ReservationOnline{" +
-                "id='" + id + '\'' +
+                "id='" + getID() + '\'' +
                 ", reservedStatus=" + reservedStatus.getValues() +
                 ", paymentMethod=" + paymentMethod.name +
                 ", paymentStatus=" + paymentStatus.getValues() +
@@ -192,8 +192,8 @@ class Owner {
 
 
 // Main.Main.Room Class
-class Room {
-    String id;
+class Room implements Identifier{
+    private String id;
     long bedAmount;
     int hourPrice, dayPrice;
     ArrayList<Reservation> reservations = new ArrayList<>();
@@ -205,6 +205,7 @@ class Room {
         this.dayPrice = dayPrice;
     }
 
+
     // toString here
     @Override
     public String toString() {
@@ -214,6 +215,11 @@ class Room {
                 ", hourPrice=" + hourPrice +
                 ", dayPrice=" + dayPrice +
                 '}';
+    }
+
+    @Override
+    public String getID() {
+        return id;
     }
 }
 
@@ -275,4 +281,22 @@ enum PaymentStatus {
     }
 }
 
+interface Identifier{
+    String getID();
+}
 
+class Finder{
+
+    public static <E extends Identifier> E search(Collection<E> collection, String key)
+    {
+        for(E e: collection)
+        {
+            if( e.getID().equals(key) )
+            {
+                return e;
+            }
+        }
+        return null;
+    }
+
+}

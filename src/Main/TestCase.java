@@ -10,7 +10,7 @@ public class TestCase {
         hotelManagement.rooms.add(new Room("1", 1, 70000, 200000));
         hotelManagement.rooms.add(new Room("2", 2, 100000, 300000));
         hotelManagement.rooms.add(new Room("3", 3, 150000, 400000));
-        for (Room r : hotelManagement.rooms
+        for (Identifier r : hotelManagement.rooms
         ) {
             System.out.println(r);
         }
@@ -45,7 +45,7 @@ public class TestCase {
                     hotelManagement.addReservation(room,dateStart,dateStop,owner);
                     break;
                 case "l" :
-                    for (Reservation r: hotelManagement.reservations
+                    for (Identifier r: hotelManagement.reservations
                          ) {
                         System.out.println(r.toString());
                     }
