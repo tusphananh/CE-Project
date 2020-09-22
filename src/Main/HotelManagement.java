@@ -94,7 +94,7 @@ class Reservation implements Identifier {
         Date d2 = format.parse(to);
         Calendar cal1 = Calendar.getInstance();
         Calendar cal2 = Calendar.getInstance();
-        cal1.setTime(d1);
+        cgual1.setTime(d1);
         cal2.setTime(d2);
         this.isOverDay = !(cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) && cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR));
         long dayInHour = ((d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24)) % 365;
