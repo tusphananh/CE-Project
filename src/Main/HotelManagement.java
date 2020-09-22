@@ -1,20 +1,23 @@
 package Main;
 
-import java.sql.SQLOutput;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class HotelManagement {
     static ArrayList<Room> rooms = new ArrayList<>();
-    private SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH");
+    private static SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH");
     static ArrayList<Reservation> reservations = new ArrayList<>();
 
     public void addReservation(Room room, String from, String to, Owner owner) throws Exception {
-        if (this.checkingReservation(room,from,this.getAvailableTime(to))){
+        if (this.checkingReservation(room,from,to)){
             reservations.add(new Reservation(String.valueOf(Reservation.getTransID()),from,to,owner,room));
         }
+    }
+
+    public static SimpleDateFormat getFormat() {
+        return format;
     }
 
     public Room findRoom(String id){
@@ -25,8 +28,10 @@ public class HotelManagement {
     }
 
     public boolean checkingReservation(Room room,String from1, String to1) throws Exception {
-        Date f1 = format.parse(from1);
-        Date t1 = format.parse(to1);
+        String from = from1 + " 14";
+        String to = to1 + " 12";
+        Date f1 = format.parse(from);
+        Date t1 = format.parse(to);
         if (room.reservations.isEmpty()) {
             System.out.println("Success");
             return true;
@@ -46,14 +51,6 @@ public class HotelManagement {
         return true;
     }
 
-    public String getAvailableTime(String to) throws ParseException {
-        Date date = format.parse(to);
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        calendar.add(Calendar.HOUR, 2);
-        return format.format(calendar.getTime());
-    }
-
 }
 
 
@@ -63,13 +60,12 @@ public class HotelManagement {
 class Reservation implements Identifier {
     private static int transID = 0;
     private String id;
-    public String availableTime;
+    long duration;
     ReservedStatus reservedStatus;
     String from, to;
     Owner owner;
     Room room;
     int totalPrice;
-    SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH");
 
     public static int getTransID() {
         return transID;
@@ -80,56 +76,39 @@ class Reservation implements Identifier {
         this.id = id;
         this.owner = owner;
         this.room = room;
-        this.from = from;
-        this.to = to;
+        this.from = from + " 14";
+        this.to = to + " 12";
         this.reservedStatus = ReservedStatus.pending;
-        setAvailableTime(this.to);
-        setTotalTime(from, to);
+        setDuration();
         setTotalPrice();
         room.reservations.add(this);
     }
 
-    public void setTotalTime(String from, String to) throws Exception {
-        Date d1 = format.parse(from);
-        Date d2 = format.parse(to);
-        Calendar cal1 = Calendar.getInstance();
-        Calendar cal2 = Calendar.getInstance();
-        cgual1.setTime(d1);
-        cal2.setTime(d2);
-        this.isOverDay = !(cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR) && cal1.get(Calendar.YEAR) == cal2.get(Calendar.YEAR));
-        long dayInHour = ((d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24)) % 365;
-        long hour = ((d2.getTime() - d1.getTime()) / (1000 * 60 * 60)) % 24;
-        this.totalTime = dayInHour * 24 + hour;
-    }
-
-    public void setAvailableTime(String to) throws ParseException {
-        Date date = format.parse(to);
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        calendar.add(Calendar.HOUR, 2);
-        availableTime = format.format(calendar.getTime());
+    public void setDuration() throws ParseException {
+        Date date1 = HotelManagement.getFormat().parse(from);
+        Date date2 = HotelManagement.getFormat().parse(to);
+        long diffInMillies = Math.abs(date2.getTime() - date1.getTime());
+        duration = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS) + 1;
     }
 
     public void setTotalPrice() {
-        if (isOverDay) totalPrice = (int) (room.dayPrice * (totalTime + 2) / 24);
-        else if (totalTime > 2) totalPrice = (int) (room.hourPrice + (totalTime - 2) * room.hourPrice * 0.07);
-        else totalPrice = (int) (room.hourPrice * totalTime);
+        this.totalPrice = (int) duration*room.price;
     }
 
     // toString here
+
+
     @Override
     public String toString() {
         return "Reservation{" +
                 "id='" + id + '\'' +
-                ", reservedStatus=" + reservedStatus.getValues() +
-                ", availableTime=" + availableTime +
+                ", duration=" + duration +
+                ", reservedStatus=" + reservedStatus +
                 ", from='" + from + '\'' +
                 ", to='" + to + '\'' +
                 ", owner=" + owner.name +
                 ", room=" + room +
-                ", totalTime=" + totalTime +
                 ", totalPrice=" + totalPrice +
-                ", isOverDay=" + isOverDay +
                 '}';
     }
 
@@ -150,20 +129,19 @@ class ReservationOnline extends Reservation {
     }
 
     // toString here
+
     @Override
     public String toString() {
         return "ReservationOnline{" +
-                "id='" + getID() + '\'' +
-                ", reservedStatus=" + reservedStatus.getValues() +
-                ", paymentMethod=" + paymentMethod.name +
-                ", paymentStatus=" + paymentStatus.getValues() +
+                "duration=" + duration +
+                ", reservedStatus=" + reservedStatus +
                 ", from='" + from + '\'' +
                 ", to='" + to + '\'' +
                 ", owner=" + owner.name +
                 ", room=" + room +
-                ", totalTime=" + totalTime +
                 ", totalPrice=" + totalPrice +
-                ", isOverDay=" + isOverDay +
+                ", paymentStatus=" + paymentStatus +
+                ", paymentMethod=" + paymentMethod.getClass() +
                 '}';
     }
 }
@@ -195,16 +173,25 @@ class Owner {
 class Room implements Identifier{
     private String id;
     long bedAmount;
-    int hourPrice, dayPrice;
+    int  price;
+    Type type;
     ArrayList<Reservation> reservations = new ArrayList<>();
+    String images;
 
-    public Room(String id, long bedAmount, int hourPrice, int dayPrice) {
+    public Room(String id, long bedAmount, int price, Type type) {
         this.id = id;
         this.bedAmount = bedAmount;
-        this.hourPrice = hourPrice;
-        this.dayPrice = dayPrice;
+        this.price = price;
+        this.type = type;
     }
 
+    public void setImages(String images) {
+        this.images = images;
+    }
+
+    public String getImages() {
+        return images;
+    }
 
     // toString here
     @Override
@@ -212,14 +199,17 @@ class Room implements Identifier{
         return "Room{" +
                 "id='" + id + '\'' +
                 ", bedAmount=" + bedAmount +
-                ", hourPrice=" + hourPrice +
-                ", dayPrice=" + dayPrice +
+                ", dayPrice=" + price +
                 '}';
     }
 
     @Override
     public String getID() {
         return id;
+    }
+
+    enum Type{
+        vip,normal
     }
 }
 

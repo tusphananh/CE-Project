@@ -6,16 +6,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.w3c.dom.Text;
 
-import javax.print.DocFlavor;
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,6 +20,12 @@ import java.util.ResourceBundle;
 public class ManagerController {
     private double x,y;
     boolean navigateBool = false;
+    @FXML
+    private Pane userManagementPane,managementPane;
+
+    @FXML
+    private BorderPane borderPane;
+
     @FXML
     private VBox vstackList;
 
@@ -68,6 +71,7 @@ public class ManagerController {
         System.exit(-1);
     }
 
+
     @FXML
     public void extendedNavigationBar(MouseEvent actionEvent) {
         Node node = navigationBar;
@@ -87,12 +91,35 @@ public class ManagerController {
     }
 
     @FXML
-    public void initialize() throws IOException {
-
-        for (Room r: ViewController.getRooms()
-             ) {
-            Node newLoadedPane = FXMLLoader.load(getClass().getResource("item.fxml"));
-            vstackList.getChildren().add(newLoadedPane);
-        }
+    void toUserManagement(MouseEvent event) throws IOException {
+        navigationBarComesIn();
+        managementPane.setVisible(false);
+        userManagementPane.setVisible(true);
     }
+
+    @FXML
+    void toManagement(MouseEvent event) throws IOException {
+        navigationBarComesIn();
+        userManagementPane.setVisible(false);
+        managementPane.setVisible(true);
+    }
+
+
+    void navigationBarComesIn(){
+        Node node = navigationBar;
+        TranslateTransition translateTransition = new TranslateTransition(Duration.millis(300), node);
+        translateTransition.setToX(-210);
+        translateTransition.play();
+        navigationBar.setTranslateX(-210);
+    }
+
+    //    @FXML
+//    public void initialize() throws IOException {
+//        for (Room r: ViewController.getRooms()
+//             ) {
+//            Node newLoadedPane = FXMLLoader.load(getClass().getResource("item.fxml"));
+//            vstackList.getChildren().add(newLoadedPane);
+//        }
+//    }
+
 }

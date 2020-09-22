@@ -16,9 +16,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        hotelManagement.rooms.add(new Room("1", 1, 70000, 200000));
-        hotelManagement.rooms.add(new Room("2", 2, 100000, 300000));
-        hotelManagement.rooms.add(new Room("3", 3, 150000, 400000));
+        hotelManagement.rooms.add(new Room("1", 1, 200000,Room.Type.vip));
+        hotelManagement.rooms.add(new Room("2", 2, 300000,Room.Type.normal));
+        hotelManagement.rooms.add(new Room("3", 3, 400000,Room.Type.normal));
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.setScene(new Scene( FXMLLoader.load(Navigation.class.getResource("Login.fxml"))));
         primaryStage.setResizable(false);
