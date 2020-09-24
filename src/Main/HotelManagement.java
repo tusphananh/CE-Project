@@ -10,6 +10,7 @@ public class HotelManagement {
     private static SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH");
     static ArrayList<Reservation> reservations = new ArrayList<>();
 
+    // This func will check and add the reservation
     public void addReservation(Room room, String from, String to, Owner owner) throws Exception {
         if (this.checkingReservation(room,from,to)){
             reservations.add(new Reservation(String.valueOf(Reservation.getTransID()),from,to,owner,room));
@@ -20,18 +21,22 @@ public class HotelManagement {
         return format;
     }
 
+    // We will use Finder to find room by room ID
     public Room findRoom(String id){
         return Finder.search(rooms,id);
     }
+    // We will use Finder to find reservation by ID
     public Reservation findReservations(String id){
         return Finder.search(reservations,id);
     }
 
     public boolean checkingReservation(Room room,String from1, String to1) throws Exception {
+        // Cuz most of hotel now will be reserved from 14PM reserved day to 12AM the day after
         String from = from1 + " 14";
         String to = to1 + " 12";
         Date f1 = format.parse(from);
         Date t1 = format.parse(to);
+        // If no reservation in this room it always be available to be booked
         if (room.reservations.isEmpty()) {
             System.out.println("Success");
             return true;
@@ -40,7 +45,8 @@ public class HotelManagement {
             ) {
                 Date f2 = format.parse(r.from);
                 Date t2 = format.parse(r.to);
-
+                //  If from1 in other reservation's duration ( from1 >= from2 or from1 < to2) or ( to1 > from2 or to1 <= to2)
+                // We will throw fail
                 if ((t1.after(f2) && (t1.before(t2) || t1.equals(t2))) || (f1.before(t2) && (f1.after(f2) || f1.equals(f2)))){
                     System.out.println("Fail");
                     return false;
@@ -52,8 +58,6 @@ public class HotelManagement {
     }
 
 }
-
-
 
 
 // Main.Main.Reservation Class
@@ -84,10 +88,14 @@ class Reservation implements Identifier {
         room.reservations.add(this);
     }
 
+
+    // The duration to calculate the different between 2 days
     public void setDuration() throws ParseException {
         Date date1 = HotelManagement.getFormat().parse(from);
         Date date2 = HotelManagement.getFormat().parse(to);
+        // Different between 2 days in MiliSec
         long diffInMillies = Math.abs(date2.getTime() - date1.getTime());
+        // Cuz the duration from 14PM to 12AM so it's not fully 24 hours so we need +1 after this
         duration = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS) + 1;
     }
 
@@ -96,8 +104,6 @@ class Reservation implements Identifier {
     }
 
     // toString here
-
-
     @Override
     public String toString() {
         return "Reservation{" +
@@ -258,6 +264,7 @@ enum ReservedStatus {
     }
 }
 
+
 enum PaymentStatus {
     pending("Pending"), success("Success");
     private final String values;
@@ -271,12 +278,15 @@ enum PaymentStatus {
     }
 }
 
+// Interface Identifier to get the ID of Objects
 interface Identifier{
     String getID();
 }
 
+// This finder class will help us find the Objects which implement the Identifier (Helper in OOAD)
 class Finder{
 
+    // This func will travels the ArrayList(Collection) to find the Object exist or not through ID(getID in Identifier)
     public static <E extends Identifier> E search(Collection<E> collection, String key)
     {
         for(E e: collection)

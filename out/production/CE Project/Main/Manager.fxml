@@ -39,29 +39,29 @@
                         </TextField>
                      </children>
                   </HBox>
-                  <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="28.0" prefWidth="302.0" spacing="10.0">
+                  <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="28.0" prefWidth="378.0" spacing="10.0">
                      <children>
-                        <Button mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" text="Capacity">
+                        <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="85.0" style="-fx-background-color: white; -fx-background-radius: 10;" text="Capacity">
                            <effect>
                               <DropShadow color="#69696924" />
                            </effect>
                         </Button>
-                        <Button mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" text="Available">
+                        <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="82.0" style="-fx-background-color: white; -fx-background-radius: 10;" text="Available">
                            <effect>
                               <DropShadow color="#69696924" />
                            </effect>
                         </Button>
-                        <Button mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" text="Hot">
+                        <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="58.0" style="-fx-background-color: white; -fx-background-radius: 10;" text="Hot">
                            <effect>
                               <DropShadow color="#69696924" />
                            </effect>
                         </Button>
-                        <Button mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" text="Sale">
+                        <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: white; -fx-background-radius: 10;" text="Sale">
                            <effect>
                               <DropShadow color="#69696924" />
                            </effect>
                         </Button>
-                        <Button mnemonicParsing="false" style="-fx-background-color: white; -fx-background-radius: 10;" text="Service">
+                        <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="88.0" style="-fx-background-color: white; -fx-background-radius: 10;" text="Service">
                            <effect>
                               <DropShadow color="#69696924" />
                            </effect>
