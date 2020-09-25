@@ -71,7 +71,7 @@
                   <Separator maxWidth="-Infinity" prefHeight="8.0" prefWidth="351.0" />
                   <ScrollPane fx:id="listOfPanels1" hbarPolicy="NEVER" prefHeight="410.0" prefWidth="558.0" style="-fx-background-color: white;" stylesheets="@StyleUI.css" vmax="2.0">
                      <content>
-                        <VBox id="vboxStyle" fx:id="vstackList1" alignment="CENTER" prefHeight="453.0" prefWidth="554.0" style="-fx-spacing: 5;" />
+                        <VBox id="vboxStyle" fx:id="vstackList" alignment="CENTER" prefHeight="453.0" prefWidth="554.0" style="-fx-spacing: 5;" />
                      </content>
                      <styleClass>
                         <String fx:value="corner" />

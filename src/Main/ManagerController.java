@@ -113,13 +113,13 @@ public class ManagerController {
         navigationBar.setTranslateX(-210);
     }
 
-    //    @FXML
-//    public void initialize() throws IOException {
-//        for (Room r: ViewController.getRooms()
-//             ) {
-//            Node newLoadedPane = FXMLLoader.load(getClass().getResource("item.fxml"));
-//            vstackList.getChildren().add(newLoadedPane);
-//        }
-//    }
+    @FXML
+    public void initialize() throws IOException {
+        for (Room r: ViewController.getRooms()
+             ) {
+            Node newLoadedPane = FXMLLoader.load(getClass().getResource("item.fxml"));
+            vstackList.getChildren().add(newLoadedPane);
+        }
+    }
 
 }
