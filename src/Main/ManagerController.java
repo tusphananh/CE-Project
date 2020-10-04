@@ -10,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -106,6 +107,7 @@ public class ManagerController {
 
 
     void navigationBarComesIn(){
+        navigateBool = !navigateBool;
         Node node = navigationBar;
         TranslateTransition translateTransition = new TranslateTransition(Duration.millis(300), node);
         translateTransition.setToX(-210);
@@ -115,11 +117,19 @@ public class ManagerController {
 
     @FXML
     public void initialize() throws IOException {
+        RoomPanels roomPanels;
+        vstackList.setSpacing(10.0);
         for (Room r: ViewController.getRooms()
              ) {
-            Node newLoadedPane = FXMLLoader.load(getClass().getResource("item.fxml"));
-            vstackList.getChildren().add(newLoadedPane);
+            roomPanels = new RoomPanels(r.getID(),r.getBedAmount(),r.getPrice(),r.getType());
+            roomPanels.initilize();
+            vstackList.getChildren().add(roomPanels);
         }
+    }
+
+    @FXML
+    public void logout(ActionEvent actionEvent) throws IOException, InterruptedException {
+        Navigation.navigateLogin(actionEvent);
     }
 
 }

@@ -93,6 +93,15 @@
                   <Button alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: white;" text="Button" textFill="#fed755" />
                </children>
             </VBox>
+            <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="29.0" layoutY="626.0" mnemonicParsing="false" onAction="#logout" prefHeight="34.0" prefWidth="128.0" style="-fx-background-color: white;" text="LOGOUT" textFill="#fed755">
+               <graphic>
+                  <ImageView fitHeight="24.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/logout.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
          <effect>
             <DropShadow color="#0000003f" height="0.0" radius="13.645" width="56.58" />

@@ -214,9 +214,22 @@ class Room implements Identifier{
         return id;
     }
 
-    enum Type{
-        vip,normal
+
+    public int getPrice() {
+        return price;
     }
+
+    public long getBedAmount() {
+        return bedAmount;
+    }
+
+
+    public Type getType() {
+        return type;
+    }
+}
+enum Type{
+    vip,normal
 }
 
 abstract class PaymentMethod {

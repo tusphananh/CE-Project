@@ -1,29 +1,23 @@
 package Main;
 
-import javafx.animation.FadeTransition;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Controller {
-    private String password = "123";
+    private String adminPass = "123";
+    private String employeePass = "456";
     @FXML
     private AnchorPane loginPane;
 
@@ -39,7 +33,7 @@ public class Controller {
     @FXML
     public void buttonPressed(javafx.event.ActionEvent actionEvent) throws IOException, InterruptedException {
         System.out.println("Logining");
-        if (passwordField.getText().equals(password)){
+        if ((passwordField.getText().equals(adminPass) && switchButton.isState()) || (passwordField.getText().equals(employeePass) && !switchButton.isState())  ){
             messagesText.setText(" Welcome back !");
             messagesText.setFill(Color.web("FED755"));
             System.out.println("Success");
@@ -90,5 +84,13 @@ public class Controller {
         }
     }
 
+    SwitchButton switchButton;
+    @FXML
+    public void initialize() throws IOException {
+        switchButton = new SwitchButton();
+        switchButton.setLayoutX(buttonLogin.getLayoutX() + 5);
+        switchButton.setLayoutY(buttonLogin.getLayoutY() + 50);
+        loginPane.getChildren().add(switchButton);
+    }
 
 }
