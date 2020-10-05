@@ -4,6 +4,7 @@ import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -13,13 +14,14 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 
-public class SwitchButton extends StackPane {
+public class SwitchButton extends Pane {
+    private StackPane stackPane;
     private final Rectangle back = new Rectangle(30, 10, Color.RED);
     private final Button button = new Button();
     private String buttonStyleOff = "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 0.1, 0.0, 0.0, 1); -fx-background-color: WHITE; -fx-border-color: #FED755 ";
     private String buttonStyleOn = "-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 0.1, 0.0, 0.0, 1); -fx-background-color: WHITE; -fx-border-color: #FED755";
     private Text text = new Text("Employee");
-    private VBox vBox = new VBox();
+    private VBox vBox;
 
     public boolean isState() {
         return state;
@@ -28,7 +30,9 @@ public class SwitchButton extends StackPane {
     private boolean state = false;
 
     private void init() {
-        setMinSize(30, 15);
+        vBox = new VBox();
+        stackPane = new StackPane();
+        stackPane.setMinSize(30, 15);
         back.maxWidth(30);
         back.minWidth(30);
         back.maxHeight(10);
@@ -38,14 +42,16 @@ public class SwitchButton extends StackPane {
         back.setFill(Color.valueOf("#FED755"));
         Double r = 2.0;
         button.setShape(new Circle(r));
-        setAlignment(button, Pos.CENTER_LEFT);
+        stackPane.setAlignment(button, Pos.CENTER_LEFT);
+        stackPane.setMaxSize(15,15);
         button.setMaxSize(15, 15);
         button.setMinSize(15, 15);
         button.setStyle(buttonStyleOff);
         text.setFill(Color.valueOf("#FED755"));
-        text.setTranslateX(back.getX());
-        text.setTranslateY((back.getY() + 30));
-        getChildren().addAll(back, button,text);
+        stackPane.getChildren().addAll(back,button);
+        vBox.getChildren().addAll(stackPane,text);
+        vBox.setSpacing(5);
+        getChildren().addAll(vBox);
     }
 
     public SwitchButton() throws IOException {
@@ -56,12 +62,12 @@ public class SwitchButton extends StackPane {
             public void handle(Event e) {
                 if (state) {
                     button.setStyle(buttonStyleOff);
-                    setAlignment(button, Pos.CENTER_LEFT);
+                    stackPane.setAlignment(button, Pos.CENTER_LEFT);
                     state = false;
                     text.setText("Employee");
                 } else {
                     button.setStyle(buttonStyleOn);
-                    setAlignment(button, Pos.CENTER_RIGHT);
+                    stackPane.setAlignment(button, Pos.CENTER_RIGHT);
                     state = true;
                     text.setText("Admin");
                 }

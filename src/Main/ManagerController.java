@@ -119,7 +119,7 @@ public class ManagerController {
     public void initialize() throws IOException {
         RoomPanels roomPanels;
         vstackList.setSpacing(10.0);
-        for (Room r: ViewController.getRooms()
+        for (Room r: HotelManagement.rooms
              ) {
             roomPanels = new RoomPanels(r.getID(),r.getBedAmount(),r.getPrice(),r.getType());
             roomPanels.initilize();
