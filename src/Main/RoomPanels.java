@@ -49,7 +49,8 @@ public class RoomPanels extends Pane {
         typeText = new Text("Type: " + type);
         button = new Button("Reserve");
         button.setTextFill(Paint.valueOf("WHITE"));
-        button.setStyle("-fx-background-color:FED755; -fx-background-radius: 20 20 20 20 ");
+        button.setStyle("-fx-background-color:FED755; -fx-background-radius: 10 10 10 10 ");
+        button.setMinWidth(vBox.getWidth() + 100);
         button.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -73,7 +74,7 @@ public class RoomPanels extends Pane {
         hBox.setLayoutY(20);
 
         this.setMaxWidth(500);
-        this.setMinHeight(vBox.getPrefHeight()+ 200 );
+        this.setMinHeight(vBox.getHeight() + 210 );
         this.setStyle("-fx-border-color: FED755 ; -fx-border-radius: 20 20 20 20;-fx-border-width: 10 ");
 
         this.getChildren().add(hBox);
