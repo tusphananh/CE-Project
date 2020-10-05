@@ -18,6 +18,8 @@ import java.io.IOException;
 public class Controller {
     private String adminPass = "123";
     private String employeePass = "456";
+    private SwitchButton switchButton;
+
     @FXML
     private AnchorPane loginPane;
 
@@ -84,7 +86,7 @@ public class Controller {
         }
     }
 
-    SwitchButton switchButton;
+
     @FXML
     public void initialize() throws IOException {
         switchButton = new SwitchButton();
