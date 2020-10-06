@@ -1,13 +1,19 @@
 package Main;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.util.Stack;
 
 public class Navigation
 {
@@ -48,5 +54,20 @@ public class Navigation
     public static void minimize(javafx.event.ActionEvent actionEvent){
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         primaryStage.setIconified(true);
+    }
+
+    public static void showInformationForm(MouseEvent actionEvent){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("InformationForm.fxml"));
+            Parent parent = fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setScene(new Scene(parent));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+        }
+        catch (Exception e){
+            System.out.println(e.toString());
+        }
     }
 }

@@ -66,6 +66,7 @@ public class RoomPanels extends Pane {
         button.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
+                Navigation.showInformationForm(mouseEvent);
                 System.out.println(id);
             }
         });
