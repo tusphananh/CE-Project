@@ -16,8 +16,8 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 
 public class Controller {
-    private String adminPass = "123";
-    private String employeePass = "456";
+    private String adminPass = "456";
+    private String employeePass = "123";
     private SwitchButton switchButton;
 
     @FXML
