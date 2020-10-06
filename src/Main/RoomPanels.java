@@ -26,7 +26,7 @@ import java.util.Map;
 public class RoomPanels extends Pane {
     private String id;
     private long capacity;
-    private int price;
+    private double price;
     private Type type;
     private HBox hBox;
     private VBox vBox;
@@ -40,7 +40,7 @@ public class RoomPanels extends Pane {
         this.price = price;
         this.type = type;
     }
-    public RoomPanels(String id, long capacity, int price, Type type,String image){
+    public RoomPanels(String id, long capacity, double price, Type type,String image){
         this.id = id;
         this.capacity = capacity;
         this.price = price;
@@ -54,8 +54,8 @@ public class RoomPanels extends Pane {
 
         idText = new Text("ID: " + id);
         capacityText = new Text("Capacity: " + capacity);
-        priceText = new Text("Price: " + price);
-        typeText = new Text("Type: " + type);
+        priceText = new Text("Price: " + price + "$");
+        typeText = new Text("Type: " + type.getValue());
         button = new Button("Reserve");
 
         button.setTextFill(Paint.valueOf("WHITE"));

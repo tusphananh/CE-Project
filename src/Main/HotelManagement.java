@@ -69,7 +69,7 @@ class Reservation implements Identifier {
     String from, to;
     Owner owner;
     Room room;
-    int totalPrice;
+    double totalPrice;
 
     public static int getTransID() {
         return transID;
@@ -179,7 +179,7 @@ class Owner {
 class Room implements Identifier{
     private String id;
     long bedAmount;
-    int  price;
+    double price;
     Type type;
     ArrayList<Reservation> reservations = new ArrayList<>();
     String images;
@@ -222,7 +222,7 @@ class Room implements Identifier{
     }
 
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -236,7 +236,13 @@ class Room implements Identifier{
     }
 }
 enum Type{
-    vip,normal
+    vip("V.I.P"),normal("Normal");
+    private String value;
+    Type(String value){ this.value = value;}
+
+    public String getValue() {
+        return value;
+    }
 }
 
 abstract class PaymentMethod {

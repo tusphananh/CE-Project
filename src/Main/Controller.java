@@ -91,7 +91,6 @@ public class Controller {
         }
     }
 
-
     @FXML
     public void initialize() throws IOException {
         switchButton = new SwitchButton();
