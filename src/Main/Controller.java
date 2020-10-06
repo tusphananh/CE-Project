@@ -54,7 +54,12 @@ public class Controller {
                 @Override
                 public void handle(WorkerStateEvent event) {
                     try {
-                        Navigation.navigateManager(actionEvent);
+                        if (switchButton.isState()){
+                            Navigation.navigateManager(actionEvent);
+                        }
+                        else {
+                            Navigation.navigateEmployee(actionEvent);
+                        }
                     } catch (IOException e) {
                         e.printStackTrace();
                     } catch (InterruptedException e) {

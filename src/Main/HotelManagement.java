@@ -190,6 +190,13 @@ class Room implements Identifier{
         this.price = price;
         this.type = type;
     }
+    public Room(String id, long bedAmount, int price, Type type,String images) {
+        this.id = id;
+        this.bedAmount = bedAmount;
+        this.price = price;
+        this.type = type;
+        this.images = images;
+    }
 
     public void setImages(String images) {
         this.images = images;

@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="713.0" prefWidth="617.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.ManagerController">
+<AnchorPane prefHeight="713.0" prefWidth="617.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.EmployeeController">
    <children>
       <Pane fx:id="userManagementPane" layoutY="29.0" prefHeight="684.0" prefWidth="624.0">
          <children>
@@ -69,7 +69,7 @@
                      </children>
                   </HBox>
                   <Separator maxWidth="-Infinity" prefHeight="8.0" prefWidth="351.0" />
-                  <ScrollPane fx:id="listOfPanels1" hbarPolicy="NEVER" prefHeight="410.0" prefWidth="558.0" style="-fx-background-color: white;" stylesheets="@StyleUI.css" vmax="2.0">
+                  <ScrollPane fx:id="listOfPane" hbarPolicy="NEVER" prefHeight="410.0" prefWidth="558.0" style="-fx-background-color: white;" stylesheets="@StyleUI.css" vmax="2.0">
                      <content>
                         <VBox id="vboxStyle" fx:id="vstackList" alignment="CENTER" prefHeight="453.0" prefWidth="554.0" style="-fx-spacing: 5;" />
                      </content>
