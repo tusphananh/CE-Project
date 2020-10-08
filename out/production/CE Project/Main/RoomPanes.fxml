@@ -1,57 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Text?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="243.0" prefWidth="449.0" style="-fx-background-color: white; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.RoomPanesController">
    <children>
       <Pane layoutX="11.0" layoutY="14.0" prefHeight="218.0" prefWidth="411.0" style="-fx-background-color: white; -fx-background-radius: 20;">
          <children>
-            <VBox alignment="CENTER" layoutX="10.0" layoutY="19.0" prefHeight="181.0" prefWidth="162.0" style="-fx-spacing: 10;">
+            <VBox layoutX="39.0" layoutY="32.0" prefHeight="156.0" prefWidth="144.0" style="-fx-spacing: 10;">
                <children>
-                  <Pane prefHeight="29.0" prefWidth="189.0" style="-fx-background-color: white; -fx-background-radius: 20;">
-                     <effect>
-                        <DropShadow color="#0000002e" />
-                     </effect>
+                  <VBox prefHeight="106.0" prefWidth="139.0" style="-fx-spacing: 10;">
                      <children>
-                        <Text fx:id="idText" layoutX="11.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
+                        <Text fx:id="idText" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
+                        <Text fx:id="capacityText" strokeType="OUTSIDE" strokeWidth="0.0" text="Capacity" />
+                        <Text fx:id="priceText" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" />
+                        <Text fx:id="typeText" strokeType="OUTSIDE" strokeWidth="0.0" text="Type" />
                      </children>
-                  </Pane>
-                  <Pane prefHeight="29.0" prefWidth="189.0" style="-fx-background-color: white; -fx-background-radius: 20;">
-                     <effect>
-                        <DropShadow color="#0000002e" />
-                     </effect>
-                     <children>
-                        <Text fx:id="capacityText" layoutX="11.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Capacity" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="29.0" prefWidth="189.0" style="-fx-background-color: white; -fx-background-radius: 20;">
-                     <effect>
-                        <DropShadow color="#0000002e" />
-                     </effect>
-                     <children>
-                        <Text fx:id="priceText" layoutX="11.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Price" />
-                     </children>
-                  </Pane>
-                  <Pane prefHeight="29.0" prefWidth="189.0" style="-fx-background-color: white; -fx-background-radius: 20;">
-                     <effect>
-                        <DropShadow color="#0000002e" />
-                     </effect>
-                     <children>
-                        <Text fx:id="typeText" layoutX="11.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type" />
-                     </children>
-                  </Pane>
+                  </VBox>
+                  <Separator prefWidth="200.0" />
                   <Button mnemonicParsing="false" onAction="#showInformationForm" prefHeight="27.0" prefWidth="96.0" style="-fx-background-color: FED755; -fx-background-radius: 30;" text="Reserve" textAlignment="RIGHT" textFill="WHITE" />
                </children>
             </VBox>
-            <ImageView fx:id="imageView" fitHeight="187.0" fitWidth="201.0" layoutX="191.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
+            <Circle fx:id="circle" fill="WHITE" layoutX="295.0" layoutY="109.0" radius="91.0" stroke="WHITE" strokeType="INSIDE">
+               <effect>
+                  <DropShadow color="#8282823f" height="127.74" radius="47.805" width="65.48" />
+               </effect>
+            </Circle>
          </children>
          <effect>
-            <DropShadow color="#00000033" />
+            <DropShadow color="#00000026" height="75.86" radius="40.765" width="89.2" />
          </effect>
       </Pane>
    </children>

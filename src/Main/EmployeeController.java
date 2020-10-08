@@ -118,6 +118,7 @@ public class EmployeeController {
 
     @FXML
     public void logout(ActionEvent actionEvent) throws IOException, InterruptedException {
+        navigationBarComesIn();
         Navigation.navigateLogin(actionEvent);
     }
 
@@ -127,7 +128,6 @@ public class EmployeeController {
         RoomPanesController roomPanesController;
         for (Room r: arrayList
         ) {
-
             FXMLLoader loader = new FXMLLoader();
             Parent parent = loader.load(getClass().getResource("RoomPanes.fxml").openStream());
             roomPanesController = loader.getController();
@@ -162,7 +162,6 @@ public class EmployeeController {
                     arrayList.add(r);
                 }
             }
-
             showRooms(arrayList);
         }
     }

@@ -8,7 +8,7 @@
 .scroll-bar:horizontal .increment-button ,
 .scroll-bar:horizontal .decrement-button {
     -fx-background-color :transparent;
-    -fx-padding :0.0 0.0 10.0 0.0;
+    -fx-padding :0.0 0.0 15.0 0.0;
 
 }
 
@@ -16,7 +16,7 @@
 .scroll-bar:vertical .decrement-button {
     -fx-background-color :transparent;
     -fx-background-radius : 0.0em;
-    -fx-padding :0.0 15.0 0.0 0.0;
+    -fx-padding :0.0 10.0 0.0 0.0;
 
 }
 

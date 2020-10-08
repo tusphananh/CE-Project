@@ -2,8 +2,13 @@ package Main;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 public class RoomPanesController {
@@ -21,7 +26,7 @@ public class RoomPanesController {
     private Text typeText;
 
     @FXML
-    private ImageView imageView;
+    private Circle circle;
 
     @FXML
     public void showInformationForm(ActionEvent actionEvent){
@@ -45,6 +50,7 @@ public class RoomPanesController {
     }
 
     public void setImageView(Image image) {
-        this.imageView.setImage(image);
+        circle.setStroke(Color.TRANSPARENT);
+        circle.setFill(new ImagePattern(image));
     }
 }

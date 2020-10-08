@@ -20,18 +20,24 @@ public class Navigation
     static Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
     private static Scene managerScene, employeeScene;
 
-    static {
-        try {
-            managerScene = new Scene( FXMLLoader.load(Navigation.class.getResource("ManagerUI.fxml")));
-            employeeScene = new Scene( FXMLLoader.load(Navigation.class.getResource("EmployeeUI.fxml")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static void navigateNewManager(javafx.event.ActionEvent actionEvent) throws IOException {
+        Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        managerScene = new Scene( FXMLLoader.load(Navigation.class.getResource("ManagerUI.fxml")));
+        primaryStage.setScene(managerScene);
+        primaryStage.setX((screenBounds.getWidth() - primaryStage.getWidth())/2);
+        primaryStage.setY((screenBounds.getHeight() - primaryStage.getHeight())/2);
+
+    }
+    public static void navigateNewEmployee(javafx.event.ActionEvent actionEvent) throws IOException {
+        Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        employeeScene = new Scene( FXMLLoader.load(Navigation.class.getResource("EmployeeUI.fxml")));
+        primaryStage.setScene(employeeScene);
+        primaryStage.setX((screenBounds.getWidth() - primaryStage.getWidth())/2);
+        primaryStage.setY((screenBounds.getHeight() - primaryStage.getHeight())/2);
     }
 
     public static void navigateManager(javafx.event.ActionEvent actionEvent){
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        managerScene.getStylesheets().add(Navigation.class.getResource("StyleUI.css").toExternalForm());
         primaryStage.setScene(managerScene);
         primaryStage.setX((screenBounds.getWidth() - primaryStage.getWidth())/2);
         primaryStage.setY((screenBounds.getHeight() - primaryStage.getHeight())/2);

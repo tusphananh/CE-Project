@@ -24,7 +24,7 @@
             <Text layoutX="244.0" layoutY="342.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This is user manager" wrappingWidth="159.13671875" />
          </children>
       </Pane>
-      <Pane fx:id="managementPane" layoutY="23.0" maxHeight="-Infinity" prefHeight="646.0" prefWidth="617.0">
+      <Pane fx:id="managementPane" layoutY="35.0" maxHeight="-Infinity" prefHeight="634.0" prefWidth="617.0">
          <children>
             <VBox alignment="CENTER" layoutX="29.0" layoutY="21.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="639.0" prefWidth="558.0" style="-fx-spacing: 10;">
                <children>
@@ -37,7 +37,7 @@
                         </ImageView>
                         <TextField prefHeight="25.0" prefWidth="363.0" promptText="Search" style="-fx-background-color: white; -fx-background-radius: 10;">
                            <effect>
-                              <DropShadow color="#0000001f" />
+                              <DropShadow color="#0000001f" height="40.0" radius="19.5" width="40.0" />
                            </effect>
                         </TextField>
                      </children>
@@ -101,12 +101,12 @@
                         <Button fx:id="searchButton" layoutX="236.0" layoutY="14.0" mnemonicParsing="false" onAction="#searchAvailableRoom" prefHeight="71.0" prefWidth="53.0" text="Search" />
                      </children>
                      <effect>
-                        <DropShadow color="#00000015" spread="0.05" />
+                        <DropShadow color="#3c3c3c26" height="50.0" radius="24.5" spread="0.05" width="50.0" />
                      </effect>
                   </Pane>
                   <Pane prefHeight="407.0" prefWidth="558.0">
                      <children>
-                        <ScrollPane fx:id="listOfPane" hbarPolicy="NEVER" layoutX="31.0" prefHeight="390.0" prefWidth="527.0" style="-fx-background-color: white;" stylesheets="@StyleUI.css" vmax="2.0">
+                        <ScrollPane fx:id="listOfPane" hbarPolicy="NEVER" layoutX="31.0" prefHeight="390.0" prefWidth="527.0" style="-fx-background-color: white;" stylesheets="@StyleUI.css">
                            <content>
                               <VBox id="vboxStyle" fx:id="vstackList" alignment="CENTER" fillWidth="false" prefHeight="395.0" prefWidth="525.0" spacing="5.0" style="-fx-spacing: 20;">
                                  <padding>
