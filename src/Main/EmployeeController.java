@@ -3,8 +3,10 @@ package Main;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
@@ -120,12 +122,19 @@ public class EmployeeController {
 
     private void showRooms(ArrayList<Room> arrayList) throws IOException {
         vstackList.getChildren().clear();
-        RoomPanels roomPanels;
+        RoomPanesController roomPanesController;
         for (Room r: arrayList
         ) {
-            roomPanels = new RoomPanels(r.getID(),r.getBedAmount(),r.getPrice(),r.getType(),r.images);
-            roomPanels.initilize();
-            vstackList.getChildren().add(roomPanels);
+
+            FXMLLoader loader = new FXMLLoader();
+            Parent parent = loader.load(getClass().getResource("RoomPanes.fxml").openStream());
+            roomPanesController = loader.getController();
+            roomPanesController.setIdText(r.getID());
+            roomPanesController.setCapacityText(String.valueOf(r.getBedAmount()));
+            roomPanesController.setPriceText(String.valueOf(r.getPrice()));
+            roomPanesController.setTypeText(r.getType());
+
+            vstackList.getChildren().add(parent);
         }
     }
 
