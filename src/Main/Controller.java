@@ -53,17 +53,11 @@ public class Controller {
             sleeper.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
                 @Override
                 public void handle(WorkerStateEvent event) {
-                    try {
-                        if (switchButton.isState()){
-                            Navigation.navigateManager(actionEvent);
-                        }
-                        else {
-                            Navigation.navigateEmployee(actionEvent);
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                    if (switchButton.isState()){
+                        Navigation.navigateManager(actionEvent);
+                    }
+                    else {
+                        Navigation.navigateEmployee(actionEvent);
                     }
                 }
             });

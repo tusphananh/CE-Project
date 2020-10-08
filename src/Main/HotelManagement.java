@@ -1,5 +1,7 @@
 package Main;
 
+import javafx.scene.control.Alert;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -7,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 public class HotelManagement {
     static ArrayList<Room> rooms = new ArrayList<>();
-    private static SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH");
+    private static SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy HH");
     static ArrayList<Reservation> reservations = new ArrayList<>();
 
     // This func will check and add the reservation
@@ -30,15 +32,19 @@ public class HotelManagement {
         return Finder.search(reservations,id);
     }
 
-    public boolean checkingReservation(Room room,String from1, String to1) throws Exception {
+    public static boolean checkingReservation(Room room,String from1, String to1) throws Exception {
         // Cuz most of hotel now will be reserved from 14PM reserved day to 12AM the day after
         String from = from1 + " 14";
         String to = to1 + " 12";
         Date f1 = format.parse(from);
         Date t1 = format.parse(to);
         // If no reservation in this room it always be available to be booked
+        if (f1.after(t1)){
+            showAlertInformation("Wait that illegal","Why start date is after end date ?");
+            throw new Exception() ;
+        }
         if (room.reservations.isEmpty()) {
-            System.out.println("Success");
+            System.out.println("True");
             return true;
         } else {
             for (Reservation r : room.reservations
@@ -48,13 +54,20 @@ public class HotelManagement {
                 //  If from1 in other reservation's duration ( from1 >= from2 or from1 < to2) or ( to1 > from2 or to1 <= to2)
                 // We will throw fail
                 if ((t1.after(f2) && (t1.before(t2) || t1.equals(t2))) || (f1.before(t2) && (f1.after(f2) || f1.equals(f2)))){
-                    System.out.println("Fail");
+                    System.out.println("False");
                     return false;
                 }
             }
         }
         System.out.println("Success");
         return true;
+    }
+
+    public static void showAlertInformation(String title, String body){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(body);
+        alert.show();
     }
 
 }

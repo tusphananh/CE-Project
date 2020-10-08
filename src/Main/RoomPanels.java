@@ -66,6 +66,7 @@ public class RoomPanels extends Pane {
         button.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
+                Navigation.showInformationForm(mouseEvent);
                 System.out.println(id);
             }
         });
@@ -88,8 +89,11 @@ public class RoomPanels extends Pane {
 
         this.setMaxWidth(450);
         this.setMinHeight(vBox.getHeight() + 250 );
-        this.setStyle("-fx-border-color: FED755 ; -fx-border-radius: 20 20 20 20;-fx-border-width: 10; ");
         this.getChildren().add(hBox);
+        this.setStyle("-fx-border-color: FED755 ; " +
+                "-fx-border-radius: 20 20 20 20;" +
+                "-fx-border-width: 10;"
+                );
     }
 
     public void setImage(String image) {
