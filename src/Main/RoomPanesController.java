@@ -1,5 +1,6 @@
 package Main;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,6 +22,11 @@ public class RoomPanesController {
 
     @FXML
     private ImageView imageView;
+
+    @FXML
+    public void showInformationForm(ActionEvent actionEvent){
+        Navigation.showInformationForm(actionEvent);
+    }
 
     public void setIdText(String idText) {
         this.idText.setText("ID:  " + idText);

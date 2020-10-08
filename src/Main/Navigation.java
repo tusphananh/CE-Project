@@ -56,7 +56,7 @@ public class Navigation
         primaryStage.setIconified(true);
     }
 
-    public static void showInformationForm(MouseEvent actionEvent){
+    public static void showInformationForm(ActionEvent actionEvent){
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("InformationForm.fxml"));
             Parent parent = fxmlLoader.load();

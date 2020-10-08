@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -122,6 +123,7 @@ public class EmployeeController {
 
     private void showRooms(ArrayList<Room> arrayList) throws IOException {
         vstackList.getChildren().clear();
+
         RoomPanesController roomPanesController;
         for (Room r: arrayList
         ) {
@@ -133,6 +135,7 @@ public class EmployeeController {
             roomPanesController.setCapacityText(String.valueOf(r.getBedAmount()));
             roomPanesController.setPriceText(String.valueOf(r.getPrice()));
             roomPanesController.setTypeText(r.getType());
+            roomPanesController.setImageView(new Image(getClass().getResourceAsStream("/images/" + r.images)));
 
             vstackList.getChildren().add(parent);
         }

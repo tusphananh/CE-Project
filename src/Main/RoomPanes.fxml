@@ -45,7 +45,7 @@
                         <Text fx:id="typeText" layoutX="11.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type" />
                      </children>
                   </Pane>
-                  <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="96.0" style="-fx-background-color: FED755; -fx-background-radius: 30;" text="Reserve" textAlignment="RIGHT" textFill="WHITE" />
+                  <Button mnemonicParsing="false" onAction="#showInformationForm" prefHeight="27.0" prefWidth="96.0" style="-fx-background-color: FED755; -fx-background-radius: 30;" text="Reserve" textAlignment="RIGHT" textFill="WHITE" />
                </children>
             </VBox>
             <ImageView fx:id="imageView" fitHeight="187.0" fitWidth="201.0" layoutX="191.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
