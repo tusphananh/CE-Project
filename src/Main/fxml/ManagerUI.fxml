@@ -14,7 +14,7 @@
                <graphic>
                   <ImageView fitHeight="14.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/exit.png" />
+                        <Image url="@../../images/exit.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -23,7 +23,7 @@
                <graphic>
                   <ImageView fitHeight="13.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/minimize.png" />
+                        <Image url="@../../images/minimize.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -32,7 +32,7 @@
                <graphic>
                   <ImageView fitHeight="19.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true" smooth="false">
                      <image>
-                        <Image url="@../images/logout.png" />
+                        <Image url="@../../images/logout.png" />
                      </image>
                   </ImageView>
                </graphic></Button>

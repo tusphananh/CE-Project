@@ -3,8 +3,6 @@ package Main;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -23,7 +21,7 @@ public class Main extends Application {
         HotelManagement.rooms.add(new Room("5", 5, 130,Type.normal,"Room3.png"));
         HotelManagement.rooms.add(new Room("6", 6, 140,Type.vip,"Room2.png"));
         primaryStage.initStyle(StageStyle.TRANSPARENT);
-        primaryStage.setScene(new Scene( FXMLLoader.load(Navigation.class.getResource("Login.fxml"))));
+        primaryStage.setScene(new Scene( FXMLLoader.load(Navigation.class.getResource("fxml/Login.fxml"))));
         primaryStage.setResizable(false);
         primaryStage.centerOnScreen();
         primaryStage.show();

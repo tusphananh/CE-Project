@@ -129,7 +129,7 @@ public class EmployeeController {
         for (Room r: arrayList
         ) {
             FXMLLoader loader = new FXMLLoader();
-            Parent parent = loader.load(getClass().getResource("RoomPanes.fxml").openStream());
+            Parent parent = loader.load(getClass().getResource("fxml/RoomPanes.fxml").openStream());
             roomPanesController = loader.getController();
             roomPanesController.setIdText(r.getID());
             roomPanesController.setCapacityText(String.valueOf(r.getBedAmount()));

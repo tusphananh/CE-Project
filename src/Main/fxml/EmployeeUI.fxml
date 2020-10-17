@@ -32,7 +32,7 @@
                      <children>
                         <ImageView fitHeight="29.0" fitWidth="45.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../images/search.png" />
+                              <Image url="@../../images/search.png" />
                            </image>
                         </ImageView>
                         <TextField prefHeight="25.0" prefWidth="363.0" promptText="Search" style="-fx-background-color: white; -fx-background-radius: 10;">
@@ -86,7 +86,7 @@
                                        <children>
                                           <ImageView fitHeight="26.0" fitWidth="22.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../images/next.png" />
+                                                <Image url="@../../images/next.png" />
                                              </image>
                                           </ImageView>
                                           <DatePicker fx:id="fromTextField" promptText="From" style="-fx-background-color: white; -fx-background-insets: 1;">
@@ -100,7 +100,7 @@
                                        <children>
                                           <ImageView fitHeight="23.0" fitWidth="21.0" opacity="0.3" pickOnBounds="true" preserveRatio="true" rotate="180.0">
                                              <image>
-                                                <Image url="@../images/next.png" />
+                                                <Image url="@../../images/next.png" />
                                              </image>
                                           </ImageView>
                                           <DatePicker fx:id="toTextField" promptText="To" style="-fx-background-color: white; -fx-background-insets: 1;">
@@ -129,7 +129,7 @@
                   </Pane>
                   <Pane prefHeight="407.0" prefWidth="558.0">
                      <children>
-                        <ScrollPane fx:id="listOfPane" hbarPolicy="NEVER" layoutX="31.0" prefHeight="390.0" prefWidth="527.0" style="-fx-background-color: white;" stylesheets="@StyleUI.css">
+                        <ScrollPane fx:id="listOfPane" hbarPolicy="NEVER" layoutX="31.0" prefHeight="390.0" prefWidth="527.0" style="-fx-background-color: white;" stylesheets="@../StyleCSS/StyleUI.css">
                            <content>
                               <VBox id="vboxStyle" fx:id="vstackList" alignment="CENTER" fillWidth="false" prefHeight="395.0" prefWidth="525.0" spacing="5.0" style="-fx-spacing: 20;">
                                  <padding>
@@ -165,7 +165,7 @@
                <graphic>
                   <ImageView fitHeight="24.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/logout.png" />
+                        <Image url="@../../images/logout.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -181,7 +181,7 @@
                <graphic>
                   <ImageView fitHeight="14.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/exit.png" />
+                        <Image url="@../../images/exit.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -190,7 +190,7 @@
                <graphic>
                   <ImageView fitHeight="13.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../images/minimize.png" />
+                        <Image url="@../../images/minimize.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -198,7 +198,7 @@
             <Button contentDisplay="CENTER" graphicTextGap="1.0" layoutY="-1.0" mnemonicParsing="false" onAction="#extendedNavigationBar" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: F2F2F2;" />
             <ImageView fitHeight="34.0" fitWidth="36.0" layoutX="4.0" layoutY="4.0" onMouseClicked="#extendedNavigationBar" pickOnBounds="true" preserveRatio="true" smooth="false">
                <image>
-                  <Image url="@../images/navigationButton.png" />
+                  <Image url="@../../images/navigationButton.png" />
                </image>
             </ImageView>
          </children>
