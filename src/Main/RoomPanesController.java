@@ -12,7 +12,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 public class RoomPanesController {
-
+    private Image image;
     @FXML
     private Text idText;
 
@@ -30,6 +30,7 @@ public class RoomPanesController {
 
     @FXML
     public void showInformationForm(ActionEvent actionEvent){
+        InformationFormController.setImageView(this.image);
         Navigation.showInformationForm(actionEvent);
     }
 
@@ -50,7 +51,8 @@ public class RoomPanesController {
     }
 
     public void setImageView(Image image) {
-        circle.setStroke(Color.TRANSPARENT);
+        this.image = image;
         circle.setFill(new ImagePattern(image));
     }
+
 }

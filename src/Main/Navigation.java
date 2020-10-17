@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -66,9 +67,12 @@ public class Navigation
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("InformationForm.fxml"));
             Parent parent = fxmlLoader.load();
+            Scene scene = new Scene(parent);
+            scene.setFill(Color.TRANSPARENT);
+            scene.getStylesheets().add("Main/StageStyle.css");
             Stage stage = new Stage();
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.setScene(new Scene(parent));
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
         }

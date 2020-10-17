@@ -76,29 +76,52 @@
                         <DropShadow blurType="ONE_PASS_BOX" color="#00000020" height="1.99" radius="0.0" width="0.0" />
                      </effect>
                   </Separator>
-                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="98.0" prefWidth="302.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+                  <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="98.0" prefWidth="315.0" style="-fx-background-color: white; -fx-background-radius: 20;">
                      <children>
-                        <HBox layoutX="24.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="221.0" spacing="5.0">
+                        <HBox layoutX="10.0" layoutY="14.0" prefHeight="76.0" prefWidth="296.0" style="-fx-spacing: 5;">
                            <children>
-                              <ImageView fitHeight="26.0" fitWidth="22.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../images/next.png" />
-                                 </image>
-                              </ImageView>
-                              <DatePicker fx:id="fromTextField" promptText="From" />
+                              <VBox prefHeight="89.0" prefWidth="216.0" style="-fx-spacing: 15;">
+                                 <children>
+                                    <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="221.0" spacing="5.0">
+                                       <children>
+                                          <ImageView fitHeight="26.0" fitWidth="22.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../images/next.png" />
+                                             </image>
+                                          </ImageView>
+                                          <DatePicker fx:id="fromTextField" promptText="From" style="-fx-background-color: white; -fx-background-insets: 1;">
+                                             <effect>
+                                                <DropShadow color="#0000001a" height="40.0" radius="19.5" width="40.0" />
+                                             </effect>
+                                          </DatePicker>
+                                       </children>
+                                    </HBox>
+                                    <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="221.0" spacing="5.0">
+                                       <children>
+                                          <ImageView fitHeight="23.0" fitWidth="21.0" opacity="0.3" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                                             <image>
+                                                <Image url="@../images/next.png" />
+                                             </image>
+                                          </ImageView>
+                                          <DatePicker fx:id="toTextField" promptText="To" style="-fx-background-color: white; -fx-background-insets: 1;">
+                                             <effect>
+                                                <DropShadow color="#0000001a" height="40.0" radius="19.5" width="40.0" />
+                                             </effect>
+                                          </DatePicker>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <Button fx:id="searchButton" mnemonicParsing="false" onAction="#searchAvailableRoom" prefHeight="68.0" prefWidth="69.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-color: fed755; -fx-border-radius: 10; -fx-border-width: 1;" text="SEARCH" textFill="#fed755">
+                                 <effect>
+                                    <DropShadow color="#0000001a" height="40.0" radius="19.5" width="40.0" />
+                                 </effect>
+                                 <font>
+                                    <Font name="Arial Bold" size="11.0" />
+                                 </font>
+                              </Button>
                            </children>
                         </HBox>
-                        <HBox layoutX="24.0" layoutY="57.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="221.0" spacing="5.0">
-                           <children>
-                              <ImageView fitHeight="23.0" fitWidth="21.0" opacity="0.3" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                                 <image>
-                                    <Image url="@../images/next.png" />
-                                 </image>
-                              </ImageView>
-                              <DatePicker fx:id="toTextField" promptText="To" />
-                           </children>
-                        </HBox>
-                        <Button fx:id="searchButton" layoutX="236.0" layoutY="14.0" mnemonicParsing="false" onAction="#searchAvailableRoom" prefHeight="71.0" prefWidth="53.0" text="Search" />
                      </children>
                      <effect>
                         <DropShadow color="#3c3c3c26" height="50.0" radius="24.5" spread="0.05" width="50.0" />

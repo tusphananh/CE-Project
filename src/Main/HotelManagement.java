@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 public class HotelManagement {
     static ArrayList<Room> rooms = new ArrayList<>();
-    private static SimpleDateFormat format = new SimpleDateFormat("MM-dd-yyyy HH");
+    private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH");
     static ArrayList<Reservation> reservations = new ArrayList<>();
 
     // This func will check and add the reservation
@@ -36,12 +36,13 @@ public class HotelManagement {
         // Cuz most of hotel now will be reserved from 14PM reserved day to 12AM the day after
         String from = from1 + " 14";
         String to = to1 + " 12";
+        System.out.println(from);
+        System.out.println(to);
         Date f1 = format.parse(from);
         Date t1 = format.parse(to);
-        // If no reservation in this room it always be available to be booked
         if (f1.after(t1)){
-            showAlertInformation("Wait that illegal","Why start date is after end date ?");
-            throw new Exception() ;
+            showAlertInformation("Something wrong","Why start day after end day");
+            throw new Exception("Time compare");
         }
         if (room.reservations.isEmpty()) {
             System.out.println("True");

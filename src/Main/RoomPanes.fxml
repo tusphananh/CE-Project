@@ -26,7 +26,7 @@
                   <Button mnemonicParsing="false" onAction="#showInformationForm" prefHeight="27.0" prefWidth="96.0" style="-fx-background-color: FED755; -fx-background-radius: 30;" text="Reserve" textAlignment="RIGHT" textFill="WHITE" />
                </children>
             </VBox>
-            <Circle fx:id="circle" fill="WHITE" layoutX="295.0" layoutY="109.0" radius="91.0" stroke="WHITE" strokeType="INSIDE">
+            <Circle fx:id="circle" fill="WHITE" layoutX="295.0" layoutY="109.0" radius="91.0" stroke="#d7d7d7" strokeType="INSIDE" strokeWidth="4.0">
                <effect>
                   <DropShadow color="#8282823f" height="127.74" radius="47.805" width="65.48" />
                </effect>
