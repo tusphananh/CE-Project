@@ -20,6 +20,9 @@ public class Main extends Application {
         HotelManagement.rooms.add(new Room("4", 4, 120,Type.vip,"Room4.png"));
         HotelManagement.rooms.add(new Room("5", 5, 130,Type.normal,"Room3.png"));
         HotelManagement.rooms.add(new Room("6", 6, 140,Type.vip,"Room2.png"));
+        HotelManagement.services.add(new Service("1","Swimming"));
+        HotelManagement.services.add(new Service("2","Message"));
+        HotelManagement.services.add(new Service("3","Buffet"));
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.setScene(new Scene( FXMLLoader.load(Navigation.class.getResource("fxml/Login.fxml"))));
         primaryStage.setResizable(false);

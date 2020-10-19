@@ -1,5 +1,6 @@
 package Main;
 
+import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +16,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -34,6 +36,9 @@ public class EmployeeController {
     private Button searchButton;
 
     @FXML
+    private AnchorPane mainUI;
+
+    @FXML
     private Pane userManagementPane,managementPane;
 
     @FXML
@@ -44,6 +49,21 @@ public class EmployeeController {
 
     @FXML
     private Pane navigationBar;
+    @FXML
+    public void initialize() throws IOException {
+        showRooms(HotelManagement.rooms);
+        mainUI.setOpacity(0);
+        fadeOut();
+    }
+
+    private void fadeOut(){
+        FadeTransition fadeTransition = new FadeTransition();
+        fadeTransition.setDuration(Duration.millis(1000));
+        fadeTransition.setNode(mainUI);
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(1);
+        fadeTransition.play();
+    }
 
     @FXML
     public void mousePressed(MouseEvent mouseEvent){
@@ -111,10 +131,6 @@ public class EmployeeController {
         navigationBar.setTranslateX(-210);
     }
 
-    @FXML
-    public void initialize() throws IOException {
-        showRooms(HotelManagement.rooms);
-    }
 
     @FXML
     public void logout(ActionEvent actionEvent) throws IOException, InterruptedException {

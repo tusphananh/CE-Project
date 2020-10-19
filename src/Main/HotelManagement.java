@@ -11,6 +11,7 @@ public class HotelManagement {
     static ArrayList<Room> rooms = new ArrayList<>();
     private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH");
     static ArrayList<Reservation> reservations = new ArrayList<>();
+    static ArrayList<Service> services = new ArrayList<Service>();
 
     // This func will check and add the reservation
     public void addReservation(Room room, String from, String to, Owner owner) throws Exception {
@@ -339,4 +340,21 @@ class Finder{
         return null;
     }
 
+}
+
+class Service{
+    private String id,name,description;
+
+    public Service(String id,String name){
+        this.id = id;
+        this.name = name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

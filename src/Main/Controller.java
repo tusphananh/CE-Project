@@ -1,5 +1,6 @@
 package Main;
 
+import javafx.animation.FadeTransition;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.ActionEvent;
@@ -12,6 +13,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 import java.io.IOException;
 
@@ -39,6 +41,11 @@ public class Controller {
             messagesText.setText(" Welcome back !");
             messagesText.setFill(Color.web("FED755"));
             System.out.println("Success");
+            FadeTransition fadeTransition = new FadeTransition();
+            fadeTransition.setDuration(Duration.millis(1000));
+            fadeTransition.setNode(loginPane);
+            fadeTransition.setFromValue(1);
+            fadeTransition.setToValue(0);
 
             Task<Void> sleeper = new Task<Void>() {
                 @Override
@@ -54,18 +61,30 @@ public class Controller {
                 @Override
                 public void handle(WorkerStateEvent event) {
                     if (switchButton.isState()){
-                        try {
-                            Navigation.navigateNewManager(actionEvent);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        fadeTransition.setOnFinished(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                try {
+                                    Navigation.navigateNewManager(actionEvent);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        fadeTransition.play();
                     }
                     else {
-                        try {
-                            Navigation.navigateNewEmployee(actionEvent);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        fadeTransition.setOnFinished(new EventHandler<ActionEvent>() {
+                            @Override
+                            public void handle(ActionEvent event) {
+                                try {
+                                    Navigation.navigateNewEmployee(actionEvent);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                        fadeTransition.play();
                     }
                 }
             });
