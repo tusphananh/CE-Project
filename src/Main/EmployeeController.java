@@ -1,7 +1,6 @@
 package Main;
 
-import javafx.animation.FadeTransition;
-import javafx.animation.TranslateTransition;
+import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +21,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -50,7 +50,7 @@ public class EmployeeController {
     @FXML
     private Pane navigationBar;
     @FXML
-    public void initialize() throws IOException {
+    public void initialize() throws IOException, InterruptedException {
         showRooms(HotelManagement.rooms);
         mainUI.setOpacity(0);
         fadeOut();
@@ -64,6 +64,7 @@ public class EmployeeController {
         fadeTransition.setToValue(1);
         fadeTransition.play();
     }
+
 
     @FXML
     public void mousePressed(MouseEvent mouseEvent){

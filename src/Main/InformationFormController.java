@@ -1,5 +1,6 @@
 package Main;
 
+import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -24,6 +25,9 @@ public class InformationFormController {
     private double x,y;
     private static Image image;
     private boolean navigateBool = false;
+    @FXML
+    private Pane firstPane,secondPane;
+
     @FXML
     private Circle firstCircle,secondCircle;
 
@@ -93,6 +97,10 @@ public class InformationFormController {
         TranslateTransition translateTransition = new TranslateTransition(Duration.millis(300), node);
         navigateBool = !navigateBool;
         if (!navigateBool){
+            secondPane.setOpacity(0);
+            fadeIn(secondPane);
+            fadeOut(firstPane);
+
             translateTransition.setToX(0);
             translateTransition.play();
             navigationPane.setTranslateX(0);
@@ -100,6 +108,9 @@ public class InformationFormController {
             secondCircle.setFill(Paint.valueOf("F2F2F2"));
         }
         else {
+            firstPane.setOpacity(0);
+            fadeIn(firstPane);
+            fadeOut(secondPane);
             translateTransition.setToX(-451);
             translateTransition.play();
             navigationPane.setTranslateX(-451);
@@ -107,6 +118,22 @@ public class InformationFormController {
             firstCircle.setFill(Paint.valueOf("F2F2F2"));
         }
 
+    }
+    private void fadeOut(Node node){
+        FadeTransition fadeTransition = new FadeTransition();
+        fadeTransition.setDuration(Duration.millis(150));
+        fadeTransition.setNode(node);
+        fadeTransition.setFromValue(0);
+        fadeTransition.setToValue(1);
+        fadeTransition.play();
+    }
+    private void fadeIn(Node node){
+        FadeTransition fadeTransition = new FadeTransition();
+        fadeTransition.setDuration(Duration.millis(150));
+        fadeTransition.setNode(node);
+        fadeTransition.setFromValue(1);
+        fadeTransition.setToValue(0);
+        fadeTransition.play();
     }
 
     public static void setImageView(Image image) {

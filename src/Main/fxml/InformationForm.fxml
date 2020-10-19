@@ -23,7 +23,7 @@
          <children>
             <HBox fx:id="navigationPane" layoutX="31.0" layoutY="112.0" prefHeight="252.0" prefWidth="833.0" style="-fx-spacing: 100;">
                <children>
-                  <Pane prefHeight="235.0" prefWidth="351.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+                  <Pane fx:id="firstPane" prefHeight="235.0" prefWidth="351.0" style="-fx-background-color: white; -fx-background-radius: 20;">
                      <children>
                         <VBox alignment="CENTER" layoutX="53.0" layoutY="13.0" prefHeight="205.0" prefWidth="245.0" style="-fx-spacing: 20;">
                            <children>
@@ -91,7 +91,7 @@
                         <DropShadow color="#0000001a" height="40.0" offsetY="5.0" radius="19.5" width="40.0" />
                      </effect>
                   </Pane>
-                  <Pane prefHeight="235.0" prefWidth="351.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+                  <Pane fx:id="secondPane" prefHeight="235.0" prefWidth="351.0" style="-fx-background-color: white; -fx-background-radius: 20;">
                      <children>
                         <VBox alignment="CENTER" layoutX="53.0" layoutY="13.0" prefHeight="205.0" prefWidth="245.0" style="-fx-spacing: 20;">
                            <children>
