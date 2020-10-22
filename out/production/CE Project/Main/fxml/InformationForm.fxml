@@ -121,7 +121,7 @@
             </HBox>
             <Text fill="#c9c9c9" layoutX="14.0" layoutY="21.0" onMouseClicked="#exit" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;&lt;&lt;" wrappingWidth="36.76830769699404">
                <font>
-                  <Font size="18.0" />
+                  <Font size="15.0" />
                </font>
             </Text>
          </children>

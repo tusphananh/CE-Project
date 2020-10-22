@@ -4,30 +4,21 @@ import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import javafx.util.Duration;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
 
 public class EmployeeController {
     private double x,y;
@@ -139,7 +130,7 @@ public class EmployeeController {
         Navigation.navigateLogin(actionEvent);
     }
 
-    private void showRooms(ArrayList<Room> arrayList) throws IOException {
+    private void showRooms(Collection<Room> arrayList) throws IOException {
         vstackList.getChildren().clear();
 
         RoomPanesController roomPanesController;
@@ -149,11 +140,17 @@ public class EmployeeController {
             Parent parent = loader.load(getClass().getResource("fxml/RoomPanes.fxml").openStream());
             roomPanesController = loader.getController();
             roomPanesController.setIdText(r.getID());
-            roomPanesController.setCapacityText(String.valueOf(r.getBedAmount()));
+            roomPanesController.setCapacityText(String.valueOf(r.getCapacity()));
             roomPanesController.setPriceText(String.valueOf(r.getPrice()));
             roomPanesController.setTypeText(r.getType());
             roomPanesController.setImageView(new Image(getClass().getResourceAsStream("/images/" + r.images)));
-
+            if (r.sale > 0.00){
+                roomPanesController.showSale();
+                roomPanesController.setSaleText(String.valueOf(r.sale*100));
+            }
+            else {
+                roomPanesController.hideSale();
+            }
             vstackList.getChildren().add(parent);
         }
     }
@@ -182,4 +179,54 @@ public class EmployeeController {
             showRooms(arrayList);
         }
     }
+
+    @FXML
+    public void sortByCapacity() throws IOException {
+        Collections.sort( HotelManagement.rooms, new Comparator<Room>() {
+            public int compare (Room o1, Room o2) {
+                if (o1.capacity > o2.capacity){
+                    return -1;
+                }
+                else if (o1.capacity < o2.capacity){
+                    return 1;
+                }
+                else {
+                    return 0;
+                }
+            }
+        });
+        showRooms(HotelManagement.rooms);
+
+    }
+
+    @FXML
+    public void sortByHot() throws IOException {
+        Collections.sort( HotelManagement.rooms, new Comparator<Room>() {
+            public int compare (Room o1, Room o2) {
+                int comp = (o2.hot - o1.hot);
+                return comp;
+            }
+        });
+        showRooms(HotelManagement.rooms);
+    }
+
+    @FXML
+    public void sortBySale() throws IOException {
+        Collections.sort( HotelManagement.rooms, new Comparator<Room>() {
+            public int compare (Room o1, Room o2) {
+                if (o1.sale > o2.sale){
+                    return -1;
+                }
+                else if (o1.sale < o2.sale){
+                    return 1;
+                }
+                else {
+                    return 0;
+                }
+            }
+        });
+        showRooms(HotelManagement.rooms);
+    }
+
+
 }

@@ -27,6 +27,10 @@ public class RoomPanesController {
 
     @FXML
     private Circle circle;
+    @FXML
+    private Text saleText;
+    @FXML
+    private Circle saleCircle;
 
     @FXML
     public void showInformationForm(ActionEvent actionEvent){
@@ -55,4 +59,17 @@ public class RoomPanesController {
         circle.setFill(new ImagePattern(image));
     }
 
+    public void setSaleText(String saleText) {
+        this.saleText.setText(saleText + "%"); ;
+    }
+
+    public void showSale(){
+        saleText.setVisible(true);
+        saleCircle.setVisible(true);
+        saleText.setRotate(45);
+    }
+    public void hideSale(){
+        saleText.setVisible(false);
+        saleCircle.setVisible(false);
+    }
 }

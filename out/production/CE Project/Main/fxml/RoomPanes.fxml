@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="243.0" prefWidth="449.0" style="-fx-background-color: white; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.RoomPanesController">
@@ -31,6 +32,16 @@
                   <DropShadow color="#8282823f" height="127.74" radius="47.805" width="65.48" />
                </effect>
             </Circle>
+            <Circle fx:id="saleCircle" fill="#f2694b" layoutX="405.0" layoutY="12.0" radius="24.0" stroke="#f7f7f700" strokeType="INSIDE">
+               <effect>
+                  <DropShadow color="#0000004d" offsetX="-2.0" offsetY="2.0" />
+               </effect>
+            </Circle>
+            <Text fx:id="saleText" fill="WHITE" layoutX="393.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+               <font>
+                  <Font name="Arial Bold" size="10.0" />
+               </font>
+            </Text>
          </children>
          <effect>
             <DropShadow color="#00000026" height="75.86" radius="40.765" width="89.2" />

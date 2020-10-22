@@ -193,24 +193,39 @@ class Owner {
 // Main.Main.Room Class
 class Room implements Identifier{
     private String id;
-    long bedAmount;
+    long capacity;
     double price;
+    double sale;
+    int hot;
     Type type;
     ArrayList<Reservation> reservations = new ArrayList<>();
     String images;
 
-    public Room(String id, long bedAmount, int price, Type type) {
+    public Room(String id, long capacity, int price, Type type) {
         this.id = id;
-        this.bedAmount = bedAmount;
-        this.price = price;
+        this.capacity = capacity ;
+        setPrice(price);
         this.type = type;
     }
-    public Room(String id, long bedAmount, int price, Type type,String images) {
+    public Room(String id, long capacity, int price, Type type,String images) {
         this.id = id;
-        this.bedAmount = bedAmount;
-        this.price = price;
+        this.capacity = capacity;
+        setPrice(price);
         this.type = type;
         this.images = images;
+    }
+    public Room(String id, long capacity, int price, Type type,String images,double sale,int hot) {
+        this.id = id;
+        this.capacity = capacity;
+        setPrice(price);
+        this.type = type;
+        this.images = images;
+        this.hot = hot;
+        this.sale = sale;
+    }
+
+    public void setPrice(double price) {
+        this.price = price - price*sale;
     }
 
     public void setImages(String images) {
@@ -222,12 +237,18 @@ class Room implements Identifier{
     }
 
     // toString here
+
+
     @Override
     public String toString() {
         return "Room{" +
                 "id='" + id + '\'' +
-                ", bedAmount=" + bedAmount +
-                ", dayPrice=" + price +
+                ", capacity=" + capacity +
+                ", price=" + price +
+                ", sale=" + sale +
+                ", hot=" + hot +
+                ", type=" + type +
+                ", images='" + images + '\'' +
                 '}';
     }
 
@@ -241,8 +262,8 @@ class Room implements Identifier{
         return price;
     }
 
-    public long getBedAmount() {
-        return bedAmount;
+    public long getCapacity() {
+        return capacity;
     }
 
 

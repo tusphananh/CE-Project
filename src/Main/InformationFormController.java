@@ -24,6 +24,8 @@ import javafx.util.Duration;
 public class InformationFormController {
     private double x,y;
     private static Image image;
+    private double fadeSpeed = 300;
+    private double slideSpeed = 500;
     private boolean navigateBool = false;
     @FXML
     private Pane firstPane,secondPane;
@@ -94,7 +96,7 @@ public class InformationFormController {
     @FXML
     public void nextSlide(ActionEvent actionEvent){
         Node node = navigationPane;
-        TranslateTransition translateTransition = new TranslateTransition(Duration.millis(300), node);
+        TranslateTransition translateTransition = new TranslateTransition(Duration.millis(slideSpeed), node);
         navigateBool = !navigateBool;
         if (!navigateBool){
             secondPane.setOpacity(0);
@@ -121,7 +123,7 @@ public class InformationFormController {
     }
     private void fadeOut(Node node){
         FadeTransition fadeTransition = new FadeTransition();
-        fadeTransition.setDuration(Duration.millis(150));
+        fadeTransition.setDuration(Duration.millis(fadeSpeed));
         fadeTransition.setNode(node);
         fadeTransition.setFromValue(0);
         fadeTransition.setToValue(1);
@@ -129,7 +131,7 @@ public class InformationFormController {
     }
     private void fadeIn(Node node){
         FadeTransition fadeTransition = new FadeTransition();
-        fadeTransition.setDuration(Duration.millis(150));
+        fadeTransition.setDuration(Duration.millis(fadeSpeed));
         fadeTransition.setNode(node);
         fadeTransition.setFromValue(1);
         fadeTransition.setToValue(0);
