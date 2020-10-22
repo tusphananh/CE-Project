@@ -29,10 +29,17 @@ public class Navigation
     }
     public static void navigateNewEmployee(javafx.event.ActionEvent actionEvent) throws IOException {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        employeeScene = new Scene( FXMLLoader.load(Navigation.class.getResource("fxml/EmployeeUI.fxml")));
-        primaryStage.setScene(employeeScene);
-        primaryStage.setX((screenBounds.getWidth() - primaryStage.getWidth())/2);
-        primaryStage.setY((screenBounds.getHeight() - primaryStage.getHeight())/2);
+        primaryStage.close();
+        FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("fxml/EmployeeUI.fxml"));
+        Parent parent = fxmlLoader.load();
+        Scene scene = new Scene(parent);
+        scene.setFill(Color.TRANSPARENT);
+        scene.getStylesheets().add("Main/StyleCSS/StageStyle.css");
+        Stage stage = new Stage();
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.setScene(scene);
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.show();
     }
 
     public static void navigateManager(javafx.event.ActionEvent actionEvent){

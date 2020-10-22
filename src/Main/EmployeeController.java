@@ -22,6 +22,7 @@ import java.util.*;
 
 public class EmployeeController {
     private double x,y;
+    private double reloadSpeed = 300;
     boolean navigateBool = false;
     @FXML
     private Button searchButton;
@@ -131,6 +132,7 @@ public class EmployeeController {
     }
 
     private void showRooms(Collection<Room> arrayList) throws IOException {
+        vstackList.setOpacity(0);
         vstackList.getChildren().clear();
 
         RoomPanesController roomPanesController;
@@ -152,6 +154,12 @@ public class EmployeeController {
                 roomPanesController.hideSale();
             }
             vstackList.getChildren().add(parent);
+            FadeTransition fadeTransition = new FadeTransition();
+            fadeTransition.setDuration(Duration.millis(reloadSpeed));
+            fadeTransition.setNode(vstackList);
+            fadeTransition.setFromValue(0);
+            fadeTransition.setToValue(1);
+            fadeTransition.play();
         }
     }
 
@@ -195,6 +203,12 @@ public class EmployeeController {
                 }
             }
         });
+        FadeTransition fadeTransition = new FadeTransition();
+        fadeTransition.setDuration(Duration.millis(reloadSpeed));
+        fadeTransition.setNode(vstackList);
+        fadeTransition.setFromValue(1);
+        fadeTransition.setToValue(0);
+        fadeTransition.play();
         showRooms(HotelManagement.rooms);
 
     }

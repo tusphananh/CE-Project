@@ -23,6 +23,11 @@ public class Main extends Application {
         HotelManagement.services.add(new Service("1","Swimming"));
         HotelManagement.services.add(new Service("2","Message"));
         HotelManagement.services.add(new Service("3","Buffet"));
+        HotelManagement.services.add(new Service("4","Bus"));
+        HotelManagement.services.add(new Service("5","SkyDiving"));
+        HotelManagement.services.add(new Service("6","ScubaDiving"));
+        HotelManagement.services.add(new Service("7","Tour"));
+
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.setScene(new Scene( FXMLLoader.load(Navigation.class.getResource("fxml/Login.fxml"))));
         primaryStage.setResizable(false);

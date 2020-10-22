@@ -117,11 +117,11 @@
                         <DropShadow color="#3c3c3c26" height="50.0" radius="24.5" spread="0.05" width="50.0" />
                      </effect>
                   </Pane>
-                  <Pane prefHeight="407.0" prefWidth="558.0">
+                  <Pane prefHeight="407.0" prefWidth="558.0" style="-fx-background-color: white;">
                      <children>
                         <ScrollPane fx:id="listOfPane" hbarPolicy="NEVER" layoutX="31.0" prefHeight="390.0" prefWidth="527.0" style="-fx-background-color: white;" stylesheets="@../StyleCSS/StyleUI.css">
                            <content>
-                              <VBox id="vboxStyle" fx:id="vstackList" alignment="CENTER" fillWidth="false" prefHeight="395.0" prefWidth="525.0" spacing="5.0" style="-fx-spacing: 20;">
+                              <VBox id="vboxStyle" fx:id="vstackList" alignment="CENTER" fillWidth="false" prefHeight="395.0" prefWidth="525.0" spacing="5.0" style="-fx-spacing: 20; -fx-background-color: white;">
                                  <padding>
                                     <Insets bottom="10.0" top="10.0" />
                                  </padding></VBox>
