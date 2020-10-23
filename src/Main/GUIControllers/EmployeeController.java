@@ -27,6 +27,8 @@ public class EmployeeController {
     private double x,y;
     private double reloadSpeed = 300;
     boolean navigateBool = false;
+    private Pane checkInPane,checkOutPane,restaurantPane;
+
     @FXML
     private Button searchButton;
 
@@ -34,7 +36,7 @@ public class EmployeeController {
     private AnchorPane mainUI;
 
     @FXML
-    private Pane userManagementPane,managementPane;
+    private Pane bookingPane;
 
     @FXML
     private VBox vstackList;
@@ -95,17 +97,27 @@ public class EmployeeController {
     }
 
     @FXML
-    void toUserManagement(MouseEvent event) throws IOException {
+    void toBooking(MouseEvent event) throws IOException {
         navigationBarComesIn();
-        managementPane.setVisible(false);
-        userManagementPane.setVisible(true);
+        bookingPane.setVisible(true);
+
     }
 
     @FXML
-    void toManagement(MouseEvent event) throws IOException {
+    void toCheckOut(MouseEvent event) throws IOException {
         navigationBarComesIn();
-        userManagementPane.setVisible(false);
-        managementPane.setVisible(true);
+        bookingPane.setVisible(false);
+    }
+    @FXML
+    void toCheckIn(MouseEvent event) throws IOException {
+        navigationBarComesIn();
+        bookingPane.setVisible(false);
+
+    }
+    @FXML
+    void toRestaurant(MouseEvent event) throws IOException {
+        navigationBarComesIn();
+        bookingPane.setVisible(false);
     }
 
 
