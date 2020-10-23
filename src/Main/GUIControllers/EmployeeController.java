@@ -16,6 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -28,6 +29,8 @@ public class EmployeeController {
     private double reloadSpeed = 300;
     boolean navigateBool = false;
     private Pane checkInPane,checkOutPane,restaurantPane;
+    @FXML
+    private StackPane stackPane;
 
     @FXML
     private Button searchButton;
@@ -48,6 +51,11 @@ public class EmployeeController {
     private Pane navigationBar;
     @FXML
     public void initialize() throws IOException, InterruptedException {
+        checkOutPane = FXMLLoader.load(getClass().getResource("../fxml/CheckOut.fxml"));
+        checkInPane = FXMLLoader.load(getClass().getResource("../fxml/CheckIn.fxml"));
+        restaurantPane = FXMLLoader.load(getClass().getResource("../fxml/Restaurant.fxml"));
+        stackPane.getChildren().addAll(checkOutPane,checkInPane,restaurantPane);
+        setVisible(true,false,false,false);
         showRooms(HotelManagement.rooms);
         mainUI.setOpacity(0);
         Navigation.fadeOut(mainUI,1000);
@@ -96,28 +104,43 @@ public class EmployeeController {
 
     }
 
+    private void addStackPane(Node node){
+        stackPane.getChildren().removeAll();
+        stackPane.getChildren().add(node);
+    }
+
+    private void setVisible(boolean booking, boolean restaurant, boolean checkin,boolean checkout){
+        restaurantPane.setVisible(restaurant);
+        checkOutPane.setVisible(checkout);
+        checkInPane.setVisible(checkin);
+        bookingPane.setVisible(booking);
+    }
+
     @FXML
     void toBooking(MouseEvent event) throws IOException {
         navigationBarComesIn();
-        bookingPane.setVisible(true);
-
+        setVisible(true,false,false,false);
+        bookingPane.toFront();
     }
 
     @FXML
     void toCheckOut(MouseEvent event) throws IOException {
         navigationBarComesIn();
-        bookingPane.setVisible(false);
+        setVisible(false,false,false,true);
+        checkOutPane.toFront();
+
     }
     @FXML
     void toCheckIn(MouseEvent event) throws IOException {
         navigationBarComesIn();
-        bookingPane.setVisible(false);
-
+        setVisible(false,false,true,false);
+        checkInPane.toFront();
     }
     @FXML
     void toRestaurant(MouseEvent event) throws IOException {
         navigationBarComesIn();
-        bookingPane.setVisible(false);
+        setVisible(false,true,false,false);
+        restaurantPane.toFront();
     }
 
 

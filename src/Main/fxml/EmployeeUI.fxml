@@ -19,7 +19,7 @@
 
 <AnchorPane fx:id="mainUI" prefHeight="713.0" prefWidth="617.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.GUIControllers.EmployeeController">
    <children>
-      <StackPane layoutY="33.0" prefHeight="678.0" prefWidth="623.0">
+      <StackPane fx:id="stackPane" layoutY="33.0" prefHeight="678.0" prefWidth="623.0">
          <children>
             <Pane fx:id="bookingPane" maxHeight="-Infinity" prefHeight="634.0" prefWidth="617.0">
                <children>
