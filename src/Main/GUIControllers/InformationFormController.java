@@ -135,7 +135,19 @@ public class InformationFormController {
 
     @FXML
     private void confirm(ActionEvent actionEvent){
-        Navigation.fadeIn(mainPane,500);
+        FadeTransition fadeTransition = new FadeTransition();
+        fadeTransition.setDuration(Duration.millis(fadeSpeed));
+        fadeTransition.setNode(mainPane);
+        fadeTransition.setFromValue(1);
+        fadeTransition.setToValue(0);
+        fadeTransition.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+                stage.close();
+            }
+        });
+        fadeTransition.play();
         Navigation.showBill(actionEvent);
     }
 }

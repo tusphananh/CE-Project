@@ -7,9 +7,9 @@
 
 <AnchorPane fx:id="mainPane" prefHeight="603.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.GUIControllers.BillController">
    <children>
-      <Pane layoutX="137.0" layoutY="176.0" prefHeight="284.0" prefWidth="327.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+      <Pane layoutX="18.0" layoutY="36.0" prefHeight="531.0" prefWidth="564.0" style="-fx-background-color: white; -fx-background-radius: 20;">
          <children>
-            <Button layoutX="136.0" layoutY="232.0" mnemonicParsing="false" text="Button" />
+            <Button layoutX="255.0" layoutY="471.0" mnemonicParsing="false" onAction="#close" text="Button" />
          </children>
          <effect>
             <DropShadow color="#00000033" height="30.0" radius="14.5" width="30.0" />
