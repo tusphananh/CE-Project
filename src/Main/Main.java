@@ -1,6 +1,11 @@
 package Main;
 
 
+import Main.Enums.Type;
+import Main.Models.HotelManagement;
+import Main.Models.Navigation;
+import Main.Models.Room;
+import Main.Models.Service;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,7 +19,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        HotelManagement.rooms.add(new Room("1", 1, 30,Type.vip,"Room1.png",0.2,5));
+        HotelManagement.rooms.add(new Room("1", 1, 30, Type.vip,"Room1.png",0.2,5));
         HotelManagement.rooms.add(new Room("2", 2, 60,Type.normal,"Room2.png",0.3,4));
         HotelManagement.rooms.add(new Room("3", 3, 80,Type.normal,"Room3.png",0.5,3));
         HotelManagement.rooms.add(new Room("4", 4, 120,Type.vip,"Room4.png",0.3,2));
@@ -29,7 +34,7 @@ public class Main extends Application {
         HotelManagement.services.add(new Service("7","Tour"));
 
         primaryStage.initStyle(StageStyle.TRANSPARENT);
-        primaryStage.setScene(new Scene( FXMLLoader.load(Navigation.class.getResource("fxml/Login.fxml"))));
+        primaryStage.setScene(new Scene( FXMLLoader.load(getClass().getResource("fxml/Login.fxml"))));
         primaryStage.setResizable(false);
         primaryStage.centerOnScreen();
         primaryStage.show();

@@ -1,5 +1,11 @@
 package Main;
 
+import Main.Enums.Type;
+import Main.Models.HotelManagement;
+import Main.Models.Identifier;
+import Main.Models.Owner;
+import Main.Models.Room;
+
 import java.util.Scanner;
 
 
@@ -7,7 +13,7 @@ public class TestCase {
     static HotelManagement hotelManagement ;
     public static void main(String[] args) throws Exception {
         hotelManagement = new HotelManagement();
-        hotelManagement.rooms.add(new Room("1", 1, 200000,Type.vip));
+        hotelManagement.rooms.add(new Room("1", 1, 200000, Type.vip));
         hotelManagement.rooms.add(new Room("2", 2, 300000,Type.normal));
         hotelManagement.rooms.add(new Room("3", 3, 400000,Type.normal));
         for (Identifier r : hotelManagement.rooms
