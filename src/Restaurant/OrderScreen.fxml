@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="rootPane" mouseTransparent="true" prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Restaurant.OrderScreenController">
+   <children>
+      <ScrollPane fx:id="menuScroll" layoutX="5.0" layoutY="90.0" prefHeight="546.0" prefWidth="659.0">
+         <content>
+            <VBox fx:id="BoxMenu" prefHeight="544.0" prefWidth="647.0" />
+         </content></ScrollPane>
+      <ScrollPane layoutX="675.0" layoutY="140.0" prefHeight="414.0" prefWidth="322.0">
+         <content>
+            <TextField />
+         </content>
+      </ScrollPane>
+      <Label layoutX="675.0" layoutY="562.0" prefHeight="73.0" prefWidth="322.0" text="Total" textOverrun="CLIP">
+         <font>
+            <Font name="Book Antiqua Bold" size="40.0" />
+         </font>
+      </Label>
+      <Label layoutX="675.0" layoutY="90.0" prefHeight="39.0" prefWidth="322.0" text="ID: 1" textAlignment="CENTER">
+         <font>
+            <Font size="24.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="BLACK" />
+                  <Stop color="WHITE" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+   </children>
+</AnchorPane>
