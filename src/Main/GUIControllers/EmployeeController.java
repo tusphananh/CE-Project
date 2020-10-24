@@ -211,6 +211,8 @@ public class EmployeeController {
             ) {
                 if (HotelManagement.checkingReservation(r,fromPicker,toPicker)){
                     arrayList.add(r);
+                    BillController.setFrom(fromPicker);
+                    BillController.setTo(toPicker);
                 }
             }
             showRooms(arrayList);
@@ -271,5 +273,11 @@ public class EmployeeController {
         showRooms(HotelManagement.rooms);
     }
 
+    public String getFromTextField() {
+        return String.valueOf(fromTextField.getValue());
+    }
 
+    public String getToTextField() {
+        return String.valueOf(toTextField.getValue());
+    }
 }

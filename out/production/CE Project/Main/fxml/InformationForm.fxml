@@ -69,20 +69,6 @@
                                     </TextField>
                                  </children>
                               </HBox>
-                              <HBox prefHeight="29.0" prefWidth="220.0" style="-fx-spacing: 20;">
-                                 <children>
-                                    <ImageView fitHeight="25.0" fitWidth="30.0" opacity="0.1" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../images/note.png" />
-                                       </image>
-                                    </ImageView>
-                                    <TextField fx:id="noteTextField" minWidth="200.0" promptText="Note" style="-fx-background-color: white; -fx-background-radius: 20;">
-                                       <effect>
-                                          <DropShadow color="#0000001a" height="40.0" radius="19.5" width="40.0" />
-                                       </effect>
-                                    </TextField>
-                                 </children>
-                              </HBox>
                               <Button fx:id="nextButton" minWidth="100.0" mnemonicParsing="false" onAction="#nextSlide" style="-fx-background-color: fed775; -fx-background-radius: 20;" text="NEXT" textFill="WHITE" />
                            </children>
                         </VBox>

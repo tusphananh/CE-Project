@@ -10,6 +10,7 @@ import javafx.scene.text.Text;
 
 public class RoomPanesController {
     private Image image;
+
     @FXML
     private Text idText;
 
@@ -29,9 +30,13 @@ public class RoomPanesController {
     @FXML
     private Circle saleCircle;
 
+
     @FXML
     public void showInformationForm(ActionEvent actionEvent){
         InformationFormController.setImageView(this.image);
+        BillController.setCapacity(capacityText.getText());
+        BillController.setRoomID(idText.getText());
+        System.out.println(idText.getText());
         Navigation.showInformationForm(actionEvent);
     }
 

@@ -25,13 +25,13 @@ public class Main extends Application {
         HotelManagement.rooms.add(new Room("4", 4, 120,Type.vip,"Room4.png",0.3,2));
         HotelManagement.rooms.add(new Room("5", 5, 130,Type.normal,"Room3.png",0.2,1));
         HotelManagement.rooms.add(new Room("6", 6, 140,Type.vip,"Room2.png",0,0));
-        HotelManagement.services.add(new Service("1","Swimming"));
-        HotelManagement.services.add(new Service("2","Message"));
-        HotelManagement.services.add(new Service("3","Buffet"));
-        HotelManagement.services.add(new Service("4","Bus"));
-        HotelManagement.services.add(new Service("5","SkyDiving"));
-        HotelManagement.services.add(new Service("6","ScubaDiving"));
-        HotelManagement.services.add(new Service("7","Tour"));
+        HotelManagement.services.add(new Service("1","Swimming",60.5));
+        HotelManagement.services.add(new Service("2","Message",60));
+        HotelManagement.services.add(new Service("3","Buffet",119.99));
+        HotelManagement.services.add(new Service("4","Bus",20));
+        HotelManagement.services.add(new Service("5","SkyDiving",1000));
+        HotelManagement.services.add(new Service("6","ScubaDiving",500));
+        HotelManagement.services.add(new Service("7","Tour",499.99));
 
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.setScene(new Scene( FXMLLoader.load(getClass().getResource("fxml/Login.fxml"))));

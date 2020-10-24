@@ -8,7 +8,9 @@ import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
@@ -22,6 +24,8 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.io.IOException;
 
 public class InformationFormController {
     private double x,y;
@@ -49,7 +53,7 @@ public class InformationFormController {
     private Button nextButton;
 
     @FXML
-    private TextField phoneTextField,nameTextField,idTextField,noteTextField;
+    private TextField phoneTextField,nameTextField,idTextField;
 
     @FXML
     private Circle circle;
@@ -134,7 +138,14 @@ public class InformationFormController {
     }
 
     @FXML
-    private void confirm(ActionEvent actionEvent){
+    private void confirm(ActionEvent actionEvent) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        Parent parent = fxmlLoader.load(getClass().getResource("../fxml/Bill.fxml").openStream());
+        BillController billController = fxmlLoader.getController();
+        billController.setPhoneText(getCustomerPhone());
+        billController.setNameText(getCustomerName());
+        billController.setIdText(getCustomerID());
+
         FadeTransition fadeTransition = new FadeTransition();
         fadeTransition.setDuration(Duration.millis(fadeSpeed));
         fadeTransition.setNode(mainPane);
@@ -148,6 +159,18 @@ public class InformationFormController {
             }
         });
         fadeTransition.play();
-        Navigation.showBill(actionEvent);
+        Navigation.showBill(actionEvent,parent);
+    }
+
+    public String getCustomerPhone(){
+        return phoneTextField.getText();
+    }
+
+    public String getCustomerName(){
+        return nameTextField.getText();
+    }
+
+    public String getCustomerID(){
+        return idTextField.getText();
     }
 }

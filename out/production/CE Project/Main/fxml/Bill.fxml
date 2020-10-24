@@ -1,15 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="mainPane" prefHeight="603.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.GUIControllers.BillController">
    <children>
       <Pane layoutX="18.0" layoutY="36.0" prefHeight="531.0" prefWidth="564.0" style="-fx-background-color: white; -fx-background-radius: 20;">
          <children>
-            <Button layoutX="255.0" layoutY="471.0" mnemonicParsing="false" onAction="#close" text="Button" />
+            <Button layoutX="243.0" layoutY="483.0" mnemonicParsing="false" onAction="#close" style="-fx-background-color: fed755; -fx-background-radius: 20;" text="CONFIRM" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="13.0" />
+               </font>
+               <effect>
+                  <DropShadow color="#0000001a" height="30.0" radius="14.5" width="30.0" />
+               </effect></Button>
+            <TextField layoutX="140.0" layoutY="402.0" prefHeight="70.0" prefWidth="285.0" promptText="Note" style="-fx-background-color: white; -fx-background-radius: 20;">
+               <effect>
+                  <DropShadow color="#0000001a" height="40.0" radius="19.5" width="40.0" />
+               </effect>
+            </TextField>
+            <Pane layoutX="21.0" layoutY="31.0" prefHeight="153.0" prefWidth="256.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+               <effect>
+                  <DropShadow color="#0000001a" />
+               </effect>
+               <children>
+                  <VBox layoutX="21.0" layoutY="17.0" prefHeight="118.0" prefWidth="209.0" style="-fx-spacing: 20;">
+                     <children>
+                        <Text fx:id="nameText" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
+                        <Text fx:id="phoneText" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone" />
+                        <Text fx:id="idText" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
+                     </children>
+                  </VBox>
+               </children>
+            </Pane>
+            <Pane layoutX="287.0" layoutY="33.0" prefHeight="153.0" prefWidth="256.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+               <effect>
+                  <DropShadow color="#0000001a" />
+               </effect>
+               <children>
+                  <VBox layoutX="21.0" layoutY="17.0" prefHeight="118.0" prefWidth="209.0" style="-fx-spacing: 10;">
+                     <children>
+                        <Text fx:id="fromText" strokeType="OUTSIDE" strokeWidth="0.0" text="From" />
+                        <Text fx:id="toText" strokeType="OUTSIDE" strokeWidth="0.0" text="To" />
+                        <Text fx:id="roomIDText" strokeType="OUTSIDE" strokeWidth="0.0" text="Room" />
+                        <Text fx:id="capacityText" strokeType="OUTSIDE" strokeWidth="0.0" text="Capacity" />
+                     </children>
+                  </VBox>
+               </children>
+            </Pane>
+            <VBox alignment="CENTER" layoutX="251.0" layoutY="358.0" prefHeight="39.0" prefWidth="68.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TOTAL:">
+                     <font>
+                        <Font name="Arial Bold" size="15.0" />
+                     </font>
+                  </Text>
+                  <Text fx:id="totalText" strokeType="OUTSIDE" strokeWidth="0.0" text="200$" />
+               </children>
+            </VBox>
          </children>
          <effect>
             <DropShadow color="#00000033" height="30.0" radius="14.5" width="30.0" />
