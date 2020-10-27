@@ -3,6 +3,7 @@ package Main.Models;
 import Main.Enums.ReservedStatus;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -11,27 +12,30 @@ public class Reservation implements Identifier {
     private static int transID = 0;
     private String id;
     long duration;
-    ReservedStatus reservedStatus;
-    String from, to;
-    Owner owner;
-    Room room;
+    public ReservedStatus reservedStatus;
+    public String from, to;
+    public Owner owner;
+    public ArrayList<Room> rooms = new ArrayList<>();
     double totalPrice;
 
     public static int getTransID() {
         return transID;
     }
 
-    public Reservation(String id, String from, String to, Owner owner, Room room) throws Exception {
+    public Reservation(String id, String from, String to, Owner owner, ArrayList<Room> rooms) throws Exception {
         Reservation.transID += 1;
         this.id = id;
         this.owner = owner;
-        this.room = room;
+        this.rooms  = rooms;
         this.from = from + " 14";
         this.to = to + " 12";
         this.reservedStatus = ReservedStatus.pending;
         setDuration();
         setTotalPrice();
-        room.reservations.add(this);
+        for (Room room : rooms
+                ) {
+            room.reservations.add(this);
+        }
     }
 
 
@@ -46,7 +50,12 @@ public class Reservation implements Identifier {
     }
 
     public void setTotalPrice() {
-        this.totalPrice = (int) duration * room.price;
+        double totalprice = 0;
+        for (Room room : rooms
+             ) {
+            totalprice = totalprice + (int) duration * room.price;
+        }
+        this.totalPrice = totalprice;
     }
 
     // toString here
@@ -59,7 +68,7 @@ public class Reservation implements Identifier {
                 ", from='" + from + '\'' +
                 ", to='" + to + '\'' +
                 ", owner=" + owner.name +
-                ", room=" + room +
+                ", room=" + rooms +
                 ", totalPrice=" + totalPrice +
                 '}';
     }

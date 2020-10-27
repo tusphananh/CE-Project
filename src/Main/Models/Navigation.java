@@ -31,7 +31,6 @@ public class Navigation
         primaryStage.setScene(managerScene);
         primaryStage.setX((screenBounds.getWidth() - primaryStage.getWidth())/2);
         primaryStage.setY((screenBounds.getHeight() - primaryStage.getHeight())/2);
-
     }
     public static void navigateNewEmployee(javafx.event.ActionEvent actionEvent) throws IOException {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
@@ -109,6 +108,7 @@ public class Navigation
         fadeTransition.setToValue(0);
         fadeTransition.play();
     }
+
 
     public static BillController getBillController() {
         return billController;

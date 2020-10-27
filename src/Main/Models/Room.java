@@ -13,6 +13,7 @@ public class Room implements Identifier {
     public int hot;
     public Type type;
     public ArrayList<Reservation> reservations = new ArrayList<>();
+    public ArrayList<Service> services = new ArrayList<>();
     public String images;
 
     public Room(String id, long capacity, int price, Type type) {

@@ -30,6 +30,11 @@ public class EmployeeController {
     boolean navigateBool = false;
     private Pane checkInPane,checkOutPane,restaurantPane;
     @FXML
+    public DatePicker fromTextField;
+    @FXML
+    public DatePicker toTextField;
+
+    @FXML
     private StackPane stackPane;
 
     @FXML
@@ -49,6 +54,10 @@ public class EmployeeController {
 
     @FXML
     private Pane navigationBar;
+
+    @FXML
+    private Button basketButton;
+
     @FXML
     public void initialize() throws IOException, InterruptedException {
         checkOutPane = FXMLLoader.load(getClass().getResource("../fxml/CheckOut.fxml"));
@@ -59,6 +68,7 @@ public class EmployeeController {
         showRooms(HotelManagement.rooms);
         mainUI.setOpacity(0);
         Navigation.fadeOut(mainUI,1000);
+        basketButton.setVisible(false);
     }
 
 
@@ -175,6 +185,7 @@ public class EmployeeController {
             roomPanesController.setPriceText(String.valueOf(r.getPrice()));
             roomPanesController.setTypeText(r.getType());
             roomPanesController.setImageView(new Image(getClass().getResourceAsStream("/images/" + r.images)));
+            roomPanesController.setRoom(r);
             if (r.sale > 0.00){
                 roomPanesController.showSale();
                 roomPanesController.setSaleText(String.valueOf(r.sale*100));
@@ -192,11 +203,6 @@ public class EmployeeController {
         }
     }
 
-    @FXML
-    public DatePicker fromTextField;
-    @FXML
-    public DatePicker toTextField;
-
 
     @FXML
     public void searchAvailableRoom(ActionEvent actionEvent) throws Exception {
@@ -209,7 +215,7 @@ public class EmployeeController {
             ArrayList<Room> arrayList= new ArrayList<>();
             for (Room r : HotelManagement.rooms
             ) {
-                if (HotelManagement.checkingReservation(r,fromPicker,toPicker)){
+                if (HotelManagement.checkingRoom(r,fromPicker,toPicker)){
                     arrayList.add(r);
                     BillController.setFrom(fromPicker);
                     BillController.setTo(toPicker);
@@ -271,6 +277,11 @@ public class EmployeeController {
             }
         });
         showRooms(HotelManagement.rooms);
+    }
+
+    public void setBasketButtonContent(String content,Boolean isVisible){
+        basketButton.setText(content);
+        basketButton.setVisible(isVisible);
     }
 
     public String getFromTextField() {

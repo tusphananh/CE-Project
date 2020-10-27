@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainUI" prefHeight="713.0" prefWidth="617.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.GUIControllers.EmployeeController">
+<AnchorPane fx:id="mainUI" prefHeight="778.0" prefWidth="624.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.GUIControllers.EmployeeController">
    <children>
       <StackPane fx:id="stackPane" layoutY="33.0" prefHeight="678.0" prefWidth="623.0">
          <children>
@@ -206,5 +206,10 @@
             <DropShadow color="#0000004e" />
          </effect>
       </Pane>
+      <Button fx:id="basketButton" layoutX="204.0" layoutY="713.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="216.0" style="-fx-background-color: fed755; -fx-background-radius: 20;" text="Basket" textFill="WHITE">
+         <effect>
+            <DropShadow color="#0000001a" />
+         </effect>
+      </Button>
    </children>
 </AnchorPane>

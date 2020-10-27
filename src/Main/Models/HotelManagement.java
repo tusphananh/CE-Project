@@ -1,6 +1,5 @@
 package Main.Models;
 
-import Main.Main;
 import javafx.scene.control.Alert;
 
 import java.text.SimpleDateFormat;
@@ -11,12 +10,19 @@ public class HotelManagement {
     private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH");
     public static ArrayList<Reservation> reservations = new ArrayList<>();
     public static ArrayList<Service> services = new ArrayList<Service>();
+    public static ArrayList<Room> selectedRoom = new ArrayList<>();
 
     // This func will check and add the reservation
-    public void addReservation(Room room, String from, String to, Owner owner) throws Exception {
-        if (this.checkingReservation(room,from,to)){
-            reservations.add(new Reservation(String.valueOf(Reservation.getTransID()),from,to,owner,room));
+
+
+    public static void addReservation(ArrayList<Room> rooms, String from, String to, Owner owner) throws Exception {
+        for (Room room : rooms
+             ) {
+            if (!HotelManagement.checkingRoom(room,from,to)){
+               return;
+            }
         }
+        reservations.add(new Reservation(String.valueOf(Reservation.getTransID()),from,to,owner,rooms));
     }
 
     public static SimpleDateFormat getFormat() {
@@ -32,7 +38,7 @@ public class HotelManagement {
         return Finder.search(reservations,id);
     }
 
-    public static boolean checkingReservation(Room room,String from1, String to1) throws Exception {
+    public static boolean checkingRoom(Room room, String from1, String to1) throws Exception {
         // Cuz most of hotel now will be reserved from 14PM reserved day to 12AM the day after
         String from = from1 + " 14";
         String to = to1 + " 12";

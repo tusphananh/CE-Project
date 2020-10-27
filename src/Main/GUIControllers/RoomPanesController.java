@@ -1,6 +1,7 @@
 package Main.GUIControllers;
 
 import Main.Models.Navigation;
+import Main.Models.Room;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
@@ -10,6 +11,7 @@ import javafx.scene.text.Text;
 
 public class RoomPanesController {
     private Image image;
+    private Room room;
 
     @FXML
     private Text idText;
@@ -34,6 +36,7 @@ public class RoomPanesController {
     @FXML
     public void showInformationForm(ActionEvent actionEvent){
         InformationFormController.setImageView(this.image);
+        InformationFormController.setSelectedRoom(room);
         BillController.setCapacity(capacityText.getText());
         BillController.setRoomID(idText.getText());
         System.out.println(idText.getText());
@@ -73,5 +76,13 @@ public class RoomPanesController {
     public void hideSale(){
         saleText.setVisible(false);
         saleCircle.setVisible(false);
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
     }
 }
