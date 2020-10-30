@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -25,35 +28,6 @@
                   <DropShadow color="#0000001a" height="40.0" radius="19.5" width="40.0" />
                </effect>
             </TextField>
-            <Pane layoutX="21.0" layoutY="31.0" prefHeight="153.0" prefWidth="256.0" style="-fx-background-color: white; -fx-background-radius: 20;">
-               <effect>
-                  <DropShadow color="#0000001a" />
-               </effect>
-               <children>
-                  <VBox layoutX="21.0" layoutY="17.0" prefHeight="118.0" prefWidth="209.0" style="-fx-spacing: 20;">
-                     <children>
-                        <Text fx:id="nameText" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" />
-                        <Text fx:id="phoneText" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone" />
-                        <Text fx:id="idText" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" />
-                     </children>
-                  </VBox>
-               </children>
-            </Pane>
-            <Pane layoutX="287.0" layoutY="33.0" prefHeight="153.0" prefWidth="256.0" style="-fx-background-color: white; -fx-background-radius: 20;">
-               <effect>
-                  <DropShadow color="#0000001a" />
-               </effect>
-               <children>
-                  <VBox layoutX="21.0" layoutY="17.0" prefHeight="118.0" prefWidth="209.0" style="-fx-spacing: 10;">
-                     <children>
-                        <Text fx:id="fromText" strokeType="OUTSIDE" strokeWidth="0.0" text="From" />
-                        <Text fx:id="toText" strokeType="OUTSIDE" strokeWidth="0.0" text="To" />
-                        <Text fx:id="roomIDText" strokeType="OUTSIDE" strokeWidth="0.0" text="Room" />
-                        <Text fx:id="capacityText" strokeType="OUTSIDE" strokeWidth="0.0" text="Capacity" />
-                     </children>
-                  </VBox>
-               </children>
-            </Pane>
             <VBox alignment="CENTER" layoutX="251.0" layoutY="358.0" prefHeight="39.0" prefWidth="68.0">
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TOTAL:">
@@ -64,10 +38,26 @@
                   <Text fx:id="totalText" strokeType="OUTSIDE" strokeWidth="0.0" text="200$" />
                </children>
             </VBox>
+            <Text fill="#0000001a" layoutX="14.0" layoutY="27.0" onMouseClicked="#exit" strokeType="OUTSIDE" strokeWidth="0.0" text="&lt;&lt;&lt;" />
          </children>
          <effect>
             <DropShadow color="#00000033" height="30.0" radius="14.5" width="30.0" />
          </effect>
       </Pane>
+      <ScrollPane fx:id="listOfPane" hbarPolicy="NEVER" layoutX="84.0" layoutY="51.0" prefHeight="319.0" prefWidth="429.0" style="-fx-background-color: white;" stylesheets="@../StyleCSS/StyleUI.css">
+         <content>
+            <VBox id="vboxStyle" fx:id="vstackList" alignment="CENTER" fillWidth="false" prefHeight="318.0" prefWidth="415.0" spacing="5.0" style="-fx-spacing: 20; -fx-background-color: white;">
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </VBox>
+         </content>
+         <styleClass>
+            <String fx:value="corner" />
+            <String fx:value="scroll-bar" />
+            <String fx:value="scroll-pane" />
+            <String fx:value="track" />
+         </styleClass>
+      </ScrollPane>
    </children>
 </AnchorPane>

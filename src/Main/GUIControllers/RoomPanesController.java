@@ -37,8 +37,6 @@ public class RoomPanesController {
     public void showInformationForm(ActionEvent actionEvent){
         InformationFormController.setImageView(this.image);
         InformationFormController.setSelectedRoom(room);
-        BillController.setCapacity(capacityText.getText());
-        BillController.setRoomID(idText.getText());
         System.out.println(idText.getText());
         Navigation.showInformationForm(actionEvent);
     }
@@ -65,7 +63,7 @@ public class RoomPanesController {
     }
 
     public void setSaleText(String saleText) {
-        this.saleText.setText(saleText + "%"); ;
+        this.saleText.setText(saleText + "%");
     }
 
     public void showSale(){

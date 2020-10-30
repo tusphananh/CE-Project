@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.effect.DropShadow?>
+
+
+<ToggleButton mnemonicParsing="false" onAction="#selected" style="-fx-background-color: white; -fx-background-radius: 30;" fx:controller="Main.GUIControllers.ServiceButtonController" text="ToggleButton" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <effect>
+      <DropShadow color="#0000001a" />
+   </effect>
+</ToggleButton>

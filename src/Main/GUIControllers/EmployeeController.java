@@ -24,10 +24,12 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.util.*;
 
-public class EmployeeController {
+public class EmployeeController{
     private double x,y;
     private double reloadSpeed = 300;
     boolean navigateBool = false;
+    public static String from,to;
+
     private Pane checkInPane,checkOutPane,restaurantPane;
     @FXML
     public DatePicker fromTextField;
@@ -56,7 +58,7 @@ public class EmployeeController {
     private Pane navigationBar;
 
     @FXML
-    private Button basketButton;
+    public Button basketButton;
 
     @FXML
     public void initialize() throws IOException, InterruptedException {
@@ -68,7 +70,7 @@ public class EmployeeController {
         showRooms(HotelManagement.rooms);
         mainUI.setOpacity(0);
         Navigation.fadeOut(mainUI,1000);
-        basketButton.setVisible(false);
+        setBasketButtonContent("",false);
     }
 
 
@@ -210,15 +212,13 @@ public class EmployeeController {
             HotelManagement.showAlertInformation("Something goes wrong","Fill start and end date");
         }
         else {
-            String fromPicker = String.valueOf(fromTextField.getValue());
-            String toPicker = String.valueOf(toTextField.getValue());
+             from = String.valueOf(fromTextField.getValue());
+             to = String.valueOf(toTextField.getValue());
             ArrayList<Room> arrayList= new ArrayList<>();
             for (Room r : HotelManagement.rooms
             ) {
-                if (HotelManagement.checkingRoom(r,fromPicker,toPicker)){
+                if (HotelManagement.checkingRoom(r,from,to)){
                     arrayList.add(r);
-                    BillController.setFrom(fromPicker);
-                    BillController.setTo(toPicker);
                 }
             }
             showRooms(arrayList);
@@ -279,9 +279,15 @@ public class EmployeeController {
         showRooms(HotelManagement.rooms);
     }
 
+
     public void setBasketButtonContent(String content,Boolean isVisible){
         basketButton.setText(content);
-        basketButton.setVisible(isVisible);
+        if (isVisible){
+            Navigation.fadeOut(basketButton,300);
+        }
+        else {
+            Navigation.fadeIn(basketButton,300);
+        }
     }
 
     public String getFromTextField() {
@@ -291,4 +297,5 @@ public class EmployeeController {
     public String getToTextField() {
         return String.valueOf(toTextField.getValue());
     }
+
 }

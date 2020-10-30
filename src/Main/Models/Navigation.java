@@ -1,6 +1,7 @@
 package Main.Models;
 
 import Main.GUIControllers.BillController;
+import Main.GUIControllers.EmployeeController;
 import Main.GUIControllers.InformationFormController;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
@@ -25,6 +26,7 @@ public class Navigation
     private static Scene managerScene, employeeScene;
     private static BillController billController;
     private static InformationFormController informationFormController;
+    public static EmployeeController employeeController;
     public static void navigateNewManager(javafx.event.ActionEvent actionEvent) throws IOException {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         managerScene = new Scene( FXMLLoader.load(Navigation.class.getResource("../fxml/ManagerUI.fxml")));
@@ -35,7 +37,10 @@ public class Navigation
     public static void navigateNewEmployee(javafx.event.ActionEvent actionEvent) throws IOException {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         primaryStage.close();
-        Scene scene = new Scene(FXMLLoader.load(Navigation.class.getResource("../fxml/EmployeeUI.fxml")));
+        FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/EmployeeUI.fxml"));
+        Parent parent = fxmlLoader.load();
+        employeeController = fxmlLoader.getController();
+        Scene scene = new Scene(parent);
         scene.setFill(Color.TRANSPARENT);
         scene.getStylesheets().add("Main/StyleCSS/StageStyle.css");
         Stage stage = new Stage();

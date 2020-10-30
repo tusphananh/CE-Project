@@ -87,4 +87,12 @@ public class Room implements Identifier {
     public String getType() {
         return type.getValue();
     }
+
+    public void addService(Service service){
+        this.services.add(service);
+    }
+
+    public void dropService(Service service){
+        this.services.remove(service);
+    }
 }
