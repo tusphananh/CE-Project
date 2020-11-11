@@ -15,6 +15,7 @@ public class Room implements Identifier {
     public ArrayList<Reservation> reservations = new ArrayList<>();
     public ArrayList<Service> services = new ArrayList<>();
     public String images;
+    private String status;
 
     public Room(String id, long capacity, int price, Type type) {
         this.id = id;
@@ -22,6 +23,7 @@ public class Room implements Identifier {
         setPrice(price);
         this.type = type;
     }
+
 
     public Room(String id, long capacity, int price, Type type, String images) {
         this.id = id;
@@ -53,6 +55,10 @@ public class Room implements Identifier {
         return images;
     }
 
+    public void setServices(ArrayList<Service> services) {
+        this.services = services;
+    }
+
     // toString here
 
 
@@ -74,6 +80,13 @@ public class Room implements Identifier {
         return id;
     }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
+    }
 
     public double getPrice() {
         return price;

@@ -26,16 +26,13 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class InformationFormController {
     private double x,y;
     private static Image image;
-    private static Room selectedRoom;
-    private EmployeeController employeeController;
-
-    public static void setSelectedRoom(Room selectedRoom) {
-        InformationFormController.selectedRoom = selectedRoom;
-    }
+    private Room selectedRoom;
+    private ArrayList<Service> selectedServices = new ArrayList<>();
 
     @FXML
     private AnchorPane mainPane;
@@ -54,31 +51,17 @@ public class InformationFormController {
 
     @FXML
     public void initialize() throws IOException {
-        circle.setFill(new ImagePattern(image));
+        mainPane.setOpacity(0);
+        Navigation.fadeOut(mainPane,300);
         for (Service s: HotelManagement.services
              ) {
-
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            ToggleButton button = fxmlLoader.load(getClass().getResource("../fxml/ServiceButton.fxml").openStream());
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/ServiceButton.fxml"));
+            ToggleButton button = fxmlLoader.load();
             ServiceButtonController serviceButtonController = fxmlLoader.getController();
             serviceButtonController.service = s;
-            button.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent actionEvent) {
-                    if (button.isSelected()){
-                        selectedRoom.addService(s);
-                        button.setStyle("-fx-background-color: rgba(0,0,0,0.2);-fx-background-radius: 30");
-                    }
-                    else {
-                        selectedRoom.dropService(s);
-                        button.setStyle("-fx-background-color: rgba(255,255,255,1);-fx-background-radius: 30");
-                    }
-                }
-            });
             button.setText(s.getName());
             flowPane.getChildren().add(button);
         }
-
     }
 
     @FXML
@@ -100,13 +83,15 @@ public class InformationFormController {
     }
 
 
-    public static void setImageView(Image image) {
+    public void setImageView(Image image) {
         InformationFormController.image = image;
+        circle.setFill(new ImagePattern(image));
     }
 
     @FXML
     private void confirm(ActionEvent actionEvent) throws Exception {
-        HotelManagement.addSelectedRoom(selectedRoom,Navigation.employeeController.getFromTextField(),Navigation.employeeController.getToTextField());
+        HotelManagement.addSelectedRoom(selectedRoom,selectedServices);
+        refresh();
         updateBasketButton();
         FadeTransition fadeTransition = new FadeTransition();
         fadeTransition.setDuration(Duration.millis(200));
@@ -123,12 +108,25 @@ public class InformationFormController {
         fadeTransition.play();
     }
 
+    void refresh(){
+        setSelectedRoom(null);
+        getSelectedServices().clear();
+    }
+
     public void updateBasketButton() throws IOException {
         if (HotelManagement.selectedRoom.isEmpty()){
-            Navigation.employeeController.setBasketButtonContent("",false);
+            Navigation.getEmployeeController().setBasketButtonContent("",false);
         }
         else {
-            Navigation.employeeController.setBasketButtonContent(HotelManagement.selectedRoom.size() + " ITEM",true);
+            Navigation.getEmployeeController().setBasketButtonContent(HotelManagement.selectedRoom.size() + " ITEM",true);
         }
+    }
+
+    public void setSelectedRoom(Room selectedRoom) {
+        this.selectedRoom = selectedRoom;
+    }
+
+    public ArrayList<Service> getSelectedServices() {
+        return selectedServices;
     }
 }

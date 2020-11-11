@@ -32,9 +32,9 @@ public class Main extends Application {
         HotelManagement.services.add(new Service("5","SkyDiving",1000));
         HotelManagement.services.add(new Service("6","ScubaDiving",500));
         HotelManagement.services.add(new Service("7","Tour",499.99));
-
-        primaryStage.initStyle(StageStyle.TRANSPARENT);
+        
         primaryStage.setScene(new Scene( FXMLLoader.load(getClass().getResource("fxml/Login.fxml"))));
+        primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.setResizable(false);
         primaryStage.centerOnScreen();
         primaryStage.show();

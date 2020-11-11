@@ -14,11 +14,23 @@ public class HotelManagement {
 
     // This func will check and add the reservation
 
-    public static void addSelectedRoom(Room room,String from,String to) throws Exception {
-        if (checkingRoom(room,from,to) && checkSelectedRoom(room)){
-            HotelManagement.selectedRoom.add(room);
-            System.out.println("Number of services: " + room.services.size());
+    public static String moneyFormat(String money){
+        return money + " $";
+    }
+
+    public static void addSelectedRoom(Room room,ArrayList<Service> services) throws Exception {
+        room.setServices(services);
+        if (!selectedRoom.isEmpty()) {
+            for (Room r : selectedRoom
+            ) {
+                if (r.getID().equals(room.getID())) {
+                    selectedRoom.remove(r);
+                    break;
+                }
+            }
         }
+        HotelManagement.selectedRoom.add(room);
+        System.out.println("Number of services: " + room.services.size());
     }
 
     public static void addReservation(ArrayList<Room> rooms, String from, String to, Owner owner) throws Exception {

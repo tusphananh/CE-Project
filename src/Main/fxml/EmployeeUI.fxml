@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
@@ -10,206 +9,134 @@
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="mainUI" prefHeight="778.0" prefWidth="624.0" style="-fx-background-color: #ffff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.GUIControllers.EmployeeController">
+<StackPane fx:id="stackPane" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.GUIControllers.EmployeeController">
    <children>
-      <StackPane fx:id="stackPane" layoutY="33.0" prefHeight="678.0" prefWidth="623.0">
+      <VBox fx:id="mainPane" alignment="TOP_CENTER" onMouseClicked="#onMouseClicked" spacing="10.0" style="-fx-background-color: white;">
          <children>
-            <Pane fx:id="bookingPane" maxHeight="-Infinity" prefHeight="634.0" prefWidth="617.0">
+            <HBox>
                <children>
-                  <VBox alignment="CENTER" layoutX="29.0" layoutY="21.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="639.0" prefWidth="558.0" style="-fx-spacing: 10;">
+                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#slide" style="-fx-background-color: white;" textAlignment="JUSTIFY" wrapText="true">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/navigationButton.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+            <StackPane fx:id="mainStack">
+               <children>
+                  <VBox fx:id="bookingPane" alignment="CENTER" spacing="20.0">
                      <children>
-                        <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="35.0" prefWidth="420.0" style="-fx-spacing: 10;">
+                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" style="-fx-spacing: 10;">
                            <children>
-                              <ImageView fitHeight="29.0" fitWidth="45.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="30.0" fitWidth="30.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../images/search.png" />
                                  </image>
                               </ImageView>
-                              <TextField prefHeight="25.0" prefWidth="363.0" promptText="Search" style="-fx-background-color: white; -fx-background-radius: 10;">
+                              <TextField prefHeight="30.0" prefWidth="300.0" promptText="Search" style="-fx-background-color: white; -fx-background-radius: 10;">
                                  <effect>
-                                    <DropShadow color="#0000001f" height="40.0" radius="19.5" width="40.0" />
+                                    <DropShadow color="#0000001f" height="20.0" offsetX="3.0" offsetY="3.0" radius="9.5" width="20.0" />
                                  </effect>
                               </TextField>
                            </children>
                         </HBox>
-                        <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="28.0" prefWidth="226.0" spacing="10.0">
+                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" spacing="10.0">
                            <children>
-                              <Button mnemonicParsing="false" onAction="#sortByCapacity" prefHeight="27.0" prefWidth="85.0" style="-fx-background-color: white; -fx-background-radius: 10;" text="Capacity" textFill="#fed755">
+                              <Button mnemonicParsing="false" onAction="#sortByCapacity" style="-fx-background-color: white; -fx-background-radius: 10;" text="Capacity" textFill="#fed755" wrapText="true">
                                  <effect>
-                                    <DropShadow color="#69696924" />
+                                    <DropShadow color="#69696924" offsetX="3.0" offsetY="3.0" />
                                  </effect>
                               </Button>
-                              <Button mnemonicParsing="false" onAction="#sortByHot" prefHeight="27.0" prefWidth="58.0" style="-fx-background-color: white; -fx-background-radius: 10;" text="Hot" textFill="#fed755">
+                              <Button mnemonicParsing="false" onAction="#sortByHot" style="-fx-background-color: white; -fx-background-radius: 10;" text="Hot" textFill="#fed755" wrapText="true">
                                  <effect>
-                                    <DropShadow color="#69696924" />
+                                    <DropShadow color="#69696924" offsetX="3.0" offsetY="3.0" />
                                  </effect>
                               </Button>
-                              <Button mnemonicParsing="false" onAction="#sortBySale" prefHeight="27.0" prefWidth="60.0" style="-fx-background-color: white; -fx-background-radius: 10;" text="Sale" textFill="#fed755">
+                              <Button mnemonicParsing="false" onAction="#sortBySale" style="-fx-background-color: white; -fx-background-radius: 10;" text="Sale" textFill="#fed755" wrapText="true">
                                  <effect>
-                                    <DropShadow color="#69696924" />
+                                    <DropShadow color="#69696924" offsetX="3.0" offsetY="3.0" />
                                  </effect>
                               </Button>
                            </children>
                         </HBox>
-                        <Separator maxWidth="-Infinity" prefHeight="15.0" prefWidth="152.0" style="-fx-background-color: white;">
-                           <effect>
-                              <DropShadow blurType="ONE_PASS_BOX" color="#00000020" height="1.99" radius="0.0" width="0.0" />
-                           </effect>
-                        </Separator>
-                        <Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="98.0" prefWidth="315.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+                        <Separator maxWidth="-Infinity" prefHeight="0.0" prefWidth="100.0" />
+                        <HBox alignment="CENTER" prefHeight="82.0" prefWidth="420.0" style="-fx-spacing: 5;">
                            <children>
-                              <HBox layoutX="10.0" layoutY="14.0" prefHeight="76.0" prefWidth="296.0" style="-fx-spacing: 5;">
+                              <VBox alignment="CENTER" prefHeight="89.0" prefWidth="216.0" style="-fx-spacing: 15;">
                                  <children>
-                                    <VBox prefHeight="89.0" prefWidth="216.0" style="-fx-spacing: 15;">
+                                    <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="221.0" spacing="5.0">
                                        <children>
-                                          <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="221.0" spacing="5.0">
-                                             <children>
-                                                <ImageView fitHeight="26.0" fitWidth="22.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@../../images/next.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <DatePicker fx:id="fromTextField" promptText="From" style="-fx-background-color: white; -fx-background-insets: 1;">
-                                                   <effect>
-                                                      <DropShadow color="#0000001a" height="40.0" radius="19.5" width="40.0" />
-                                                   </effect>
-                                                </DatePicker>
-                                             </children>
-                                          </HBox>
-                                          <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="221.0" spacing="5.0">
-                                             <children>
-                                                <ImageView fitHeight="23.0" fitWidth="21.0" opacity="0.3" pickOnBounds="true" preserveRatio="true" rotate="180.0">
-                                                   <image>
-                                                      <Image url="@../../images/next.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <DatePicker fx:id="toTextField" promptText="To" style="-fx-background-color: white; -fx-background-insets: 1;">
-                                                   <effect>
-                                                      <DropShadow color="#0000001a" height="40.0" radius="19.5" width="40.0" />
-                                                   </effect>
-                                                </DatePicker>
-                                             </children>
-                                          </HBox>
+                                          <ImageView fitHeight="26.0" fitWidth="22.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../images/next.png" />
+                                             </image>
+                                          </ImageView>
+                                          <DatePicker fx:id="fromTextField" promptText="From" style="-fx-background-color: white; -fx-background-radius: 20;" />
                                        </children>
-                                    </VBox>
-                                    <Button fx:id="searchButton" mnemonicParsing="false" onAction="#searchAvailableRoom" prefHeight="68.0" prefWidth="69.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-color: fed755; -fx-border-radius: 10; -fx-border-width: 1;" text="SEARCH" textFill="#fed755">
-                                       <effect>
-                                          <DropShadow color="#0000001a" height="40.0" radius="19.5" width="40.0" />
-                                       </effect>
-                                       <font>
-                                          <Font name="Arial Bold" size="11.0" />
-                                       </font>
-                                    </Button>
+                                    </HBox>
+                                    <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="221.0" spacing="5.0">
+                                       <children>
+                                          <ImageView fitHeight="23.0" fitWidth="21.0" opacity="0.3" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                                             <image>
+                                                <Image url="@../../images/next.png" />
+                                             </image>
+                                          </ImageView>
+                                          <DatePicker fx:id="toTextField" promptText="To" style="-fx-background-color: white;" />
+                                       </children>
+                                    </HBox>
                                  </children>
-                              </HBox>
+                              </VBox>
+                              <Button fx:id="searchButton" mnemonicParsing="false" onAction="#searchAvailableRoom" prefHeight="68.0" prefWidth="69.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-border-color: fed755; -fx-border-radius: 10; -fx-border-width: 1;" text="SEARCH" textFill="#fed755">
+                                 <effect>
+                                    <DropShadow color="#0000001a" height="20.0" radius="9.5" width="20.0" />
+                                 </effect>
+                                 <font>
+                                    <Font name="Arial Bold" size="11.0" />
+                                 </font>
+                              </Button>
                            </children>
+                        </HBox>
+                        <ScrollPane fx:id="listOfPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" style="-fx-background-color: white;" stylesheets="@../StyleCSS/StyleUI.css">
+                           <content>
+                              <FlowPane fx:id="FlowPane" alignment="CENTER" hgap="20.0" vgap="30.0">
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </padding>
+                              </FlowPane>
+                           </content>
+                        </ScrollPane>
+                        <Button fx:id="basketButton" mnemonicParsing="false" style="-fx-background-color: fed755; -fx-background-radius: 20;" text="Basket" textFill="WHITE" wrapText="true">
                            <effect>
-                              <DropShadow color="#3c3c3c26" height="50.0" radius="24.5" spread="0.05" width="50.0" />
+                              <DropShadow color="#0000001a" />
                            </effect>
-                        </Pane>
-                        <Pane prefHeight="407.0" prefWidth="558.0" style="-fx-background-color: white;">
-                           <children>
-                              <ScrollPane fx:id="listOfPane" hbarPolicy="NEVER" layoutX="31.0" prefHeight="390.0" prefWidth="527.0" style="-fx-background-color: white;" stylesheets="@../StyleCSS/StyleUI.css">
-                                 <content>
-                                    <VBox id="vboxStyle" fx:id="vstackList" alignment="CENTER" fillWidth="false" prefHeight="395.0" prefWidth="525.0" spacing="5.0" style="-fx-spacing: 20; -fx-background-color: white;">
-                                       <padding>
-                                          <Insets bottom="10.0" top="10.0" />
-                                       </padding>
-                                    </VBox>
-                                 </content>
-                                 <styleClass>
-                                    <String fx:value="corner" />
-                                    <String fx:value="scroll-bar" />
-                                    <String fx:value="scroll-pane" />
-                                    <String fx:value="track" />
-                                 </styleClass>
-                              </ScrollPane>
-                           </children>
-                        </Pane>
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+                           </padding>
+                        </Button>
                      </children>
                   </VBox>
                </children>
-            </Pane>
+            </StackPane>
          </children>
-      </StackPane>
-      <Pane fx:id="navigationBar" layoutY="29.0" prefHeight="684.0" prefWidth="200.0" style="-fx-background-color: FED755;" translateX="-210.0">
-         <children>
-            <VBox alignment="CENTER" layoutX="11.0" layoutY="38.0" prefHeight="155.0" prefWidth="184.0" style="-fx-spacing: 30;">
-               <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" onMouseClicked="#toBooking" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: white;" text="BOOKING" textFill="#fed755">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-                  <Button alignment="CENTER" mnemonicParsing="false" onMouseClicked="#toRestaurant" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: white;" text="RESTAURANT" textFill="#fed755">
-                     <font>
-                        <Font name="System Bold" size="13.0" />
-                     </font>
-                  </Button>
-                  <Button alignment="CENTER" mnemonicParsing="false" onMouseClicked="#toCheckIn" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: white;" text="CHECKIN" textFill="#fed755" />
-                  <Button alignment="CENTER" mnemonicParsing="false" onMouseClicked="#toCheckOut" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: white;" text="CHECKOUT" textFill="#fed755">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Button>
-               </children>
-            </VBox>
-            <Button alignment="CENTER" contentDisplay="RIGHT" layoutX="29.0" layoutY="626.0" mnemonicParsing="false" onAction="#logout" prefHeight="34.0" prefWidth="128.0" style="-fx-background-color: white;" text="LOGOUT" textFill="#fed755">
-               <graphic>
-                  <ImageView fitHeight="24.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../images/logout.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-         </children>
-         <effect>
-            <DropShadow color="#0000003f" height="0.0" radius="13.645" width="56.58" />
-         </effect>
-      </Pane>
-      <Pane onMouseDragged="#mouseDraged" onMousePressed="#mousePressed" prefHeight="37.0" prefWidth="624.0" style="-fx-background-color: F2F2F2;">
-         <children>
-            <Button layoutX="572.0" layoutY="6.0" mnemonicParsing="false" onAction="#minimize" prefHeight="25.0" prefWidth="15.0" style="-fx-background-color: F2F2F2;">
-               <graphic>
-                  <ImageView fitHeight="13.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../images/minimize.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button layoutX="593.0" layoutY="6.0" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="26.0" style="-fx-background-color: F2F2F2;">
-               <graphic>
-                  <ImageView fitHeight="14.0" fitWidth="12.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../images/exit.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button contentDisplay="CENTER" graphicTextGap="1.0" layoutY="-1.0" mnemonicParsing="false" onAction="#extendedNavigationBar" prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: F2F2F2;" />
-            <ImageView fitHeight="34.0" fitWidth="36.0" layoutX="4.0" layoutY="4.0" onMouseClicked="#extendedNavigationBar" pickOnBounds="true" preserveRatio="true" smooth="false">
-               <image>
-                  <Image url="@../../images/navigationButton.png" />
-               </image>
-            </ImageView>
-         </children>
-         <effect>
-            <DropShadow color="#0000004e" />
-         </effect>
-      </Pane>
-      <Button fx:id="basketButton" layoutX="204.0" layoutY="713.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="216.0" style="-fx-background-color: fed755; -fx-background-radius: 20;" text="Basket" textFill="WHITE">
-         <effect>
-            <DropShadow color="#0000001a" />
-         </effect>
-      </Button>
+         <padding>
+            <Insets bottom="30.0" />
+         </padding>
+      </VBox>
    </children>
-</AnchorPane>
+</StackPane>

@@ -4,7 +4,10 @@ import Main.Models.HotelManagement;
 import Main.Models.Navigation;
 import Main.Models.Room;
 import javafx.animation.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -14,48 +17,41 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.*;
 
 public class EmployeeController{
-    private double x,y;
-    private double reloadSpeed = 300;
-    boolean navigateBool = false;
+    private double reloadSpeed = 500;
+    static boolean navigateBool = false;
     public static String from,to;
 
-    private Pane checkInPane,checkOutPane,restaurantPane;
+    private VBox checkInPane,checkOutPane,restaurantPane;
+    private VBox slider;
+
+    @FXML
+    private StackPane stackPane,mainStack;
     @FXML
     public DatePicker fromTextField;
     @FXML
     public DatePicker toTextField;
 
     @FXML
-    private StackPane stackPane;
-
-    @FXML
     private Button searchButton;
 
     @FXML
-    private AnchorPane mainUI;
+    private VBox mainPane,bookingPane;
 
     @FXML
-    private Pane bookingPane;
-
-    @FXML
-    private VBox vstackList;
+    private FlowPane FlowPane;
 
     @FXML
     private ScrollPane listOfPane;
-
-    @FXML
-    private Pane navigationBar;
 
     @FXML
     public Button basketButton;
@@ -65,117 +61,19 @@ public class EmployeeController{
         checkOutPane = FXMLLoader.load(getClass().getResource("../fxml/CheckOut.fxml"));
         checkInPane = FXMLLoader.load(getClass().getResource("../fxml/CheckIn.fxml"));
         restaurantPane = FXMLLoader.load(getClass().getResource("../fxml/Restaurant.fxml"));
-        stackPane.getChildren().addAll(checkOutPane,checkInPane,restaurantPane);
-        setVisible(true,false,false,false);
+        slider = FXMLLoader.load(getClass().getResource("../fxml/Slider.fxml"));
+        stackPane.getChildren().add(slider);
+        slider.setTranslateX(-(slider.getPrefWidth() + 30 ));
+        showBooking();
         showRooms(HotelManagement.rooms);
-        mainUI.setOpacity(0);
-        Navigation.fadeOut(mainUI,1000);
+        stackPane.setOpacity(0);
+        Navigation.fadeOut(stackPane,1000);
         setBasketButtonContent("",false);
     }
 
-
-    @FXML
-    public void mousePressed(MouseEvent mouseEvent){
-        x = mouseEvent.getSceneX();
-        y = mouseEvent.getSceneY();
-    }
-
-    @FXML
-    public void mouseDraged(MouseEvent mouseEvent){
-        Stage stage = (Stage)((Node)mouseEvent.getSource()).getScene().getWindow();
-        stage.setX(mouseEvent.getScreenX() - x );
-        stage.setY(mouseEvent.getScreenY() - y );
-    }
-    @FXML
-    public void minimize(ActionEvent actionEvent){
-        Navigation.minimize(actionEvent);
-    }
-
-    @FXML
-    public void exit(ActionEvent actionEvent){
-        System.out.println("Exit");
-        System.exit(-1);
-    }
-
-
-    @FXML
-    public void extendedNavigationBar(MouseEvent actionEvent) {
-        Node node = navigationBar;
-        TranslateTransition translateTransition = new TranslateTransition(Duration.millis(300), node);
-        navigateBool = !navigateBool;
-        if (navigateBool){
-            translateTransition.setToX(0);
-            translateTransition.play();
-            navigationBar.setTranslateX(0);
-        }
-        else {
-            translateTransition.setToX(-210);
-            translateTransition.play();
-            navigationBar.setTranslateX(-210);
-        }
-
-    }
-
-    private void addStackPane(Node node){
-        stackPane.getChildren().removeAll();
-        stackPane.getChildren().add(node);
-    }
-
-    private void setVisible(boolean booking, boolean restaurant, boolean checkin,boolean checkout){
-        restaurantPane.setVisible(restaurant);
-        checkOutPane.setVisible(checkout);
-        checkInPane.setVisible(checkin);
-        bookingPane.setVisible(booking);
-    }
-
-    @FXML
-    void toBooking(MouseEvent event) throws IOException {
-        navigationBarComesIn();
-        setVisible(true,false,false,false);
-        bookingPane.toFront();
-    }
-
-    @FXML
-    void toCheckOut(MouseEvent event) throws IOException {
-        navigationBarComesIn();
-        setVisible(false,false,false,true);
-        checkOutPane.toFront();
-
-    }
-    @FXML
-    void toCheckIn(MouseEvent event) throws IOException {
-        navigationBarComesIn();
-        setVisible(false,false,true,false);
-        checkInPane.toFront();
-    }
-    @FXML
-    void toRestaurant(MouseEvent event) throws IOException {
-        navigationBarComesIn();
-        setVisible(false,true,false,false);
-        restaurantPane.toFront();
-    }
-
-
-    void navigationBarComesIn(){
-        navigateBool = !navigateBool;
-        Node node = navigationBar;
-        TranslateTransition translateTransition = new TranslateTransition(Duration.millis(300), node);
-        translateTransition.setToX(-210);
-        translateTransition.play();
-        navigationBar.setTranslateX(-210);
-    }
-
-
-    @FXML
-    public void logout(ActionEvent actionEvent) throws IOException, InterruptedException {
-        navigationBarComesIn();
-        Navigation.navigateLogin(actionEvent);
-    }
-
     private void showRooms(Collection<Room> arrayList) throws IOException {
-        vstackList.setOpacity(0);
-        vstackList.getChildren().clear();
-
+        FlowPane.setOpacity(0);
+        FlowPane.getChildren().clear();
         RoomPanesController roomPanesController;
         for (Room r: arrayList
         ) {
@@ -195,13 +93,8 @@ public class EmployeeController{
             else {
                 roomPanesController.hideSale();
             }
-            vstackList.getChildren().add(parent);
-            FadeTransition fadeTransition = new FadeTransition();
-            fadeTransition.setDuration(Duration.millis(reloadSpeed));
-            fadeTransition.setNode(vstackList);
-            fadeTransition.setFromValue(0);
-            fadeTransition.setToValue(1);
-            fadeTransition.play();
+            FlowPane.getChildren().add(parent);
+            Navigation.fadeOut(FlowPane,reloadSpeed);
         }
     }
 
@@ -221,7 +114,7 @@ public class EmployeeController{
                     arrayList.add(r);
                 }
             }
-            showRooms(arrayList);
+            refreshRoomPanes();
         }
     }
 
@@ -240,14 +133,7 @@ public class EmployeeController{
                 }
             }
         });
-        FadeTransition fadeTransition = new FadeTransition();
-        fadeTransition.setDuration(Duration.millis(reloadSpeed));
-        fadeTransition.setNode(vstackList);
-        fadeTransition.setFromValue(1);
-        fadeTransition.setToValue(0);
-        fadeTransition.play();
-        showRooms(HotelManagement.rooms);
-
+        refreshRoomPanes();
     }
 
     @FXML
@@ -258,7 +144,7 @@ public class EmployeeController{
                 return comp;
             }
         });
-        showRooms(HotelManagement.rooms);
+        refreshRoomPanes();
     }
 
     @FXML
@@ -276,9 +162,30 @@ public class EmployeeController{
                 }
             }
         });
-        showRooms(HotelManagement.rooms);
+        refreshRoomPanes();
     }
 
+    @FXML
+    void onMouseClicked(MouseEvent mouseEvent){
+        if (navigateBool){
+            slideTransition();
+        }
+    }
+
+    @FXML
+    void slide(ActionEvent actionEvent){
+        slideTransition();
+    }
+
+    void slideTransition(){
+        navigateBool = !navigateBool;
+        if (navigateBool){
+            Navigation.slideTransition(slider,0,300);
+        }
+        else{
+            Navigation.slideTransition(slider,-(slider.getPrefWidth() + 30 ),300);
+        }
+    }
 
     public void setBasketButtonContent(String content,Boolean isVisible){
         basketButton.setText(content);
@@ -288,6 +195,42 @@ public class EmployeeController{
         else {
             Navigation.fadeIn(basketButton,300);
         }
+    }
+
+    private void refreshRoomPanes(){
+        FadeTransition fadeTransition = new FadeTransition();
+        fadeTransition.setDuration(Duration.millis(reloadSpeed));
+        fadeTransition.setNode(FlowPane);
+        fadeTransition.setFromValue(1);
+        fadeTransition.setToValue(0);
+        fadeTransition.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                try {
+                    showRooms(HotelManagement.rooms);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        fadeTransition.play();
+    }
+
+    void showBooking(){
+        mainStack.getChildren().clear();
+        mainStack.getChildren().add(bookingPane);
+    }
+    void showCheckIn(){
+        mainStack.getChildren().clear();
+        mainStack.getChildren().add(checkInPane);
+    }
+    void showCheckOut(){
+        mainStack.getChildren().clear();
+        mainStack.getChildren().add(checkOutPane);
+    }
+    void showRestaurant(){
+        mainStack.getChildren().clear();
+        mainStack.getChildren().add(restaurantPane);
     }
 
     public String getFromTextField() {

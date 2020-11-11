@@ -6,13 +6,9 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 public class CheckOutController {
-
-    @FXML
-    private StackPane stackPane;
-
     @FXML
     private ScrollPane listOfPane;
 
     @FXML
-    private VBox vstackList;
+    private VBox vstack;
 }

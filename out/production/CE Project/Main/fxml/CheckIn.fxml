@@ -1,60 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="678.0" prefWidth="623.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.GUIControllers.CheckInController">
+
+<VBox alignment="TOP_CENTER" spacing="20.0" style="-fx-background-color: white;" fx:controller="Main.GUIControllers.CheckInController" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <StackPane fx:id="stackPane" layoutX="3.0" prefHeight="678.0" prefWidth="623.0">
+      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" style="-fx-spacing: 10;">
          <children>
-            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="679.0" prefWidth="558.0" style="-fx-spacing: 10;">
-               <children>
-                  <HBox maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="35.0" prefWidth="420.0" style="-fx-spacing: 10;">
-                     <children>
-                        <ImageView fitHeight="29.0" fitWidth="45.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../images/search.png" />
-                           </image>
-                        </ImageView>
-                        <TextField prefHeight="25.0" prefWidth="363.0" promptText="Check In ID" style="-fx-background-color: white; -fx-background-radius: 10;">
-                           <effect>
-                              <DropShadow color="#0000001f" height="40.0" radius="19.5" width="40.0" />
-                           </effect>
-                        </TextField>
-                     </children>
-                  </HBox>
-                  <Pane prefHeight="581.0" prefWidth="558.0" style="-fx-background-color: white;">
-                     <children>
-                        <ScrollPane fx:id="listOfPane" hbarPolicy="NEVER" layoutX="-2.0" prefHeight="583.0" prefWidth="560.0" style="-fx-background-color: white;" stylesheets="@../StyleCSS/StyleUI.css">
-                           <content>
-                              <VBox id="vboxStyle" fx:id="vstackList" alignment="CENTER" fillWidth="false" prefHeight="589.0" prefWidth="563.0" spacing="5.0" style="-fx-spacing: 20; -fx-background-color: white;">
-                                 <padding>
-                                    <Insets bottom="10.0" top="10.0" />
-                                 </padding>
-                              </VBox>
-                           </content>
-                           <styleClass>
-                              <String fx:value="corner" />
-                              <String fx:value="scroll-bar" />
-                              <String fx:value="scroll-pane" />
-                              <String fx:value="track" />
-                           </styleClass>
-                        </ScrollPane>
-                     </children>
-                  </Pane>
-               </children>
-            </VBox>
+            <ImageView fitHeight="30.0" fitWidth="30.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/search.png" />
+               </image>
+            </ImageView>
+            <TextField prefHeight="30.0" prefWidth="300.0" promptText="Search" style="-fx-background-color: white; -fx-background-radius: 10;">
+               <effect>
+                  <DropShadow color="#0000001f" height="20.0" offsetX="3.0" offsetY="3.0" radius="9.5" width="20.0" />
+               </effect>
+            </TextField>
          </children>
-      </StackPane>
+      </HBox>
+      <ScrollPane fx:id="listOfPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" style="-fx-background-color: white;" stylesheets="@../StyleCSS/StyleUI.css">
+         <content>
+            <VBox fx:id="vstack" alignment="TOP_CENTER">
+               <padding>
+                  <Insets bottom="20.0" top="20.0" />
+               </padding>
+            </VBox>
+         </content>
+      </ScrollPane>
    </children>
-</AnchorPane>
+</VBox>

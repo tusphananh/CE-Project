@@ -4,6 +4,7 @@ import Main.GUIControllers.BillController;
 import Main.GUIControllers.EmployeeController;
 import Main.GUIControllers.InformationFormController;
 import javafx.animation.FadeTransition;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
@@ -26,7 +27,7 @@ public class Navigation
     private static Scene managerScene, employeeScene;
     private static BillController billController;
     private static InformationFormController informationFormController;
-    public static EmployeeController employeeController;
+    private static EmployeeController employeeController;
     public static void navigateNewManager(javafx.event.ActionEvent actionEvent) throws IOException {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         managerScene = new Scene( FXMLLoader.load(Navigation.class.getResource("../fxml/ManagerUI.fxml")));
@@ -41,12 +42,12 @@ public class Navigation
         Parent parent = fxmlLoader.load();
         employeeController = fxmlLoader.getController();
         Scene scene = new Scene(parent);
-        scene.setFill(Color.TRANSPARENT);
-        scene.getStylesheets().add("Main/StyleCSS/StageStyle.css");
         Stage stage = new Stage();
-        stage.initStyle(StageStyle.TRANSPARENT);
         stage.setScene(scene);
-        stage.initModality(Modality.APPLICATION_MODAL);
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+        stage.setWidth(bounds.getWidth() / 1.5);
+        stage.setHeight(bounds.getHeight() / 1.5);
         stage.show();
     }
 
@@ -62,24 +63,6 @@ public class Navigation
         primaryStage.setIconified(true);
     }
 
-    public static void showInformationForm(ActionEvent actionEvent){
-        try{
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            Parent parent = fxmlLoader.load(Navigation.class.getResource("../fxml/InformationForm.fxml"));
-            informationFormController = fxmlLoader.getController();
-            Scene scene = new Scene(parent);
-            scene.setFill(Color.TRANSPARENT);
-            scene.getStylesheets().add("Main/StyleCSS/StageStyle.css");
-            Stage stage = new Stage();
-            stage.initStyle(StageStyle.TRANSPARENT);
-            stage.setScene(scene);
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.show();
-        }
-        catch (Exception e){
-            System.out.println(e.toString());
-        }
-    }
 
     public static void showBill(ActionEvent actionEvent,Parent parent){
         try{
@@ -114,6 +97,13 @@ public class Navigation
         fadeTransition.play();
     }
 
+    public static void slideTransition(Node node,double to,double duration){
+        TranslateTransition swipeTransition = new TranslateTransition();
+        swipeTransition.setNode(node);
+        swipeTransition.setDuration(Duration.millis(duration));
+        swipeTransition.setToX(to);
+        swipeTransition.play();
+    }
 
     public static BillController getBillController() {
         return billController;
@@ -121,5 +111,13 @@ public class Navigation
 
     public static InformationFormController getInformationFormController() {
         return informationFormController;
+    }
+
+    public static EmployeeController getEmployeeController() {
+        return employeeController;
+    }
+
+    public static void setInformationFormController(InformationFormController informationFormController) {
+        Navigation.informationFormController = informationFormController;
     }
 }

@@ -3,8 +3,7 @@
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.effect.DropShadow?>
 
-
-<ToggleButton mnemonicParsing="false" onAction="#selected" style="-fx-background-color: white; -fx-background-radius: 30;" fx:controller="Main.GUIControllers.ServiceButtonController" text="ToggleButton" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<ToggleButton fx:id="button" mnemonicParsing="false" onAction="#selected" style="-fx-background-color: white; -fx-background-radius: 30;" text="ToggleButton" wrapText="true" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.GUIControllers.ServiceButtonController">
    <effect>
       <DropShadow color="#0000001a" />
    </effect>
