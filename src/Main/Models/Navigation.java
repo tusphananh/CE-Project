@@ -97,11 +97,19 @@ public class Navigation
         fadeTransition.play();
     }
 
-    public static void slideTransition(Node node,double to,double duration){
+    public static void slideHorizontallyTransition(Node node, double to, double duration){
         TranslateTransition swipeTransition = new TranslateTransition();
         swipeTransition.setNode(node);
         swipeTransition.setDuration(Duration.millis(duration));
         swipeTransition.setToX(to);
+        swipeTransition.play();
+    }
+
+    public static void slideVerticallyTransition(Node node,double to,double duration){
+        TranslateTransition swipeTransition = new TranslateTransition();
+        swipeTransition.setNode(node);
+        swipeTransition.setDuration(Duration.millis(duration));
+        swipeTransition.setToY(to);
         swipeTransition.play();
     }
 

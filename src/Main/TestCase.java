@@ -1,6 +1,5 @@
 package Main;
 
-import Main.Enums.Type;
 import Main.Models.HotelManagement;
 import Main.Models.Identifier;
 import Main.Models.Owner;

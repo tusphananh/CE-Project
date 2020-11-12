@@ -1,7 +1,5 @@
 package Main;
 
-
-import Main.Enums.Type;
 import Main.Models.HotelManagement;
 import Main.Models.Navigation;
 import Main.Models.Room;
@@ -19,12 +17,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        HotelManagement.rooms.add(new Room("1", 1, 30, Type.vip,"Room1.png",0.2,5));
-        HotelManagement.rooms.add(new Room("2", 2, 60,Type.normal,"Room2.png",0.3,4));
-        HotelManagement.rooms.add(new Room("3", 3, 80,Type.normal,"Room3.png",0.5,3));
-        HotelManagement.rooms.add(new Room("4", 4, 120,Type.vip,"Room4.png",0.3,2));
-        HotelManagement.rooms.add(new Room("5", 5, 130,Type.normal,"Room3.png",0.2,1));
-        HotelManagement.rooms.add(new Room("6", 6, 140,Type.vip,"Room2.png",0,0));
+        HotelManagement.rooms.add(new Room("1", 1, 30, "vip","Room1.png",0.2,5));
+        HotelManagement.rooms.add(new Room("2", 2, 60,"normal","Room2.png",0.3,4));
+        HotelManagement.rooms.add(new Room("3", 3, 80,"normal","Room3.png",0.5,3));
+        HotelManagement.rooms.add(new Room("4", 4, 120,"vip","Room4.png",0.3,2));
+        HotelManagement.rooms.add(new Room("5", 5, 130,"normal","Room3.png",0.2,1));
+        HotelManagement.rooms.add(new Room("6", 6, 140,"vip","Room2.png",0,0));
         HotelManagement.services.add(new Service("1","Swimming",60.5));
         HotelManagement.services.add(new Service("2","Message",60));
         HotelManagement.services.add(new Service("3","Buffet",119.99));

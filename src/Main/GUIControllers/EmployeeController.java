@@ -4,13 +4,10 @@ import Main.Models.HotelManagement;
 import Main.Models.Navigation;
 import Main.Models.Room;
 import javafx.animation.*;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -18,7 +15,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
@@ -31,8 +27,10 @@ public class EmployeeController{
     static boolean navigateBool = false;
     public static String from,to;
 
-    private VBox checkInPane,checkOutPane,restaurantPane;
+    private VBox checkInPane,checkOutPane,restaurantPane,billPane;
     private VBox slider;
+
+    private BillController billController;
 
     @FXML
     private StackPane stackPane,mainStack;
@@ -58,12 +56,11 @@ public class EmployeeController{
 
     @FXML
     public void initialize() throws IOException, InterruptedException {
-        checkOutPane = FXMLLoader.load(getClass().getResource("../fxml/CheckOut.fxml"));
-        checkInPane = FXMLLoader.load(getClass().getResource("../fxml/CheckIn.fxml"));
-        restaurantPane = FXMLLoader.load(getClass().getResource("../fxml/Restaurant.fxml"));
-        slider = FXMLLoader.load(getClass().getResource("../fxml/Slider.fxml"));
-        stackPane.getChildren().add(slider);
-        slider.setTranslateX(-(slider.getPrefWidth() + 30 ));
+        loadCheckIn();
+        loadCheckOut();
+        loadRestaurant();
+        loadBill();
+        loadSlider();
         showBooking();
         showRooms(HotelManagement.rooms);
         stackPane.setOpacity(0);
@@ -71,6 +68,30 @@ public class EmployeeController{
         setBasketButtonContent("",false);
     }
 
+    void loadCheckIn() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/CheckIn.fxml"));
+        checkInPane = fxmlLoader.load();
+    }
+    void loadCheckOut() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/CheckOut.fxml"));
+        checkOutPane = fxmlLoader.load();
+    }
+    void loadRestaurant() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Restaurant.fxml"));
+        restaurantPane = fxmlLoader.load();
+    }
+    void loadBill() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Bill.fxml"));
+        billPane = fxmlLoader.load();
+        billController = fxmlLoader.getController();
+    }
+
+    void loadSlider() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Slider.fxml"));
+        slider = fxmlLoader.load();
+        stackPane.getChildren().add(slider);
+        slider.setTranslateX(-(slider.getPrefWidth() + 30 ));
+    }
     private void showRooms(Collection<Room> arrayList) throws IOException {
         FlowPane.setOpacity(0);
         FlowPane.getChildren().clear();
@@ -180,10 +201,10 @@ public class EmployeeController{
     void slideTransition(){
         navigateBool = !navigateBool;
         if (navigateBool){
-            Navigation.slideTransition(slider,0,300);
+            Navigation.slideHorizontallyTransition(slider,0,300);
         }
         else{
-            Navigation.slideTransition(slider,-(slider.getPrefWidth() + 30 ),300);
+            Navigation.slideHorizontallyTransition(slider,-(slider.getPrefWidth() + 30 ),300);
         }
     }
 
@@ -216,9 +237,37 @@ public class EmployeeController{
         fadeTransition.play();
     }
 
+    @FXML
+    void showBill(ActionEvent actionEvent){
+        slideShowBill();
+    }
+
+
+    void slideShowBill(){
+        billPane.setTranslateY(bookingPane.getHeight());
+        billPane.setVisible(true);
+        Navigation.slideVerticallyTransition(billPane,0,300);
+    }
+
+    void slideHideBill(){
+        TranslateTransition swipeTransition = new TranslateTransition();
+        swipeTransition.setNode(billPane);
+        swipeTransition.setDuration(Duration.millis(300));
+        swipeTransition.setToY(bookingPane.getHeight());
+        swipeTransition.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                billPane.setVisible(false);
+            }
+        });
+        swipeTransition.play();
+    }
+
     void showBooking(){
         mainStack.getChildren().clear();
         mainStack.getChildren().add(bookingPane);
+        billPane.setVisible(false);
+        mainStack.getChildren().add(billPane);
     }
     void showCheckIn(){
         mainStack.getChildren().clear();

@@ -17,24 +17,22 @@ import java.io.IOException;
 
 public class BillController {
     @FXML
-    private AnchorPane mainPane;
+    private ScrollPane listOfPane;
+
+    @FXML
+    private VBox vstack;
 
     @FXML
     private Text totalText;
 
     @FXML
-    private ScrollPane listOfPane;
-
-    @FXML
-    private VBox vstackList;
-
-    @FXML
-    void close(ActionEvent event) {
+    void confirm(ActionEvent event) {
 
     }
 
     @FXML
-    void exit(MouseEvent event) {
-
+    void back(MouseEvent event) {
+        Navigation.getEmployeeController().slideHideBill();
     }
+
 }

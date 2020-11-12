@@ -1,7 +1,5 @@
 package Main.Models;
 
-import Main.Enums.Type;
-
 import java.util.ArrayList;
 
 // Main.Main.Models.Room Class
@@ -11,13 +9,13 @@ public class Room implements Identifier {
     public double price;
     public double sale;
     public int hot;
-    public Type type;
+    public String type;
     public ArrayList<Reservation> reservations = new ArrayList<>();
     public ArrayList<Service> services = new ArrayList<>();
     public String images;
     private String status;
 
-    public Room(String id, long capacity, int price, Type type) {
+    public Room(String id, long capacity, int price, String type) {
         this.id = id;
         this.capacity = capacity;
         setPrice(price);
@@ -25,7 +23,7 @@ public class Room implements Identifier {
     }
 
 
-    public Room(String id, long capacity, int price, Type type, String images) {
+    public Room(String id, long capacity, int price, String type, String images) {
         this.id = id;
         this.capacity = capacity;
         setPrice(price);
@@ -33,7 +31,7 @@ public class Room implements Identifier {
         this.images = images;
     }
 
-    public Room(String id, long capacity, int price, Type type, String images, double sale, int hot) {
+    public Room(String id, long capacity, int price, String type, String images, double sale, int hot) {
         this.id = id;
         this.capacity = capacity;
         setPrice(price);
@@ -98,7 +96,7 @@ public class Room implements Identifier {
 
 
     public String getType() {
-        return type.getValue();
+        return type;
     }
 
     public void addService(Service service){

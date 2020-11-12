@@ -1,16 +1,15 @@
 package Main.Models;
 
-import Main.Enums.PaymentStatus;
 
 import java.util.ArrayList;
 
 public class ReservationOnline extends Reservation {
-    PaymentStatus paymentStatus;
+    String paymentStatus;
     PaymentMethod paymentMethod;
 
     public ReservationOnline(String id, String from, String to, PaymentMethod paymentMethod, Owner owner, ArrayList<Room> rooms) throws Exception {
         super(id, from, to, owner, rooms);
-        this.paymentStatus = PaymentStatus.pending;
+        this.paymentStatus = "pending";
         this.paymentMethod = paymentMethod;
     }
 
@@ -20,7 +19,7 @@ public class ReservationOnline extends Reservation {
     public String toString() {
         return "ReservationOnline{" +
                 "duration=" + duration +
-                ", reservedStatus=" + reservedStatus +
+                ", status=" + status +
                 ", from='" + from + '\'' +
                 ", to='" + to + '\'' +
                 ", owner=" + owner.name +

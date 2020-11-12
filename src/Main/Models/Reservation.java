@@ -1,7 +1,5 @@
 package Main.Models;
 
-import Main.Enums.ReservedStatus;
-
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,7 +10,7 @@ public class Reservation implements Identifier {
     private static int transID = 0;
     private String id;
     long duration;
-    public ReservedStatus reservedStatus;
+    public String status;
     public String from, to;
     public Owner owner;
     public ArrayList<Room> rooms = new ArrayList<>();
@@ -29,7 +27,7 @@ public class Reservation implements Identifier {
         this.rooms  = rooms;
         this.from = from + " 14";
         this.to = to + " 12";
-        this.reservedStatus = ReservedStatus.pending;
+        this.status = "pending";
         setDuration();
         setTotalPrice();
         for (Room room : rooms
@@ -64,7 +62,7 @@ public class Reservation implements Identifier {
         return "Reservation{" +
                 "id='" + id + '\'' +
                 ", duration=" + duration +
-                ", reservedStatus=" + reservedStatus +
+                ", status=" + status +
                 ", from='" + from + '\'' +
                 ", to='" + to + '\'' +
                 ", owner=" + owner.name +
