@@ -1,9 +1,6 @@
 package Main.GUIControllers;
 
-import Main.Models.HotelManagement;
-import Main.Models.Navigation;
-import Main.Models.Room;
-import Main.Models.Service;
+import Main.Models.*;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -32,7 +29,6 @@ public class InformationFormController {
     private double x,y;
     private static Image image;
     private Room selectedRoom;
-    private ArrayList<Service> selectedServices = new ArrayList<>();
 
     @FXML
     private AnchorPane mainPane;
@@ -90,7 +86,7 @@ public class InformationFormController {
 
     @FXML
     private void confirm(ActionEvent actionEvent) throws Exception {
-        HotelManagement.addSelectedRoom(selectedRoom,selectedServices);
+        HotelManagement.addSelectedRoom(selectedRoom);
         refresh();
         updateBasketButton();
         FadeTransition fadeTransition = new FadeTransition();
@@ -110,7 +106,6 @@ public class InformationFormController {
 
     void refresh(){
         setSelectedRoom(null);
-        getSelectedServices().clear();
     }
 
     public void updateBasketButton() throws IOException {
@@ -126,7 +121,7 @@ public class InformationFormController {
         this.selectedRoom = selectedRoom;
     }
 
-    public ArrayList<Service> getSelectedServices() {
-        return selectedServices;
+    public Room getSelectedRoom() {
+        return selectedRoom;
     }
 }

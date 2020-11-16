@@ -18,8 +18,7 @@ public class HotelManagement {
         return money + " $";
     }
 
-    public static void addSelectedRoom(Room room,ArrayList<Service> services) throws Exception {
-        room.setServices(services);
+    public static void addSelectedRoom(Room room) throws Exception {
         if (!selectedRoom.isEmpty()) {
             for (Room r : selectedRoom
             ) {
@@ -30,7 +29,7 @@ public class HotelManagement {
             }
         }
         HotelManagement.selectedRoom.add(room);
-        System.out.println("Number of services: " + room.services.size());
+        System.out.println("Number of services: " + room.uses.size());
     }
 
     public static void addReservation(ArrayList<Room> rooms, String from, String to, Owner owner) throws Exception {
