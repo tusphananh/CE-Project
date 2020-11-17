@@ -6,10 +6,12 @@ public class Use {
     private Service service;
     private long amount;
     private double totalPrice;
+    private Room room;
 
-    public Use(Service service,long amount){
+    public Use(Service service,long amount,Room room){
         this.service = service;
         this.amount = amount;
+        this.room = room;
         setTotalPrice();
     }
 
@@ -35,5 +37,19 @@ public class Use {
 
     public double getTotalPrice() {
         return totalPrice;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    @Override
+    public String toString() {
+        return "Use{" +
+                "service=" + service +
+                ", amount=" + amount +
+                ", totalPrice=" + totalPrice +
+                ", room=" + room.getID() +
+                '}';
     }
 }

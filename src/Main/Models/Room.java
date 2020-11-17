@@ -10,8 +10,6 @@ public class Room implements Identifier {
     public double sale;
     public int hot;
     public String type;
-    public ArrayList<Reservation> reservations = new ArrayList<>();
-    public ArrayList<Use> uses = new ArrayList<>();
     public String images;
     private String status;
 
@@ -95,29 +93,4 @@ public class Room implements Identifier {
         return type;
     }
 
-    public void updateUses(Use use){
-        if (!this.uses.isEmpty()) {
-            for (Use u : this.uses
-            ) {
-                if (u.getService().equals(use.getService()) && use.getAmount() != 0) {
-                    this.uses.remove(u);
-                    break;
-                }
-                else {
-                    this.uses.remove(u);
-                    return ;
-                }
-            }
-        }
-
-        this.uses.add(use);
-    }
-
-    public void setUses(ArrayList<Use> uses) {
-        this.uses = uses;
-    }
-
-    public ArrayList<Use> getUses() {
-        return uses;
-    }
 }

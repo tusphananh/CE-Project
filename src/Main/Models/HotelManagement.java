@@ -7,12 +7,32 @@ import java.util.*;
 
 public class HotelManagement {
     public static ArrayList<Room> rooms = new ArrayList<>();
-    private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH");
-    public static ArrayList<Reservation> reservations = new ArrayList<>();
+    private static SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH");
+    public static ArrayList<RoomBooking> reservations = new ArrayList<>();
     public static ArrayList<Service> services = new ArrayList<Service>();
     public static ArrayList<Room> selectedRoom = new ArrayList<>();
+    public static ArrayList<Use> selectedUse = new ArrayList<>();
+    public static ArrayList<Room> availableRooms = new ArrayList<>();
 
     // This func will check and add the reservation
+
+    public static void updateSelectedUses(Use use){
+        for (Use u : HotelManagement.selectedUse
+        ) {
+            if (u.getService().equals(use.getService()) && u.getRoom().equals(use.getRoom())) {
+                HotelManagement.selectedUse.remove(u);
+                break;
+            }
+        }
+        if(use.getAmount() != 0){
+            HotelManagement.selectedUse.add(use);
+        }
+
+        for (Use u : HotelManagement.selectedUse
+             ) {
+            System.out.println(u.toString());
+        }
+    }
 
     public static String moneyFormat(String money){
         return money + " $";
@@ -29,36 +49,27 @@ public class HotelManagement {
             }
         }
         HotelManagement.selectedRoom.add(room);
-        System.out.println("Number of services: " + room.uses.size());
+        System.out.println("Number of services: " + selectedUse.size());
     }
 
-    public static void addReservation(ArrayList<Room> rooms, String from, String to, Owner owner) throws Exception {
-        for (Room room : rooms
-             ) {
-            if (!HotelManagement.checkingRoom(room,from,to)){
-               return;
+    public static void dropSelectedRoom(Room room) throws Exception {
+        for (Room r : selectedRoom
+        ) {
+            if (r.getID().equals(room.getID())) {
+                selectedRoom.remove(r);
+                break;
             }
         }
-        reservations.add(new Reservation(String.valueOf(Reservation.getTransID()),from,to,owner,rooms));
     }
-    public static Boolean checkSelectedRoom(Room room){
-        if (selectedRoom.isEmpty()){
-            System.out.println("Add selected Room : True");
-            return true;
-        }
-        else {
-            for (Room r : selectedRoom
-                 ) {
-                if (r.equals(room)){
-                    System.out.println("Add selected Room : False");
-                    return false;
-                }
-            }
-            System.out.println("Add selected Room : True");
-            return true;
-
-        }
-    }
+//    public static void addReservation(ArrayList<Room> rooms, String from, String to, Owner owner) throws Exception {
+//        for (Room room : rooms
+//             ) {
+//            if (!HotelManagement.checkingRoom(room,from,to)){
+//               return;
+//            }
+//        }
+//        reservations.add(new Reservation(String.valueOf(RoomBooking.getTransID()),from,to,owner,rooms));
+//    }
 
     public static SimpleDateFormat getFormat() {
         return format;
@@ -73,36 +84,52 @@ public class HotelManagement {
         return Finder.search(reservations,id);
     }
 
-    public static boolean checkingRoom(Room room, String from1, String to1) throws Exception {
+
+    public static boolean checkingRoom(String from, String to, RoomBooking roomBooking) throws Exception {
         // Cuz most of hotel now will be reserved from 14PM reserved day to 12AM the day after
-        String from = from1 + " 14";
-        String to = to1 + " 12";
-        System.out.println(from);
-        System.out.println(to);
-        Date f1 = format.parse(from);
-        Date t1 = format.parse(to);
-        if (f1.after(t1)){
-            showAlertInformation("Something wrong","Why start day after end day");
-            throw new Exception("Time compare");
+        String fromDate = from + " 14";
+        String toDate = to + " 12";
+        Date f1 = format.parse(fromDate);
+        Date t1 = format.parse(toDate);
+        if (checkValidDate(from,to)){
+            Date f2 = format.parse(roomBooking.from);
+            Date t2 = format.parse(roomBooking.to);
+            //  If from1 in other reservation's duration ( from1 >= from2 or from1 < to2) or ( to1 > from2 or to1 <= to2)
+            // We will throw fail
+            return (t1.after(f2) && (t1.before(t2) || t1.equals(t2))) || (f1.before(t2) && (f1.after(f2) || f1.equals(f2)));
         }
-        if (room.reservations.isEmpty()) {
-            System.out.println("Checking Room : True");
-            return true;
-        } else {
-            for (Reservation r : room.reservations
+        throw new Exception("Invalid Room");
+    }
+
+    private static boolean checkValidDate(String from,String to) throws Exception {
+        Date f1 = format.parse(from + " 14");
+        Date t1 = format.parse(to+ " 12");
+        if (f1.after(t1) || f1.equals(t1)){
+            System.out.println("Why start day after end day");
+            showAlertInformation("Something wrong","Why start day after end day");
+            return false;
+        }
+
+        return true;
+    }
+
+    public static Boolean updateAvailableRooms(String from, String to) throws Exception {
+        if (checkValidDate(from,to)){
+            availableRooms = rooms;
+            for (RoomBooking r: reservations
             ) {
-                Date f2 = format.parse(r.from);
-                Date t2 = format.parse(r.to);
-                //  If from1 in other reservation's duration ( from1 >= from2 or from1 < to2) or ( to1 > from2 or to1 <= to2)
-                // We will throw fail
-                if ((t1.after(f2) && (t1.before(t2) || t1.equals(t2))) || (f1.before(t2) && (f1.after(f2) || f1.equals(f2)))){
-                    System.out.println("Checking Room : False");
-                    return false;
+                if (!checkingRoom(from,to,r)){
+                    for (Room room: r.rooms
+                    ) {
+                        availableRooms.remove(room);
+                    }
                 }
             }
+
+            return true;
         }
-        System.out.println("Checking Room : True");
-        return true;
+
+        return false;
     }
 
     public static void showAlertInformation(String title, String body){

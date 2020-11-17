@@ -1,8 +1,9 @@
 package Main.Models;
 
 import Main.GUIControllers.BillController;
-import Main.GUIControllers.EmployeeController;
+import Main.GUIControllers.DayPickController;
 import Main.GUIControllers.InformationFormController;
+import Main.GUIControllers.RoomPickController;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
@@ -11,8 +12,6 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -27,7 +26,8 @@ public class Navigation
     private static Scene managerScene, employeeScene;
     private static BillController billController;
     private static InformationFormController informationFormController;
-    private static EmployeeController employeeController;
+    private static DayPickController dayPickController;
+    private static RoomPickController roomPickController;
     public static void navigateNewManager(javafx.event.ActionEvent actionEvent) throws IOException {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         managerScene = new Scene( FXMLLoader.load(Navigation.class.getResource("../fxml/ManagerUI.fxml")));
@@ -38,9 +38,9 @@ public class Navigation
     public static void navigateNewEmployee(javafx.event.ActionEvent actionEvent) throws IOException {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         primaryStage.close();
-        FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/EmployeeUI.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/DatePick.fxml"));
         Parent parent = fxmlLoader.load();
-        employeeController = fxmlLoader.getController();
+        dayPickController = fxmlLoader.getController();
         Scene scene = new Scene(parent);
         Stage stage = new Stage();
         stage.setScene(scene);
@@ -121,11 +121,23 @@ public class Navigation
         return informationFormController;
     }
 
-    public static EmployeeController getEmployeeController() {
-        return employeeController;
+    public static DayPickController getDayPickController() {
+        return dayPickController;
     }
 
     public static void setInformationFormController(InformationFormController informationFormController) {
         Navigation.informationFormController = informationFormController;
+    }
+
+    public static RoomPickController getRoomPickController() {
+        return roomPickController;
+    }
+
+    public static void setRoomPickController(RoomPickController roomPickController) {
+        Navigation.roomPickController = roomPickController;
+    }
+
+    public static void setBillController(BillController billController) {
+        Navigation.billController = billController;
     }
 }

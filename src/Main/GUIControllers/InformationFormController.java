@@ -3,27 +3,20 @@ package Main.GUIControllers;
 import Main.Models.*;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class InformationFormController {
     private double x,y;
@@ -78,7 +71,6 @@ public class InformationFormController {
         stage.setY(mouseEvent.getScreenY() - y );
     }
 
-
     public void setImageView(Image image) {
         InformationFormController.image = image;
         circle.setFill(new ImagePattern(image));
@@ -110,10 +102,10 @@ public class InformationFormController {
 
     public void updateBasketButton() throws IOException {
         if (HotelManagement.selectedRoom.isEmpty()){
-            Navigation.getEmployeeController().setBasketButtonContent("",false);
+            Navigation.getRoomPickController().setBasketButtonContent("",false);
         }
         else {
-            Navigation.getEmployeeController().setBasketButtonContent(HotelManagement.selectedRoom.size() + " ITEM",true);
+            Navigation.getRoomPickController().setBasketButtonContent(HotelManagement.selectedRoom.size() + " ITEM",true);
         }
     }
 

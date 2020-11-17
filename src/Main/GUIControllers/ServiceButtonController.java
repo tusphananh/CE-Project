@@ -1,9 +1,6 @@
 package Main.GUIControllers;
 
-import Main.Models.Navigation;
-import Main.Models.Room;
-import Main.Models.Service;
-import Main.Models.Use;
+import Main.Models.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ToggleButton;
@@ -18,11 +15,11 @@ public class ServiceButtonController{
     @FXML
     void selected(ActionEvent event) {
         if (button.isSelected()){
-            Navigation.getInformationFormController().getSelectedRoom().updateUses(new Use(service,1));
+            HotelManagement.updateSelectedUses(new Use(service,1,Navigation.getInformationFormController().getSelectedRoom()));
             button.setStyle("-fx-background-color: rgba(0,0,0,0.1) ; -fx-background-radius: 20");
         }
         else {
-            Navigation.getInformationFormController().getSelectedRoom().updateUses(new Use(service,0));
+            HotelManagement.updateSelectedUses(new Use(service,0,Navigation.getInformationFormController().getSelectedRoom()));
             button.setStyle("-fx-background-color: rgba(255,255,255,1) ; -fx-background-radius: 20");
         }
     }

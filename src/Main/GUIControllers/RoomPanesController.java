@@ -6,21 +6,13 @@ import Main.Models.Room;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
-import javax.crypto.Cipher;
 import java.io.IOException;
 
 public class RoomPanesController {
@@ -43,30 +35,36 @@ public class RoomPanesController {
     private Circle saleCircle;
     @FXML
     private Circle statusCircle;
+    @FXML
+    private ImageView addImage,dropImage;
 
     @FXML
     void initialize(){
-
+        addImage.setImage(new Image(getClass().getResourceAsStream("/images/add.png")));
+        dropImage.setImage(new Image(getClass().getResourceAsStream("/images/drop.png")));
     }
 
     @FXML
-    public void showInformationForm(ActionEvent actionEvent) throws IOException {
-        Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/InformationForm.fxml"));
-        Parent parent = fxmlLoader.load();
-        Navigation.setInformationFormController(fxmlLoader.getController());
-        Navigation.getInformationFormController().setImageView(this.image);
-        Navigation.getInformationFormController().setSelectedRoom(room);
-        Scene scene = new Scene(parent);
-        scene.setFill(Color.TRANSPARENT);
-        scene.getStylesheets().add("Main/StyleCSS/StageStyle.css");
-        Stage stage = new Stage();
-        stage.initOwner(primaryStage);
-        stage.initStyle(StageStyle.TRANSPARENT);
-        stage.setScene(scene);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.showAndWait();
+    public void reserve(ActionEvent actionEvent) throws Exception {
+        HotelManagement.addSelectedRoom(room);
+        updateBasketButton();
     }
+
+    @FXML
+    public void drop(ActionEvent actionEvent) throws Exception {
+        HotelManagement.dropSelectedRoom(room);
+        updateBasketButton();
+    }
+
+    public void updateBasketButton(){
+        if (HotelManagement.selectedRoom.isEmpty()){
+            Navigation.getRoomPickController().setBasketButtonContent("",false);
+        }
+        else {
+            Navigation.getRoomPickController().setBasketButtonContent(HotelManagement.selectedRoom.size() + " ITEM",true);
+        }
+    }
+
 
     public void setIdText(String idText) {
         this.idText.setText(idText);

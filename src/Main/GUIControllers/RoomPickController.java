@@ -3,7 +3,8 @@ package Main.GUIControllers;
 import Main.Models.HotelManagement;
 import Main.Models.Navigation;
 import Main.Models.Room;
-import javafx.animation.*;
+import javafx.animation.FadeTransition;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -20,33 +21,21 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 
-public class EmployeeController{
+public class RoomPickController {
     private double reloadSpeed = 500;
-    static boolean navigateBool = false;
-    public static String from,to;
-
-    private VBox checkInPane,checkOutPane,restaurantPane,billPane;
-    private VBox slider;
-
+    private VBox billPane;
     private BillController billController;
 
     @FXML
-    private StackPane stackPane,mainStack;
-    @FXML
-    public DatePicker fromTextField;
-    @FXML
-    public DatePicker toTextField;
+    private VBox bookingPane;
 
     @FXML
-    private Button searchButton;
-
-    @FXML
-    private VBox mainPane,bookingPane;
-
-    @FXML
-    private FlowPane FlowPane;
+    private javafx.scene.layout.FlowPane FlowPane;
 
     @FXML
     private ScrollPane listOfPane;
@@ -56,43 +45,11 @@ public class EmployeeController{
 
     @FXML
     public void initialize() throws IOException, InterruptedException {
-        loadCheckIn();
-        loadCheckOut();
-        loadRestaurant();
-        loadBill();
-        loadSlider();
-        showBooking();
         showRooms(HotelManagement.rooms);
-        stackPane.setOpacity(0);
-        Navigation.fadeOut(stackPane,1000);
         setBasketButtonContent("",false);
     }
 
-    void loadCheckIn() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/CheckIn.fxml"));
-        checkInPane = fxmlLoader.load();
-    }
-    void loadCheckOut() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/CheckOut.fxml"));
-        checkOutPane = fxmlLoader.load();
-    }
-    void loadRestaurant() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Restaurant.fxml"));
-        restaurantPane = fxmlLoader.load();
-    }
-    void loadBill() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Bill.fxml"));
-        billPane = fxmlLoader.load();
-        billController = fxmlLoader.getController();
-    }
-
-    void loadSlider() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Slider.fxml"));
-        slider = fxmlLoader.load();
-        stackPane.getChildren().add(slider);
-        slider.setTranslateX(-(slider.getPrefWidth() + 30 ));
-    }
-    private void showRooms(Collection<Room> arrayList) throws IOException {
+    public void showRooms(Collection<Room> arrayList) throws IOException {
         FlowPane.setOpacity(0);
         FlowPane.getChildren().clear();
         RoomPanesController roomPanesController;
@@ -119,25 +76,6 @@ public class EmployeeController{
         }
     }
 
-
-    @FXML
-    public void searchAvailableRoom(ActionEvent actionEvent) throws Exception {
-        if (fromTextField.getValue() == null || toTextField.getValue() == null){
-            HotelManagement.showAlertInformation("Something goes wrong","Fill start and end date");
-        }
-        else {
-             from = String.valueOf(fromTextField.getValue());
-             to = String.valueOf(toTextField.getValue());
-            ArrayList<Room> arrayList= new ArrayList<>();
-            for (Room r : HotelManagement.rooms
-            ) {
-                if (HotelManagement.checkingRoom(r,from,to)){
-                    arrayList.add(r);
-                }
-            }
-            refreshRoomPanes();
-        }
-    }
 
     @FXML
     public void sortByCapacity() throws IOException {
@@ -186,28 +124,6 @@ public class EmployeeController{
         refreshRoomPanes();
     }
 
-    @FXML
-    void onMouseClicked(MouseEvent mouseEvent){
-        if (navigateBool){
-            slideTransition();
-        }
-    }
-
-    @FXML
-    void slide(ActionEvent actionEvent){
-        slideTransition();
-    }
-
-    void slideTransition(){
-        navigateBool = !navigateBool;
-        if (navigateBool){
-            Navigation.slideHorizontallyTransition(slider,0,300);
-        }
-        else{
-            Navigation.slideHorizontallyTransition(slider,-(slider.getPrefWidth() + 30 ),300);
-        }
-    }
-
     public void setBasketButtonContent(String content,Boolean isVisible){
         basketButton.setText(content);
         if (isVisible){
@@ -238,13 +154,12 @@ public class EmployeeController{
     }
 
     @FXML
-    void showBill(ActionEvent actionEvent){
+    void showBill(ActionEvent actionEvent) throws IOException {
+        loadBill();
         slideShowBill();
     }
 
-
     void slideShowBill(){
-        billPane.setTranslateY(bookingPane.getHeight());
         billPane.setVisible(true);
         Navigation.slideVerticallyTransition(billPane,0,300);
     }
@@ -263,31 +178,12 @@ public class EmployeeController{
         swipeTransition.play();
     }
 
-    void showBooking(){
-        mainStack.getChildren().clear();
-        mainStack.getChildren().add(bookingPane);
+    void loadBill() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Bill.fxml"));
+        billPane = fxmlLoader.load();
+        billPane.setTranslateY(bookingPane.getHeight());
         billPane.setVisible(false);
-        mainStack.getChildren().add(billPane);
+        Navigation.setBillController(fxmlLoader.getController());
+        Navigation.getDayPickController().getMainStack().getChildren().add(billPane);
     }
-    void showCheckIn(){
-        mainStack.getChildren().clear();
-        mainStack.getChildren().add(checkInPane);
-    }
-    void showCheckOut(){
-        mainStack.getChildren().clear();
-        mainStack.getChildren().add(checkOutPane);
-    }
-    void showRestaurant(){
-        mainStack.getChildren().clear();
-        mainStack.getChildren().add(restaurantPane);
-    }
-
-    public String getFromTextField() {
-        return String.valueOf(fromTextField.getValue());
-    }
-
-    public String getToTextField() {
-        return String.valueOf(toTextField.getValue());
-    }
-
 }
