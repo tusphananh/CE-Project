@@ -25,7 +25,7 @@ public class BillController {
 
     @FXML
     void back(MouseEvent event) {
-
+        Navigation.getRoomPickController().slideHideBill();
     }
 
 }

@@ -76,6 +76,10 @@ public class RoomPickController {
         }
     }
 
+    @FXML
+    public void back(ActionEvent actionEvent){
+        Navigation.getDayPickController().hideSlideRoomPicker();
+    }
 
     @FXML
     public void sortByCapacity() throws IOException {

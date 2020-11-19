@@ -64,6 +64,7 @@ public class DayPickController {
             HotelManagement.showAlertInformation("Something goes wrong","Fill start and end date");
         }
         else if (HotelManagement.updateAvailableRooms(fromTextField.getEditor().getText(),toTextField.getEditor().getText())){
+
              loadRoomPicker();
              showSlideRoomPicker();
         }
@@ -93,8 +94,8 @@ public class DayPickController {
     private void datePickerConvert(){
         String pattern = "dd-MM-yyyy";
 
-        fromTextField.setPromptText(pattern.toLowerCase());
-        toTextField.setPromptText(pattern.toLowerCase());
+        fromTextField.setPromptText("From");
+        toTextField.setPromptText("To");
 
         fromTextField.setConverter(new StringConverter<LocalDate>() {
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
@@ -144,20 +145,28 @@ public class DayPickController {
 
     void showBooking(){
         mainStack.getChildren().clear();
+        bookingPane.setOpacity(0);
         mainStack.getChildren().add(bookingPane);
+        Navigation.fadeOut(bookingPane,500);
     }
 
     void showCheckIn(){
         mainStack.getChildren().clear();
+        checkInPane.setOpacity(0);
         mainStack.getChildren().add(checkInPane);
+        Navigation.fadeOut(checkInPane,500);
     }
     void showCheckOut(){
         mainStack.getChildren().clear();
+        checkOutPane.setOpacity(0);
         mainStack.getChildren().add(checkOutPane);
+        Navigation.fadeOut(checkOutPane,500);
     }
     void showRestaurant(){
         mainStack.getChildren().clear();
+        restaurantPane.setOpacity(0);
         mainStack.getChildren().add(restaurantPane);
+        Navigation.fadeOut(restaurantPane,500);
     }
 
 
@@ -182,6 +191,8 @@ public class DayPickController {
     }
 
     void loadRoomPicker() throws IOException {
+        HotelManagement.selectedRoom.clear();
+        HotelManagement.selectedUse.clear();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/RoomPick.fxml"));
         roomPickerPane = fxmlLoader.load();
         roomPickerPane.setVisible(false);
@@ -191,7 +202,12 @@ public class DayPickController {
     }
     void showSlideRoomPicker(){
         roomPickerPane.setVisible(true);
-        Navigation.slideHorizontallyTransition(roomPickerPane,0,300);
+        Navigation.slideHorizontallyTransition(roomPickerPane,0,800);
+    }
+
+    void hideSlideRoomPicker(){
+        roomPickerPane.setDisable(true);
+        Navigation.slideHorizontallyTransition(roomPickerPane,roomPickerPane.getWidth(),800);
     }
 
     public String getFromTextField() {

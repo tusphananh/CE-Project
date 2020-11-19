@@ -13,8 +13,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="bookingPane" alignment="CENTER" spacing="20.0" style="-fx-background-color: white;" fx:controller="Main.GUIControllers.RoomPickController" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="bookingPane" alignment="CENTER" spacing="20.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.GUIControllers.RoomPickController">
    <children>
+      <HBox>
+         <children>
+            <Button mnemonicParsing="false" onAction="#back" style="-fx-background-color: white;" text="&lt;&lt;&lt;" textFill="#00000080" />
+         </children>
+      </HBox>
       <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" style="-fx-spacing: 10;">
          <children>
             <ImageView fitHeight="30.0" fitWidth="30.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
