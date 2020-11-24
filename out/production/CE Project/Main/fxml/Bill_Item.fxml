@@ -13,7 +13,7 @@
    <children>
       <Label fx:id="roomLabel" minWidth="100.0" text="Room 1" />
       <Separator maxWidth="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefWidth="1.0" />
-      <FlowPane fx:id="serviceFlowPane" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" />
+      <FlowPane fx:id="serviceFlowPane" hgap="10.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" vgap="10.0" />
       <Separator maxWidth="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefWidth="1.0" />
       <Button fx:id="detailButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#showDetail" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: white;">
          <graphic>

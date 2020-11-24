@@ -17,21 +17,17 @@ public class HotelManagement {
     // This func will check and add the reservation
 
     public static void updateSelectedUses(Use use){
-        for (Use u : HotelManagement.selectedUse
+        for (Use u : selectedUse
         ) {
             if (u.getService().equals(use.getService()) && u.getRoom().equals(use.getRoom())) {
-                HotelManagement.selectedUse.remove(u);
+                selectedUse.remove(u);
                 break;
             }
         }
-        if(use.getAmount() != 0){
-            HotelManagement.selectedUse.add(use);
+        if(use.getAmount() > 0){
+            selectedUse.add(use);
         }
-
-        for (Use u : HotelManagement.selectedUse
-             ) {
-            System.out.println(u.toString());
-        }
+        System.out.println("Number of service : " + selectedUse.size());
     }
 
     public static String moneyFormat(String money){
@@ -49,7 +45,6 @@ public class HotelManagement {
             }
         }
         HotelManagement.selectedRoom.add(room);
-        System.out.println("Number of services: " + selectedUse.size());
     }
 
     public static void dropSelectedRoom(Room room) throws Exception {

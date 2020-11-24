@@ -6,6 +6,7 @@ import Main.Models.Room;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
@@ -34,7 +35,7 @@ public class BillController {
         for (Room r: HotelManagement.selectedRoom
              ) {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Bill_Item.fxml"));
-            HBox bill_itemPane = fxmlLoader.load();
+            Parent bill_itemPane = fxmlLoader.load();
             Bill_ItemController bill_itemController = fxmlLoader.getController();
             bill_itemController.setRoom(r);
             bill_itemController.setRoomLabel(r.getID());

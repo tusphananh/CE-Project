@@ -8,6 +8,7 @@ import javafx.scene.layout.Background;
 
 public class ServiceButtonController{
     public Service service;
+    public Room room;
 
     @FXML
     private ToggleButton button;
@@ -15,11 +16,11 @@ public class ServiceButtonController{
     @FXML
     void selected(ActionEvent event) {
         if (button.isSelected()){
-            HotelManagement.updateSelectedUses(new Use(service,1,Navigation.getInformationFormController().getSelectedRoom()));
+            HotelManagement.updateSelectedUses(new Use(service,1,room));
             button.setStyle("-fx-background-color: rgba(0,0,0,0.1) ; -fx-background-radius: 20");
         }
         else {
-            HotelManagement.updateSelectedUses(new Use(service,0,Navigation.getInformationFormController().getSelectedRoom()));
+            HotelManagement.updateSelectedUses(new Use(service,0,room));
             button.setStyle("-fx-background-color: rgba(255,255,255,1) ; -fx-background-radius: 20");
         }
     }

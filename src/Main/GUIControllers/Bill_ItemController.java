@@ -37,7 +37,6 @@ public class Bill_ItemController {
     void initialize() throws IOException {
         detailImageView.setImage(new Image(getClass().getResourceAsStream("/images/detail.png")));
         deleteImageView.setImage(new Image(getClass().getResourceAsStream("/images/drop.png")));
-        loadServices();
     }
 
     @FXML
@@ -57,13 +56,19 @@ public class Bill_ItemController {
             ToggleButton button = fxmlLoader.load();
             ServiceButtonController serviceButtonController = fxmlLoader.getController();
             serviceButtonController.service = s;
+            serviceButtonController.room = room;
             button.setText(s.getName());
             serviceFlowPane.getChildren().add(button);
         }
     }
 
-    public void setRoom(Room room) {
+    public void setRoom(Room room) throws IOException {
         this.room = room;
+        loadServices();
+    }
+
+    public Room getRoom() {
+        return room;
     }
 
     public void setRoomLabel(String roomLabel) {
