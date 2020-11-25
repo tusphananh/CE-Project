@@ -11,17 +11,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -46,7 +41,7 @@ public class RoomPickController {
     @FXML
     public void initialize() throws IOException, InterruptedException {
         showRooms(HotelManagement.rooms);
-        setBasketButtonContent("",false);
+        updateBasketButton();
     }
 
     public void showRooms(Collection<Room> arrayList) throws IOException {
@@ -128,12 +123,15 @@ public class RoomPickController {
         refreshRoomPanes();
     }
 
-    public void setBasketButtonContent(String content,Boolean isVisible){
-        basketButton.setText(content);
-        if (isVisible){
+    public void updateBasketButton(){
+        if (!HotelManagement.selectedRoom.isEmpty()){
+            basketButton.setDisable(false);
+            basketButton.setText(HotelManagement.selectedRoom.size() + " ITEM");
             Navigation.fadeOut(basketButton,300);
         }
         else {
+            basketButton.setDisable(true);
+            basketButton.setText("Basket");
             Navigation.fadeIn(basketButton,300);
         }
     }

@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.util.NavigableMap;
 
 public class InformationFormController {
     private double x,y;
@@ -101,12 +102,7 @@ public class InformationFormController {
     }
 
     public void updateBasketButton() throws IOException {
-        if (HotelManagement.selectedRoom.isEmpty()){
-            Navigation.getRoomPickController().setBasketButtonContent("",false);
-        }
-        else {
-            Navigation.getRoomPickController().setBasketButtonContent(HotelManagement.selectedRoom.size() + " ITEM",true);
-        }
+        Navigation.getRoomPickController().updateBasketButton();
     }
 
     public void setSelectedRoom(Room selectedRoom) {

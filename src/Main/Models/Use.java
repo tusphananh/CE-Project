@@ -5,14 +5,12 @@ import java.util.ArrayList;
 public class Use {
     private Service service;
     private long amount;
-    private double totalPrice;
     private Room room;
 
     public Use(Service service,long amount,Room room){
         this.service = service;
         this.amount = amount;
         this.room = room;
-        setTotalPrice();
     }
 
     public void setAmount(long amount) {
@@ -31,12 +29,8 @@ public class Use {
         return service;
     }
 
-    public void setTotalPrice() {
-        this.totalPrice = this.amount*service.getPrice();
-    }
-
     public double getTotalPrice() {
-        return totalPrice;
+        return service.getPrice()*amount;
     }
 
     public Room getRoom() {
@@ -48,7 +42,7 @@ public class Use {
         return "Use{" +
                 "service=" + service +
                 ", amount=" + amount +
-                ", totalPrice=" + totalPrice +
+                ", totalPrice=" + getTotalPrice() +
                 ", room=" + room.getID() +
                 '}';
     }

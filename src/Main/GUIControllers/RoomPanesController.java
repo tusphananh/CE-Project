@@ -5,15 +5,12 @@ import Main.Models.Navigation;
 import Main.Models.Room;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-
-import java.io.IOException;
 
 public class RoomPanesController {
     private Image image;
@@ -52,17 +49,14 @@ public class RoomPanesController {
 
     @FXML
     public void drop(ActionEvent actionEvent) throws Exception {
-        HotelManagement.dropSelectedRoom(room);
-        updateBasketButton();
+        if (!HotelManagement.selectedRoom.isEmpty()){
+            HotelManagement.dropSelectedRoom(room);
+            updateBasketButton();
+        }
     }
 
     public void updateBasketButton(){
-        if (HotelManagement.selectedRoom.isEmpty()){
-            Navigation.getRoomPickController().setBasketButtonContent("",false);
-        }
-        else {
-            Navigation.getRoomPickController().setBasketButtonContent(HotelManagement.selectedRoom.size() + " ITEM",true);
-        }
+       Navigation.getRoomPickController().updateBasketButton();
     }
 
 

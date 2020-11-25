@@ -13,6 +13,20 @@ public class HotelManagement {
     public static ArrayList<Room> selectedRoom = new ArrayList<>();
     public static ArrayList<Use> selectedUse = new ArrayList<>();
     public static ArrayList<Room> availableRooms = new ArrayList<>();
+    public static double totalPrice;
+
+    public static double getTotalPrice() {
+        totalPrice = 0;
+        for (Room room : selectedRoom){
+            totalPrice = totalPrice + room.getPrice();
+        }
+        for (Use use: selectedUse
+             ) {
+            totalPrice = totalPrice + use.getTotalPrice();
+        }
+
+        return totalPrice;
+    }
 
     // This func will check and add the reservation
 
@@ -55,6 +69,18 @@ public class HotelManagement {
                 break;
             }
         }
+    }
+
+    public static void dropBillItem(Room room) throws Exception {
+        dropSelectedRoom(room);
+        ArrayList<Use> arrayList = new ArrayList<>();
+        for (Use use: selectedUse
+             ) {
+            if (!use.getRoom().equals(room)){
+                arrayList.add(use);
+            }
+        }
+        selectedUse = arrayList;
     }
 //    public static void addReservation(ArrayList<Room> rooms, String from, String to, Owner owner) throws Exception {
 //        for (Room room : rooms

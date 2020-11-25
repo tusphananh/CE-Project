@@ -8,9 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -29,9 +27,15 @@ public class BillController {
     @FXML
     void initialize() throws IOException {
         loadSelectedRoom();
+        loadTotalPrice();
     }
 
-    private void loadSelectedRoom() throws IOException {
+    public void loadTotalPrice(){
+        totalText.setText(String.valueOf(HotelManagement.getTotalPrice()) + " $");
+    }
+
+    public void loadSelectedRoom() throws IOException {
+        vstack.getChildren().clear();
         for (Room r: HotelManagement.selectedRoom
              ) {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/Bill_Item.fxml"));
@@ -50,6 +54,9 @@ public class BillController {
 
     @FXML
     void back(MouseEvent event) {
+       close();
+    }
+    public void close(){
         Navigation.getRoomPickController().slideHideBill();
     }
 

@@ -1,6 +1,7 @@
 package Main.GUIControllers;
 
 import Main.Models.HotelManagement;
+import Main.Models.Navigation;
 import Main.Models.Room;
 import Main.Models.Service;
 import javafx.event.ActionEvent;
@@ -14,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 
 import java.io.IOException;
+import java.util.NavigableMap;
 
 public class Bill_ItemController {
     private Room room;
@@ -40,13 +42,18 @@ public class Bill_ItemController {
     }
 
     @FXML
-    void delete(ActionEvent event) {
-
+    void delete(ActionEvent event) throws Exception {
+        HotelManagement.dropBillItem(room);
+        Navigation.getBillController().loadSelectedRoom();
+        if (HotelManagement.selectedRoom.isEmpty()){
+            Navigation.getBillController().close();
+        }
+        Navigation.getBillController().loadTotalPrice();
+        Navigation.getRoomPickController().updateBasketButton();
     }
 
     @FXML
     void showDetail(ActionEvent event) {
-
     }
 
     private void loadServices() throws IOException {
