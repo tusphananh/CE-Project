@@ -23,7 +23,7 @@ public class Bill_ItemController {
     private Label roomLabel;
 
     @FXML
-    private FlowPane serviceFlowPane;
+    private Label priceLabel;
 
     @FXML
     private Button detailButton;
@@ -43,9 +43,10 @@ public class Bill_ItemController {
 
     @FXML
     void delete(ActionEvent event) throws Exception {
-        HotelManagement.dropBillItem(room);
+        HotelManagement.dropSelectedRoom(room);
         Navigation.getBillController().loadSelectedRoom();
         if (HotelManagement.selectedRoom.isEmpty()){
+            HotelManagement.selectedUse.clear();
             Navigation.getBillController().close();
         }
         Navigation.getBillController().loadTotalPrice();
@@ -56,22 +57,8 @@ public class Bill_ItemController {
     void showDetail(ActionEvent event) {
     }
 
-    private void loadServices() throws IOException {
-        for (Service s: HotelManagement.services
-        ) {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/ServiceButton.fxml"));
-            ToggleButton button = fxmlLoader.load();
-            ServiceButtonController serviceButtonController = fxmlLoader.getController();
-            serviceButtonController.service = s;
-            serviceButtonController.room = room;
-            button.setText(s.getName());
-            serviceFlowPane.getChildren().add(button);
-        }
-    }
-
     public void setRoom(Room room) throws IOException {
         this.room = room;
-        loadServices();
     }
 
     public Room getRoom() {
@@ -80,5 +67,9 @@ public class Bill_ItemController {
 
     public void setRoomLabel(String roomLabel) {
         this.roomLabel .setText("Room " + roomLabel);
+    }
+
+    public void setPriceLabel(String priceLabel) {
+        this.priceLabel.setText(priceLabel + " $");
     }
 }

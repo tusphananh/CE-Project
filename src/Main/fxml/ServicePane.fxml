@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="300.0" spacing="10.0" style="-fx-background-color: white; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.GUIControllers.ServicePaneController">
+   <children>
+      <Label fx:id="nameLabel" prefWidth="80.0" text="Label" />
+      <Separator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="20.0" prefWidth="1.0" />
+      <Label fx:id="amountLabel" prefWidth="80.0" text="Label" />
+      <Separator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="20.0" prefWidth="1.0" />
+      <Label fx:id="priceLabel" prefWidth="80.0" text="Label" />
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+   <effect>
+      <DropShadow color="#0000001a" offsetX="3.0" offsetY="3.0" />
+   </effect>
+</HBox>

@@ -3,27 +3,48 @@ package Main.GUIControllers;
 import Main.Models.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.layout.Background;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
+import java.io.IOException;
 
 public class ServiceButtonController{
     public Service service;
-    public Room room;
+    @FXML
+    private ImageView dropImage;
 
     @FXML
-    private ToggleButton button;
+    private Label nameLabel;
 
     @FXML
-    void selected(ActionEvent event) {
-        if (button.isSelected()){
-            HotelManagement.updateSelectedUses(new Use(service,1,room));
-            Navigation.getBillController().loadTotalPrice();
-            button.setStyle("-fx-background-color: rgba(0,0,0,0.1) ; -fx-background-radius: 20");
-        }
-        else {
-            HotelManagement.updateSelectedUses(new Use(service,0,room));
-            Navigation.getBillController().loadTotalPrice();
-            button.setStyle("-fx-background-color: rgba(255,255,255,1) ; -fx-background-radius: 20");
-        }
+    private ImageView addImage;
+
+    @FXML
+    void initialize(){
+        addImage.setImage(new Image(getClass().getResourceAsStream("/images/add.png")));
+        dropImage.setImage(new Image(getClass().getResourceAsStream("/images/drop.png")));
+    }
+
+    @FXML
+    void add(ActionEvent event) throws IOException {
+        HotelManagement.addSelectedUse(service);
+        Navigation.getBillController().loadServicesStack();
+        System.out.println("Number of service : " + HotelManagement.selectedUse.size());
+    }
+
+    @FXML
+    void drop(ActionEvent event) throws IOException {
+        HotelManagement.dropSelectedUse(service);
+        Navigation.getBillController().loadServicesStack();
+        System.out.println("Number of service : " + HotelManagement.selectedUse.size());
+    }
+
+    public void setNameLabel(String nameLabel) {
+        this.nameLabel.setText(nameLabel);
+    }
+
+    public void setService(Service service) {
+        this.service = service;
     }
 }

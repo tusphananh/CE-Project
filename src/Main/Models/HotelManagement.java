@@ -20,29 +20,10 @@ public class HotelManagement {
         for (Room room : selectedRoom){
             totalPrice = totalPrice + room.getPrice();
         }
-        for (Use use: selectedUse
-             ) {
-            totalPrice = totalPrice + use.getTotalPrice();
-        }
-
         return totalPrice;
     }
 
     // This func will check and add the reservation
-
-    public static void updateSelectedUses(Use use){
-        for (Use u : selectedUse
-        ) {
-            if (u.getService().equals(use.getService()) && u.getRoom().equals(use.getRoom())) {
-                selectedUse.remove(u);
-                break;
-            }
-        }
-        if(use.getAmount() > 0){
-            selectedUse.add(use);
-        }
-        System.out.println("Number of service : " + selectedUse.size());
-    }
 
     public static String moneyFormat(String money){
         return money + " $";
@@ -71,17 +52,36 @@ public class HotelManagement {
         }
     }
 
-    public static void dropBillItem(Room room) throws Exception {
-        dropSelectedRoom(room);
-        ArrayList<Use> arrayList = new ArrayList<>();
-        for (Use use: selectedUse
-             ) {
-            if (!use.getRoom().equals(room)){
-                arrayList.add(use);
+    public static void addSelectedUse(Service service){
+        if (!selectedUse.isEmpty()){
+            for (Use use: selectedUse
+                 ) {
+                if (use.getService().equals(service)){
+                    use.setAmount(use.getAmount() + 1);
+                    return;
+                }
             }
         }
-        selectedUse = arrayList;
+        selectedUse.add(new Use(service,1));
     }
+
+    public static void dropSelectedUse(Service service){
+        if (!selectedUse.isEmpty()){
+            for (Use use: selectedUse
+            ) {
+                if (use.getService().equals(service)){
+                    long amount = use.getAmount() - 1;
+                    if (amount > 0){
+                        use.setAmount(use.getAmount() - 1);
+                        return;
+                    }
+                    selectedUse.remove(use);
+                    break;
+                }
+            }
+        }
+    }
+
 //    public static void addReservation(ArrayList<Room> rooms, String from, String to, Owner owner) throws Exception {
 //        for (Room room : rooms
 //             ) {

@@ -1,14 +1,13 @@
 package Main.GUIControllers;
 
-import Main.Models.HotelManagement;
-import Main.Models.Navigation;
-import Main.Models.Room;
+import Main.Models.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -19,7 +18,10 @@ public class BillController {
     private ScrollPane listOfPane;
 
     @FXML
-    private VBox vstack;
+    private VBox vstack,serviceStack;
+
+    @FXML
+    private FlowPane serviceFlowPane;
 
     @FXML
     private Text totalText;
@@ -28,6 +30,7 @@ public class BillController {
     void initialize() throws IOException {
         loadSelectedRoom();
         loadTotalPrice();
+        loadServices();
     }
 
     public void loadTotalPrice(){
@@ -43,6 +46,7 @@ public class BillController {
             Bill_ItemController bill_itemController = fxmlLoader.getController();
             bill_itemController.setRoom(r);
             bill_itemController.setRoomLabel(r.getID());
+            bill_itemController.setPriceLabel(String.valueOf(r.getPrice()));
             vstack.getChildren().add(bill_itemPane);
         }
     }
@@ -50,6 +54,32 @@ public class BillController {
     @FXML
     void confirm(ActionEvent event) {
 
+    }
+
+    void loadServicesStack() throws IOException {
+        serviceStack.getChildren().clear();
+        for (Use use: HotelManagement.selectedUse
+             ) {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/ServicePane.fxml"));
+            Parent servicePane = fxmlLoader.load();
+            ServicePaneController servicePaneController = fxmlLoader.getController();
+            servicePaneController.setPriceLabel(HotelManagement.moneyFormat(String.valueOf(use.getTotalPrice())));
+            servicePaneController.setNameLabel(use.getService().getName());
+            servicePaneController.setAmountLabel(String.valueOf(use.getAmount()));
+            serviceStack.getChildren().add(servicePane);
+        }
+    }
+
+    void loadServices() throws IOException {
+        for (Service service: HotelManagement.services
+             ) {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("../fxml/ServiceButton.fxml"));
+            Parent servicePane = fxmlLoader.load();
+            ServiceButtonController serviceButtonController = fxmlLoader.getController();
+            serviceButtonController.setService(service);
+            serviceButtonController.setNameLabel(service.getName());
+            serviceFlowPane.getChildren().add(servicePane);
+        }
     }
 
     @FXML
