@@ -35,7 +35,7 @@ public class BillController {
     }
 
     public void loadTotalPrice(){
-        totalText.setText(String.valueOf(HotelManagement.getTotalPrice()) + " $");
+        totalText.setText(HotelManagement.getTotalPrice() + " $");
     }
 
     public void loadSelectedRoom() throws IOException {

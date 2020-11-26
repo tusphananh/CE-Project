@@ -20,6 +20,11 @@ public class HotelManagement {
         for (Room room : selectedRoom){
             totalPrice = totalPrice + room.getPrice();
         }
+
+        for (Use use: selectedUse
+             ) {
+            totalPrice = totalPrice + use.getTotalPrice();
+        }
         return totalPrice;
     }
 

@@ -30,6 +30,7 @@ public class ServiceButtonController{
     void add(ActionEvent event) throws IOException {
         HotelManagement.addSelectedUse(service);
         Navigation.getBillController().loadServicesStack();
+        Navigation.getBillController().loadTotalPrice();
         System.out.println("Number of service : " + HotelManagement.selectedUse.size());
     }
 
@@ -37,6 +38,7 @@ public class ServiceButtonController{
     void drop(ActionEvent event) throws IOException {
         HotelManagement.dropSelectedUse(service);
         Navigation.getBillController().loadServicesStack();
+        Navigation.getBillController().loadTotalPrice();
         System.out.println("Number of service : " + HotelManagement.selectedUse.size());
     }
 
