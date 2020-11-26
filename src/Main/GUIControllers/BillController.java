@@ -31,6 +31,7 @@ public class BillController {
         loadSelectedRoom();
         loadTotalPrice();
         loadServices();
+        loadServicesStack();
     }
 
     public void loadTotalPrice(){

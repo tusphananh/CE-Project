@@ -26,21 +26,21 @@
          </children>
       </HBox>
       <Label text="Rooms" />
-      <ScrollPane fx:id="listOfPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" minHeight="100.0" style="-fx-background-color: white;" stylesheets="@../StyleCSS/StyleUI.css">
+      <ScrollPane fx:id="listOfPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="180.0" minHeight="60.0" style="-fx-background-color: white;" stylesheets="@../StyleCSS/StyleUI.css">
          <content>
             <VBox fx:id="vstack" alignment="TOP_CENTER" spacing="10.0">
                <padding>
-                  <Insets bottom="20.0" top="20.0" />
+                  <Insets bottom="10.0" top="5.0" />
                </padding>
             </VBox>
          </content>
       </ScrollPane>
       <Label text="Services" />
-      <ScrollPane fx:id="listOfPane1" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" minHeight="100.0" style="-fx-background-color: white;" stylesheets="@../StyleCSS/StyleUI.css">
+      <ScrollPane fx:id="listOfPane1" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="150.0" minHeight="50.0" style="-fx-background-color: white;" stylesheets="@../StyleCSS/StyleUI.css">
          <content>
             <VBox fx:id="serviceStack" alignment="TOP_CENTER" spacing="10.0">
                <padding>
-                  <Insets bottom="20.0" top="20.0" />
+                  <Insets bottom="10.0" top="5.0" />
                </padding>
             </VBox>
          </content>
