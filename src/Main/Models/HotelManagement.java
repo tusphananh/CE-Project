@@ -2,23 +2,34 @@ package Main.Models;
 
 import javafx.scene.control.Alert;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class HotelManagement {
+    private static String from,to;
     public static ArrayList<Room> rooms = new ArrayList<>();
     private static SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH");
-    public static ArrayList<RoomBooking> reservations = new ArrayList<>();
+    public static ArrayList<Reservation> reservations = new ArrayList<>();
+    public static ArrayList<Reservation> pendingReservations = new ArrayList<>();
+    public static ArrayList<Reservation> usingReservations = new ArrayList<>();
     public static ArrayList<Service> services = new ArrayList<Service>();
     public static ArrayList<Room> selectedRoom = new ArrayList<>();
     public static ArrayList<Use> selectedUse = new ArrayList<>();
     public static ArrayList<Room> availableRooms = new ArrayList<>();
     public static double totalPrice;
 
-    public static double getTotalPrice() {
+    public static void checkIn(Reservation reservation){
+        if (reservation.getPaymentStatus().equals("success")){
+            reservation.setStatus("using");
+        }
+    }
+
+    public static double getTotalPrice() throws ParseException {
         totalPrice = 0;
         for (Room room : selectedRoom){
-            totalPrice = totalPrice + room.getPrice();
+            totalPrice = totalPrice + room.getPrice()*getDuration();
         }
 
         for (Use use: selectedUse
@@ -87,15 +98,10 @@ public class HotelManagement {
         }
     }
 
-//    public static void addReservation(ArrayList<Room> rooms, String from, String to, Owner owner) throws Exception {
-//        for (Room room : rooms
-//             ) {
-//            if (!HotelManagement.checkingRoom(room,from,to)){
-//               return;
-//            }
-//        }
-//        reservations.add(new Reservation(String.valueOf(RoomBooking.getTransID()),from,to,owner,rooms));
-//    }
+    public static void addReservation(String from, String to, Owner owner,ArrayList<Room> rooms,ArrayList
+                                      <Use> uses) throws Exception {
+
+    }
 
     public static SimpleDateFormat getFormat() {
         return format;
@@ -111,25 +117,20 @@ public class HotelManagement {
     }
 
 
-    public static boolean checkingRoom(String from, String to, RoomBooking roomBooking) throws Exception {
+    public static boolean checkAvailableDate(Reservation reservation) throws Exception {
         // Cuz most of hotel now will be reserved from 14PM reserved day to 12AM the day after
-        String fromDate = from + " 14";
-        String toDate = to + " 12";
-        Date f1 = format.parse(fromDate);
-        Date t1 = format.parse(toDate);
-        if (checkValidDate(from,to)){
-            Date f2 = format.parse(roomBooking.from);
-            Date t2 = format.parse(roomBooking.to);
-            //  If from1 in other reservation's duration ( from1 >= from2 or from1 < to2) or ( to1 > from2 or to1 <= to2)
-            // We will throw fail
-            return (t1.after(f2) && (t1.before(t2) || t1.equals(t2))) || (f1.before(t2) && (f1.after(f2) || f1.equals(f2)));
-        }
-        throw new Exception("Invalid Room");
+        Date f1 = format.parse(from);
+        Date t1 = format.parse(to);
+        Date f2 = format.parse(reservation.getFrom());
+        Date t2 = format.parse(reservation.getTo());
+        //  If from1 in other reservation's duration ( from1 >= from2 or from1 < to2) or ( to1 > from2 or to1 <= to2)
+        // We will throw fail
+        return ( t1.before(f2) || f1.after(t2) );
     }
 
-    private static boolean checkValidDate(String from,String to) throws Exception {
-        Date f1 = format.parse(from + " 14");
-        Date t1 = format.parse(to+ " 12");
+    private static boolean checkValidDate() throws Exception {
+        Date f1 = format.parse(from);
+        Date t1 = format.parse(to);
         if (f1.after(t1) || f1.equals(t1)){
             System.out.println("Why start day after end day");
             showAlertInformation("Something wrong","Why start day after end day");
@@ -139,22 +140,26 @@ public class HotelManagement {
         return true;
     }
 
-    public static Boolean updateAvailableRooms(String from, String to) throws Exception {
-        if (checkValidDate(from,to)){
+    public static Boolean updateAvailableRooms() throws Exception {
+        availableRooms.clear();
+        if (checkValidDate()){
             availableRooms = rooms;
-            for (RoomBooking r: reservations
-            ) {
-                if (!checkingRoom(from,to,r)){
-                    for (Room room: r.rooms
+            for (Reservation reservation: reservations
+                 ) {
+                if (!checkAvailableDate(reservation)){
+                    for (Room room: reservation.getRooms()
                     ) {
+                        try {
                         availableRooms.remove(room);
+                      }
+                        catch (Exception e){
+
+                        }
                     }
                 }
             }
-
             return true;
         }
-
         return false;
     }
 
@@ -165,6 +170,30 @@ public class HotelManagement {
         alert.show();
     }
 
+    private static long getDuration() throws ParseException {
+        Date date1 = HotelManagement.getFormat().parse(from);
+        Date date2 = HotelManagement.getFormat().parse(to);
+        // Different between 2 days in MiliSec
+        long diff = Math.abs(date2.getTime() - date1.getTime());
+        // Cuz the duration from 14PM to 12AM so it's not fully 24 hours so we need +1 after this
+        return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS) + 1;
+    }
+
+    public static void setFrom(String from) {
+        HotelManagement.from = from + " 14";
+    }
+
+    public static void setTo(String to) {
+        HotelManagement.to = to + " 12";
+    }
+
+    public static String getFrom() {
+        return from;
+    }
+
+    public static String getTo() {
+        return to;
+    }
 }
 
 

@@ -1,21 +1,18 @@
 package Main.Models;
 
-import Main.GUIControllers.BillController;
-import Main.GUIControllers.DayPickController;
-import Main.GUIControllers.InformationFormController;
-import Main.GUIControllers.RoomPickController;
+import Main.GUIControllers.Employee.RoomBooking.BillController;
+import Main.GUIControllers.Employee.RoomBooking.DayPickController;
+import Main.GUIControllers.Employee.RoomBooking.InformationFormController;
+import Main.GUIControllers.Employee.RoomBooking.RoomPickController;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -30,7 +27,7 @@ public class Navigation
     private static RoomPickController roomPickController;
     public static void navigateNewManager(javafx.event.ActionEvent actionEvent) throws IOException {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        managerScene = new Scene( FXMLLoader.load(Navigation.class.getResource("../fxml/ManagerUI.fxml")));
+        managerScene = new Scene( FXMLLoader.load(Navigation.class.getResource("../fxml/Manager/ManagerUI.fxml")));
         primaryStage.setScene(managerScene);
         primaryStage.setX((screenBounds.getWidth() - primaryStage.getWidth())/2);
         primaryStage.setY((screenBounds.getHeight() - primaryStage.getHeight())/2);
@@ -38,7 +35,7 @@ public class Navigation
     public static void navigateNewEmployee(javafx.event.ActionEvent actionEvent) throws IOException {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         primaryStage.close();
-        FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/DatePick.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/Employee/RoomBooking/DatePick.fxml"));
         Parent parent = fxmlLoader.load();
         dayPickController = fxmlLoader.getController();
         Scene scene = new Scene(parent);
@@ -63,22 +60,6 @@ public class Navigation
         primaryStage.setIconified(true);
     }
 
-
-    public static void showBill(ActionEvent actionEvent,Parent parent){
-        try{
-            Scene scene = new Scene(parent);
-            scene.getStylesheets().add("Main/StyleCSS/StageStyle.css");
-            Stage stage = new Stage();
-            stage.initStyle(StageStyle.TRANSPARENT);
-            stage.setScene(scene);
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.showAndWait();
-
-        }
-        catch (Exception e){
-            System.out.println(e.toString());
-        }
-    }
 
     public static void fadeOut(Node node, double fadeSpeed){
         FadeTransition fadeTransition = new FadeTransition();
