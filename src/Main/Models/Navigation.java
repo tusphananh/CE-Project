@@ -1,8 +1,11 @@
 package Main.Models;
 
+import Main.GUIControllers.Employee.BanquetBooking.RestaurantController;
+import Main.GUIControllers.Employee.CheckIn.CheckInController;
+import Main.GUIControllers.Employee.CheckOut.CheckOutController;
 import Main.GUIControllers.Employee.RoomBooking.BillController;
 import Main.GUIControllers.Employee.RoomBooking.DayPickController;
-import Main.GUIControllers.Employee.RoomBooking.InformationFormController;
+import Main.GUIControllers.Employee.RoomBooking.SuccessController;
 import Main.GUIControllers.Employee.RoomBooking.RoomPickController;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
@@ -22,9 +25,12 @@ public class Navigation
     static Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
     private static Scene managerScene, employeeScene;
     private static BillController billController;
-    private static InformationFormController informationFormController;
+    private static SuccessController informationFormController;
     private static DayPickController dayPickController;
     private static RoomPickController roomPickController;
+    private static CheckInController checkInController;
+    private static CheckOutController checkOutController;
+    private static RestaurantController restaurantController;
     public static void navigateNewManager(javafx.event.ActionEvent actionEvent) throws IOException {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         managerScene = new Scene( FXMLLoader.load(Navigation.class.getResource("../fxml/Manager/ManagerUI.fxml")));
@@ -98,7 +104,7 @@ public class Navigation
         return billController;
     }
 
-    public static InformationFormController getInformationFormController() {
+    public static SuccessController getInformationFormController() {
         return informationFormController;
     }
 
@@ -106,7 +112,7 @@ public class Navigation
         return dayPickController;
     }
 
-    public static void setInformationFormController(InformationFormController informationFormController) {
+    public static void setInformationFormController(SuccessController informationFormController) {
         Navigation.informationFormController = informationFormController;
     }
 
@@ -120,5 +126,29 @@ public class Navigation
 
     public static void setBillController(BillController billController) {
         Navigation.billController = billController;
+    }
+
+    public static void setCheckInController(CheckInController checkInController) {
+        Navigation.checkInController = checkInController;
+    }
+
+    public static void setCheckOutController(CheckOutController checkOutController) {
+        Navigation.checkOutController = checkOutController;
+    }
+
+    public static void setRestaurantController(RestaurantController restaurantController) {
+        Navigation.restaurantController = restaurantController;
+    }
+
+    public static CheckInController getCheckInController() {
+        return checkInController;
+    }
+
+    public static CheckOutController getCheckOutController() {
+        return checkOutController;
+    }
+
+    public static RestaurantController getRestaurantController() {
+        return restaurantController;
     }
 }

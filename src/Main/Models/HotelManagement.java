@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 public class HotelManagement {
     private static String from,to;
+    private static Owner owner;
     public static ArrayList<Room> rooms = new ArrayList<>();
     private static SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy HH");
     public static ArrayList<Reservation> reservations = new ArrayList<>();
@@ -30,11 +31,6 @@ public class HotelManagement {
         totalPrice = 0;
         for (Room room : selectedRoom){
             totalPrice = totalPrice + room.getPrice()*getDuration();
-        }
-
-        for (Use use: selectedUse
-             ) {
-            totalPrice = totalPrice + use.getTotalPrice();
         }
         return totalPrice;
     }
@@ -98,9 +94,9 @@ public class HotelManagement {
         }
     }
 
-    public static void addReservation(String from, String to, Owner owner,ArrayList<Room> rooms,ArrayList
-                                      <Use> uses) throws Exception {
-
+    public static void addReservation() throws Exception {
+        int id = 1;
+        Reservation reservation = new Reservation(id,from,to,owner,selectedRoom,selectedUse);
     }
 
     public static SimpleDateFormat getFormat() {
@@ -143,7 +139,7 @@ public class HotelManagement {
     public static Boolean updateAvailableRooms() throws Exception {
         availableRooms.clear();
         if (checkValidDate()){
-            availableRooms = rooms;
+            availableRooms.addAll(rooms);
             for (Reservation reservation: reservations
                  ) {
                 if (!checkAvailableDate(reservation)){
@@ -151,10 +147,7 @@ public class HotelManagement {
                     ) {
                         try {
                         availableRooms.remove(room);
-                      }
-                        catch (Exception e){
-
-                        }
+                      } catch (Exception e){ }
                     }
                 }
             }
@@ -193,6 +186,10 @@ public class HotelManagement {
 
     public static String getTo() {
         return to;
+    }
+
+    public static void setOwner(Owner owner) {
+        HotelManagement.owner = owner;
     }
 }
 

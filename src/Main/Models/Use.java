@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class Use {
     private Service service;
     private long amount;
-
     public Use(Service service,long amount){
         this.service = service;
         this.amount = amount;

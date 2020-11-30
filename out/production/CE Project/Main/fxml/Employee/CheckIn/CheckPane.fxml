@@ -20,7 +20,7 @@
             <Separator orientation="VERTICAL" />
             <Text fx:id="phoneText" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone" wrappingWidth="162.609375" />
             <Separator orientation="VERTICAL" />
-            <Text fx:id="totalText" strokeType="OUTSIDE" strokeWidth="0.0" text="Room" wrappingWidth="92.396484375" />
+            <Text fx:id="roomText" strokeType="OUTSIDE" strokeWidth="0.0" text="Room" wrappingWidth="92.396484375" />
             <Separator orientation="VERTICAL" />
             <HBox alignment="CENTER_RIGHT" prefHeight="28.0" prefWidth="78.0" style="-fx-spacing: 10;">
                <children>
@@ -74,10 +74,6 @@
             <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
          </padding>
       </HBox>
-      <ImageView fx:id="noteImage" fitHeight="30.0" fitWidth="30.0" layoutX="737.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 40;">
-         <image>
-            <Image url="@../../../../images/note.png" />
-         </image>
-      </ImageView>
+      <ImageView fx:id="noteImage" fitHeight="30.0" fitWidth="30.0" layoutX="737.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 40;" />
    </children>
 </Pane>

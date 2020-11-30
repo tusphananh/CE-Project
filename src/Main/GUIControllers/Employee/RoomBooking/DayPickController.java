@@ -19,7 +19,7 @@ import java.time.format.DateTimeFormatter;
 public class DayPickController {
     private double reloadSpeed = 500;
     static boolean navigateBool = false;
-    private VBox checkInPane,checkOutPane,restaurantPane,roomPickerPane;
+    private VBox checkInPane,checkOutPane,restaurantPane,roomPickerPane,successPane;
     private VBox slider;
 
     @FXML
@@ -36,14 +36,8 @@ public class DayPickController {
     private VBox mainPane,bookingPane;
 
     @FXML
-    public Button basketButton;
-
-    @FXML
     public void initialize() throws IOException, InterruptedException {
         datePickerConvert();
-        loadCheckIn();
-        loadCheckOut();
-        loadRestaurant();
         loadSlider();
         stackPane.setOpacity(0);
         Navigation.fadeOut(stackPane,1000);
@@ -59,6 +53,8 @@ public class DayPickController {
         else if (HotelManagement.updateAvailableRooms()){
              loadRoomPicker();
              showSlideRoomPicker();
+            System.out.println(HotelManagement.availableRooms
+            .size());
         }
     }
     @FXML
@@ -135,26 +131,30 @@ public class DayPickController {
     }
 
 
-    public void showBooking(){
+    public void showBooking() throws IOException {
+        loadRoomPicker();
         mainStack.getChildren().clear();
         bookingPane.setOpacity(0);
         mainStack.getChildren().add(bookingPane);
         Navigation.fadeOut(bookingPane,500);
     }
 
-    public void showCheckIn(){
+    public void showCheckIn() throws IOException {
+        loadCheckIn();
         mainStack.getChildren().clear();
         checkInPane.setOpacity(0);
         mainStack.getChildren().add(checkInPane);
         Navigation.fadeOut(checkInPane,500);
     }
-    public void showCheckOut(){
+    public void showCheckOut() throws IOException {
+        loadCheckOut();
         mainStack.getChildren().clear();
         checkOutPane.setOpacity(0);
         mainStack.getChildren().add(checkOutPane);
         Navigation.fadeOut(checkOutPane,500);
     }
-    public void showRestaurant(){
+    public void showRestaurant() throws IOException {
+        loadRestaurant();
         mainStack.getChildren().clear();
         restaurantPane.setOpacity(0);
         mainStack.getChildren().add(restaurantPane);
@@ -165,14 +165,17 @@ public class DayPickController {
     void loadCheckIn() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/Employee/CheckIn/CheckIn.fxml"));
         checkInPane = fxmlLoader.load();
+        Navigation.setCheckInController(fxmlLoader.getController());
     }
     void loadCheckOut() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/Employee/CheckOut/CheckOut.fxml"));
         checkOutPane = fxmlLoader.load();
+        Navigation.setCheckOutController(fxmlLoader.getController());
     }
     void loadRestaurant() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/Employee/BanquetBooking/Restaurant.fxml"));
         restaurantPane = fxmlLoader.load();
+        Navigation.setRestaurantController(fxmlLoader.getController());
     }
 
     void loadSlider() throws IOException {
@@ -200,6 +203,20 @@ public class DayPickController {
     void hideSlideRoomPicker(){
         roomPickerPane.setDisable(true);
         Navigation.slideHorizontallyTransition(roomPickerPane,roomPickerPane.getWidth(),800);
+    }
+
+    void loadSuccess() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/Employee/RoomBooking/Success.fxml"));
+        successPane = fxmlLoader.load();
+        successPane.setVisible(false);
+        successPane.setOpacity(0);
+        mainStack.getChildren().add(successPane);
+    }
+
+    void showSuccess() throws IOException {
+        loadSuccess();
+        successPane.setVisible(true);
+        Navigation.fadeOut(successPane,500);
     }
 
     public String getFromTextField() {

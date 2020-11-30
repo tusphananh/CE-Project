@@ -2,12 +2,25 @@ package Main.Models;
 
 // Main.Main.Models.Owner Class
 public class Owner {
-    String name, phone, id;
+    private int id;
+    private String name, phone,membership,identifier;
+    private int coins;
 
-    public Owner(String name, String phone, String id) {
+    public Owner(String name, String phone) {
         this.name = name;
         this.phone = phone;
-        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPhone() {
+        return phone;
     }
 
     // toString here

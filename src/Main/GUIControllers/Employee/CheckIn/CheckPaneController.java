@@ -3,6 +3,7 @@ package Main.GUIControllers.Employee.CheckIn;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
@@ -15,7 +16,7 @@ public class CheckPaneController {
     private Text phoneText;
 
     @FXML
-    private Text totalText;
+    private Text roomText;
 
     @FXML
     private Button cancelButton;
@@ -42,5 +43,21 @@ public class CheckPaneController {
     @FXML
     void detail(ActionEvent event) {
 
+    }
+
+    public void setNameText(String nameText) {
+        this.nameText.setText(nameText);
+    }
+
+    public void setPhoneText(String phoneText) {
+        this.phoneText.setText(phoneText);
+    }
+
+    public void setRoomText(String roomText) {
+        this.roomText.setText(roomText);
+    }
+
+    public void setNoteImage(Image noteImage) {
+        this.noteImage.setImage(noteImage);
     }
 }

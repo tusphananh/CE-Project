@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
+import java.io.IOException;
+
 public class SliderController  {
     @FXML
     private VBox mainPane;
@@ -21,23 +23,23 @@ public class SliderController  {
     }
 
     @FXML
-    void booking(ActionEvent actionEvent){
+    void booking(ActionEvent actionEvent) throws IOException {
         Navigation.getDayPickController().slideTransition();
         Navigation.getDayPickController().showBooking();
     }
 
     @FXML
-    void checkin(ActionEvent actionEvent){
+    void checkin(ActionEvent actionEvent) throws IOException {
         Navigation.getDayPickController().slideTransition();
         Navigation.getDayPickController().showCheckIn();
     }
     @FXML
-    void checkout(ActionEvent actionEvent){
+    void checkout(ActionEvent actionEvent) throws IOException {
         Navigation.getDayPickController().slideTransition();
         Navigation.getDayPickController().showCheckOut();
     }
     @FXML
-    void restaurant(ActionEvent actionEvent){
+    void restaurant(ActionEvent actionEvent) throws IOException {
         Navigation.getDayPickController().slideTransition();
         Navigation.getDayPickController().showRestaurant();
     }

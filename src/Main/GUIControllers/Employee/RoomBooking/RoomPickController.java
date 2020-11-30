@@ -17,6 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -44,14 +45,14 @@ public class RoomPickController {
         updateBasketButton();
     }
 
-    public void showRooms(Collection<Room> arrayList) throws IOException {
+    public void showRooms(ArrayList<Room> arrayList) throws IOException {
         FlowPane.setOpacity(0);
         FlowPane.getChildren().clear();
         RoomPanesController roomPanesController;
         for (Room r: arrayList
         ) {
-            FXMLLoader loader = new FXMLLoader();
-            Parent parent = loader.load(Navigation.class.getResource("../fxml/Employee/RoomBooking/RoomPanes.fxml").openStream());
+            FXMLLoader loader = new FXMLLoader(Navigation.class.getResource("../fxml/Employee/RoomBooking/RoomPanes.fxml"));
+            Parent parent = loader.load();
             roomPanesController = loader.getController();
             roomPanesController.setIdText(r.getID());
             roomPanesController.setCapacityText(String.valueOf(r.getCapacity()));

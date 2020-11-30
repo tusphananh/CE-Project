@@ -7,27 +7,41 @@ import java.util.concurrent.TimeUnit;
 
 // Main.Main.Models.Reservation Class
 public class Reservation implements Identifier {
-    private String id,from,to;
+    private String from,to,note = "";
+    private int id;
     public String status;
     public String paymentStatus;
-    public Owner owner;
-    public ArrayList<Use> uses;
-    public ArrayList<Room> rooms;
+    private Owner owner;
+    private ArrayList<Use> uses;
+    private ArrayList<Room> rooms;
     double totalPrice;
 
-    public Reservation(String id,String from,String to, Owner owner, ArrayList<Room> rooms) throws Exception {
+    public Reservation(int id,String from,String to, Owner owner, ArrayList<Room> rooms,ArrayList<Use> uses) throws Exception {
         this.id = id;
         this.from = from + " 14";
         this.to = to + " 12";
         this.owner = owner;
         this.rooms = rooms;
+        this.uses = uses;
         this.status = "pending";
         this.paymentStatus = "pending";
     }
 
     @Override
     public String getID() {
+        return String.valueOf(id);
+    }
+
+    public int getId() {
         return id;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public String getNote() {
+        return note;
     }
 
     public String getPaymentStatus() {
@@ -64,5 +78,9 @@ public class Reservation implements Identifier {
 
     public String getTo() {
         return to;
+    }
+
+    public Owner getOwner() {
+        return owner;
     }
 }
