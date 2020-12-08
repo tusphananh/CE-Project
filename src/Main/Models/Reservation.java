@@ -7,45 +7,43 @@ import java.util.concurrent.TimeUnit;
 
 // Main.Main.Models.Reservation Class
 public class Reservation implements Identifier {
-    private String from,to,note = "";
+    private String note = "";
     private int id;
     public String status;
     public String paymentStatus;
     private Owner owner;
-    private ArrayList<Use> uses;
-    private ArrayList<Room> rooms;
-    double totalPrice;
+    private double totalPrice;
+    private User user;
 
-    public Reservation(int id,String from,String to, Owner owner, ArrayList<Room> rooms,ArrayList<Use> uses) throws Exception {
+    public Reservation(int id, Owner owner,User user,String status,String paymentStatus,double totalPrice,String note){
         this.id = id;
-        this.from = from + " 14";
-        this.to = to + " 12";
         this.owner = owner;
-        this.rooms = rooms;
-        this.uses = uses;
-        this.status = "pending";
-        this.paymentStatus = "pending";
-    }
-
-    @Override
-    public String getID() {
-        return String.valueOf(id);
+        this.status = status;
+        this.paymentStatus = paymentStatus;
+        this.user = user;
+        this.totalPrice = totalPrice;
+        this.note = note;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setNote(String note) {
-        this.note = note;
+    @Override
+    public String getID() {
+        return null;
     }
 
     public String getNote() {
         return note;
     }
 
-    public String getPaymentStatus() {
-        return paymentStatus;
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getStatus() {
@@ -56,31 +54,35 @@ public class Reservation implements Identifier {
         this.status = status;
     }
 
+    public String getPaymentStatus() {
+        return paymentStatus;
+    }
+
     public void setPaymentStatus(String paymentStatus) {
         this.paymentStatus = paymentStatus;
     }
 
-    public ArrayList<Room> getRooms() {
-        return rooms;
+    public Owner getOwner() {
+        return owner;
     }
 
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setOwner(Owner owner) {
+        this.owner = owner;
     }
 
     public double getTotalPrice() {
         return totalPrice;
     }
 
-    public String getFrom() {
-        return from;
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
-    public String getTo() {
-        return to;
+    public User getUser() {
+        return user;
     }
 
-    public Owner getOwner() {
-        return owner;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

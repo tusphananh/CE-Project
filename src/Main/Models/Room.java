@@ -1,42 +1,27 @@
 package Main.Models;
 
-import java.util.ArrayList;
-
 // Main.Main.Models.Room Class
 public class Room implements Identifier {
-    private String id;
+    private int id;
+    private String name;
     public long capacity;
     public double price;
     public double sale;
-    public int hot;
     public String type;
     public String images;
     private String status;
 
-    public Room(String id, long capacity, int price, String type) {
+    public Room(int id,String name,String status, String type, long capacity, double price, double sale,String images) {
         this.id = id;
+        this.name = name;
         this.capacity = capacity;
         setPrice(price);
         this.type = type;
+        this.images = images + ".png";
     }
 
-
-    public Room(String id, long capacity, int price, String type, String images) {
-        this.id = id;
-        this.capacity = capacity;
-        setPrice(price);
-        this.type = type;
-        this.images = images;
-    }
-
-    public Room(String id, long capacity, int price, String type, String images, double sale, int hot) {
-        this.id = id;
-        this.capacity = capacity;
-        setPrice(price);
-        this.type = type;
-        this.images = images;
-        this.hot = hot;
-        this.sale = sale;
+    public String getName() {
+        return name;
     }
 
     public void setPrice(double price) {
@@ -57,11 +42,10 @@ public class Room implements Identifier {
     @Override
     public String toString() {
         return "Room{" +
-                "id='" + id + '\'' +
+                "name='" + name + '\'' +
                 ", capacity=" + capacity +
                 ", price=" + price +
                 ", sale=" + sale +
-                ", hot=" + hot +
                 ", type=" + type +
                 ", images='" + images + '\'' +
                 '}';
@@ -69,7 +53,7 @@ public class Room implements Identifier {
 
     @Override
     public String getID() {
-        return id;
+        return String.valueOf(id);
     }
 
     public void setStatus(String status) {
@@ -88,6 +72,9 @@ public class Room implements Identifier {
         return capacity;
     }
 
+    public int getId() {
+        return id;
+    }
 
     public String getType() {
         return type;

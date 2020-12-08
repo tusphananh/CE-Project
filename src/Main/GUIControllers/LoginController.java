@@ -1,7 +1,7 @@
 package Main.GUIControllers;
 
-import Main.Models.Navigation;
-import Main.Models.SwitchButton;
+import Main.Database.Data;
+import Main.Models.*;
 import javafx.animation.FadeTransition;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
@@ -18,11 +18,11 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class LoginController {
-    private String adminPass = "456";
-    private String employeePass = "123";
-    private SwitchButton switchButton;
+    Data data = new Data();
+    private User user;
 
     @FXML
     private AnchorPane loginPane;
@@ -31,16 +31,19 @@ public class LoginController {
     private Button buttonLogin;
 
     @FXML
-    private PasswordField passwordField;
+    private PasswordField passwordField,usernameField;
 
     @FXML
     private Text messagesText;
 
     @FXML
-    public void buttonPressed(javafx.event.ActionEvent actionEvent) throws IOException, InterruptedException {
+    public void buttonPressed(javafx.event.ActionEvent actionEvent) throws IOException, InterruptedException, SQLException {
+        user = data.getUserByPassword(usernameField.getText(), passwordField.getText());
         System.out.println("Logining");
-        if ((passwordField.getText().equals(adminPass) && switchButton.isState()) || (passwordField.getText().equals(employeePass) && !switchButton.isState())  ){
-            messagesText.setText(" Welcome back !");
+        if (user != null){
+            HotelManagement.setUser(user);
+            BanquetManagement.setUser(user);
+            messagesText.setText(" Welcome back " + user.getName() + "!");
             messagesText.setFill(Color.web("FED755"));
             System.out.println("Success");
             FadeTransition fadeTransition = new FadeTransition();
@@ -62,7 +65,7 @@ public class LoginController {
             sleeper.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
                 @Override
                 public void handle(WorkerStateEvent event) {
-                    if (switchButton.isState()){
+                    if (user.getRole().equals("manager")){
                         fadeTransition.setOnFinished(new EventHandler<ActionEvent>() {
                             @Override
                             public void handle(ActionEvent event) {
@@ -116,10 +119,8 @@ public class LoginController {
 
     @FXML
     public void initialize() throws IOException {
-        switchButton = new SwitchButton();
-        switchButton.setLayoutX(buttonLogin.getLayoutX() + 5);
-        switchButton.setLayoutY(buttonLogin.getLayoutY() + 50);
-        loginPane.getChildren().add(switchButton);
+        usernameField.setFocusTraversable(false);
+        passwordField.setFocusTraversable(false);
     }
 
 }

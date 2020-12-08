@@ -1,12 +1,13 @@
 package Main.Models;
 
-import Main.GUIControllers.Employee.BanquetBooking.RestaurantController;
-import Main.GUIControllers.Employee.CheckIn.CheckInController;
-import Main.GUIControllers.Employee.CheckOut.CheckOutController;
-import Main.GUIControllers.Employee.RoomBooking.BillController;
-import Main.GUIControllers.Employee.RoomBooking.DayPickController;
-import Main.GUIControllers.Employee.RoomBooking.SuccessController;
-import Main.GUIControllers.Employee.RoomBooking.RoomPickController;
+import Main.GUIControllers.Employee.BanquetBooking.Booking.RestaurantController;
+import Main.GUIControllers.Employee.RoomBooking.CheckIn.CheckInController;
+import Main.GUIControllers.Employee.RoomBooking.CheckOut.CheckOutController;
+import Main.GUIControllers.Employee.RoomBooking.Booking.BillController;
+import Main.GUIControllers.Employee.RoomBooking.Booking.DayPickController;
+import Main.GUIControllers.Employee.RoomBooking.Booking.SuccessController;
+import Main.GUIControllers.Employee.RoomBooking.Booking.RoomPickController;
+import Main.GUIControllers.Manager.ManagerController;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXMLLoader;
@@ -31,17 +32,27 @@ public class Navigation
     private static CheckInController checkInController;
     private static CheckOutController checkOutController;
     private static RestaurantController restaurantController;
+    private static ManagerController managerController;
+    private static Main.GUIControllers.Employee.BanquetBooking.CheckIn.CheckInController banquetCheckInController;
     public static void navigateNewManager(javafx.event.ActionEvent actionEvent) throws IOException {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        managerScene = new Scene( FXMLLoader.load(Navigation.class.getResource("../fxml/Manager/ManagerUI.fxml")));
-        primaryStage.setScene(managerScene);
-        primaryStage.setX((screenBounds.getWidth() - primaryStage.getWidth())/2);
-        primaryStage.setY((screenBounds.getHeight() - primaryStage.getHeight())/2);
+        primaryStage.close();
+        FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/Manager/ManagerUI.fxml"));
+        Parent parent = fxmlLoader.load();
+        managerController = fxmlLoader.getController();
+        Scene scene = new Scene(parent);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        Screen screen = Screen.getPrimary();
+        Rectangle2D bounds = screen.getVisualBounds();
+        stage.setWidth(bounds.getWidth() / 1.5);
+        stage.setHeight(bounds.getHeight() / 1.5);
+        stage.show();
     }
     public static void navigateNewEmployee(javafx.event.ActionEvent actionEvent) throws IOException {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         primaryStage.close();
-        FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/Employee/RoomBooking/DatePick.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/Employee/RoomBooking/Booking/DatePick.fxml"));
         Parent parent = fxmlLoader.load();
         dayPickController = fxmlLoader.getController();
         Scene scene = new Scene(parent);
@@ -150,5 +161,21 @@ public class Navigation
 
     public static RestaurantController getRestaurantController() {
         return restaurantController;
+    }
+
+    public static void setDayPickController(DayPickController dayPickController) {
+        Navigation.dayPickController = dayPickController;
+    }
+
+    public static void setBanquetCheckInController(Main.GUIControllers.Employee.BanquetBooking.CheckIn.CheckInController banquetCheckInController) {
+        Navigation.banquetCheckInController = banquetCheckInController;
+    }
+
+    public static Main.GUIControllers.Employee.BanquetBooking.CheckIn.CheckInController getBanquetCheckInController() {
+        return banquetCheckInController;
+    }
+
+    public static ManagerController getManagerController() {
+        return managerController;
     }
 }

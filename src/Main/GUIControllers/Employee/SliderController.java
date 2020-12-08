@@ -23,6 +23,12 @@ public class SliderController  {
     }
 
     @FXML
+    void banquetCheckIn(ActionEvent actionEvent) throws IOException {
+        Navigation.getDayPickController().slideTransition();
+        Navigation.getDayPickController().showBanquetCheckIn();
+    }
+
+    @FXML
     void booking(ActionEvent actionEvent) throws IOException {
         Navigation.getDayPickController().slideTransition();
         Navigation.getDayPickController().showBooking();

@@ -7,10 +7,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="loginPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffff; -fx-background-radius: 20;" fx:controller="Main.GUIControllers.LoginController" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" >
+<AnchorPane fx:id="loginPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffff; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.GUIControllers.LoginController">
    <children>
       <Pane layoutX="-20.0" layoutY="-25.0" prefHeight="434.0" prefWidth="323.0" style="-fx-background-color: FED755;">
          <children>
@@ -24,28 +25,34 @@
             <DropShadow color="#00000025" radius="21.12" spread="0.48" width="65.48" />
          </effect>
       </Pane>
-      <Text fill="#fed755" layoutX="327.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HOTEL">
+      <Text fill="#fed755" layoutX="328.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HOTEL">
          <font>
             <Font name="System Bold" size="46.0" />
          </font></Text>
-      <Text fill="#0000004b" layoutX="333.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Management">
+      <Text fill="#0000004b" layoutX="333.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Management">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Button fx:id="buttonLogin" layoutX="333.0" layoutY="259.0" mnemonicParsing="false" onAction="#buttonPressed" pickOnBounds="false" style="-fx-background-color: FED755; -fx-background-radius: 10;" text="LOGIN" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-         <effect>
-            <DropShadow color="#00000021" spread="0.42" />
-         </effect>
-      </Button>
+      <VBox layoutX="333.0" layoutY="158.0" spacing="20.0">
+         <children>
+            <PasswordField fx:id="usernameField" onKeyPressed="#enterPressed" prefHeight="37.0" prefWidth="227.0" promptText="User Name" style="-fx-background-color: F8F7F7;" />
+            <PasswordField fx:id="passwordField" onKeyPressed="#enterPressed" prefHeight="37.0" prefWidth="227.0" promptText="Password" style="-fx-background-color: F8F7F7;" />
+            <Text fx:id="messagesText" strokeType="OUTSIDE" strokeWidth="0.0" />
+            <Button fx:id="buttonLogin" mnemonicParsing="false" onAction="#buttonPressed" pickOnBounds="false" style="-fx-background-color: FED755; -fx-background-radius: 10;" text="LOGIN" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <effect>
+                  <DropShadow color="#00000021" spread="0.42" />
+               </effect>
+            </Button>
+         </children>
+      </VBox>
       <Button layoutX="560.0" mnemonicParsing="false" onAction="#exit" style="-fx-background-color: #ffff;" text="X" textFill="#fed755">
          <font>
             <Font size="21.0" />
-         </font></Button>
-      <PasswordField fx:id="passwordField" layoutX="333.0" layoutY="192.0" onKeyPressed="#enterPressed" prefHeight="37.0" prefWidth="227.0" promptText="Password" style="-fx-background-color: F8F7F7;" />
-      <Text fx:id="messagesText" layoutX="333.0" layoutY="248.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
