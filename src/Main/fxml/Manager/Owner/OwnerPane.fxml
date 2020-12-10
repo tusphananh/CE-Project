@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="82.0" prefWidth="593.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.GUIControllers.Manager.Owner.OwnerPaneController">
+   <children>
+      <HBox alignment="CENTER" layoutX="6.0" layoutY="11.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="575.0" style="-fx-background-color: white; -fx-background-radius: 10; -fx-spacing: 10;">
+         <children>
+            <Text fx:id="id" strokeType="OUTSIDE" strokeWidth="0.0" text="ID" wrappingWidth="60.693359375" />
+            <Separator orientation="VERTICAL" />
+            <Text fx:id="name" strokeType="OUTSIDE" strokeWidth="0.0" text="tran ngoc hong phuc" wrappingWidth="152.609375" />
+            <Separator orientation="VERTICAL" />
+            <Text fx:id="phone" strokeType="OUTSIDE" strokeWidth="0.0" text="0932059267" wrappingWidth="87.396484375" />
+            <Separator orientation="VERTICAL" />
+            <Label fx:id="type" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="17.0" prefWidth="58.0" text="bronze" />
+            <Separator orientation="VERTICAL" />
+            <Button minWidth="84.0" mnemonicParsing="false" onAction="#edit" prefHeight="25.0" prefWidth="84.0" style="-fx-background-color: FAFAFA; -fx-background-radius: 20;" text="Edit" wrapText="true">
+               <effect>
+                  <DropShadow color="#0000001a" offsetX="3.0" offsetY="3.0" />
+               </effect>
+            </Button>
+         </children>
+         <effect>
+            <DropShadow color="#0000001a" height="20.0" offsetX="2.0" offsetY="3.0" radius="9.5" width="20.0" />
+         </effect>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+         </padding>
+      </HBox>
+   </children>
+</Pane>

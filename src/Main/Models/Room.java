@@ -5,27 +5,26 @@ public class Room implements Identifier {
     private int id;
     private String name;
     public long capacity;
-    public double price;
-    public double sale;
+    public double price,salePrice;
+    public long sale;
     public String type;
     public String images;
     private String status;
 
-    public Room(int id,String name,String status, String type, long capacity, double price, double sale,String images) {
+    public Room(int id, String name, String status, String type, long capacity, double price, long sale, String images) {
         this.id = id;
         this.name = name;
         this.capacity = capacity;
-        setPrice(price);
+        this.price = price;
         this.type = type;
-        this.images = images + ".png";
+        this.images = images;
+        this.status = status;
+        this.sale = sale;
+        this.salePrice = price - price*50/100;
     }
 
     public String getName() {
         return name;
-    }
-
-    public void setPrice(double price) {
-        this.price = price - price * sale;
     }
 
     public void setImages(String images) {
@@ -36,18 +35,25 @@ public class Room implements Identifier {
         return images;
     }
 
+    public double getSalePrice() {
+        return salePrice;
+    }
+
     // toString here
 
 
     @Override
     public String toString() {
         return "Room{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", capacity=" + capacity +
                 ", price=" + price +
+                ", salePrice=" + salePrice +
                 ", sale=" + sale +
-                ", type=" + type +
+                ", type='" + type + '\'' +
                 ", images='" + images + '\'' +
+                ", status='" + status + '\'' +
                 '}';
     }
 
@@ -80,4 +86,7 @@ public class Room implements Identifier {
         return type;
     }
 
+    public long getSale() {
+        return sale;
+    }
 }

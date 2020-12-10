@@ -7,7 +7,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -19,6 +21,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class CheckPaneController {
     private BanquetBooking reservation;
@@ -47,13 +50,20 @@ public class CheckPaneController {
 
     @FXML
     void cancel(ActionEvent event) throws Exception {
-        BanquetManagement.updateStatus("fail","fail",reservation.getId());
-        Navigation.getBanquetCheckInController().loadStack();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Cancel");
+        alert.setHeaderText("Confirm");
+        alert.setContentText("Do you want do cancel this reservation");
+        Optional<ButtonType> option = alert.showAndWait();
+        if (option.get() == ButtonType.OK){
+            BanquetBookingManagement.updateStatus("fail","fail",reservation.getId());
+            Navigation.getBanquetCheckInController().loadStack();
+        }
     }
 
     @FXML
     void confirm(ActionEvent event) throws Exception {
-        BanquetManagement.updateStatus("success","success",reservation.getId());
+        BanquetBookingManagement.updateStatus("success","success",reservation.getId());
         Navigation.getBanquetCheckInController().loadStack();
     }
 
@@ -68,7 +78,7 @@ public class CheckPaneController {
         detailController.setPhoneText(reservation.getOwner().getPhone());
         detailController.setDateText(reservation.getFrom() + " " + reservation.getHour() + "h");
         detailController.setStatusText(reservation.getPaymentStatus());
-        detailController.setTotalText(HotelManagement.moneyFormat(String.valueOf(reservation.getTotalPrice())));
+        detailController.setTotalText(RoomBookingManagement.moneyFormat(String.valueOf(reservation.getTotalPrice())));
         detailController.setNoteText(reservation.getNote());
         for (Use use: reservation.getUses()
         ) {

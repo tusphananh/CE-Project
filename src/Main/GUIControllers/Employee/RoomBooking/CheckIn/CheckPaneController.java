@@ -7,7 +7,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -19,6 +21,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public class CheckPaneController {
     private RoomBooking reservation;
@@ -47,28 +50,35 @@ public class CheckPaneController {
 
     @FXML
     void cancel(ActionEvent event) throws Exception {
-        HotelManagement.updateStatus("fail","fail",reservation.getId());
-        Navigation.getCheckInController().loadStack();
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Cancel");
+        alert.setHeaderText("Confirm");
+        alert.setContentText("Do you want do cancel this reservation");
+        Optional<ButtonType> option = alert.showAndWait();
+        if (option.get() == ButtonType.OK){
+            RoomBookingManagement.updateStatus("fail","fail",reservation.getId());
+            Navigation.getCheckInController().loadStack();
+        }
     }
 
     @FXML
     void confirm(ActionEvent event) throws Exception {
-        HotelManagement.updateStatus("using","pending",reservation.getId());
+        RoomBookingManagement.updateStatus("using","pending",reservation.getId());
         Navigation.getCheckInController().loadStack();
     }
 
     @FXML
     void detail(ActionEvent actionEvent) throws IOException {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/Employee/CheckIn/Detail.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/Employee/RoomBooking/CheckIn/Detail.fxml"));
         Parent parent = fxmlLoader.load();
         DetailController detailController = fxmlLoader.getController();
-        detailController.setIdText(String.valueOf(reservation.getID()));
+        detailController.setIdText(String.valueOf(reservation.getId()));
         detailController.setNameText(reservation.getOwner().getName());
         detailController.setPhoneText(reservation.getOwner().getPhone());
         detailController.setDateText(reservation.getFrom() + " to " + reservation.getTo());
         detailController.setStatusText(reservation.getPaymentStatus());
-        detailController.setTotalText(HotelManagement.moneyFormat(String.valueOf(reservation.getTotalPrice())));
+        detailController.setTotalText(RoomBookingManagement.moneyFormat(String.valueOf(reservation.getTotalPrice())));
         detailController.setNoteText(reservation.getNote());
         if (reservation.getRooms().size() > 1){
             String rooms = "";

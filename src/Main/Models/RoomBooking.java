@@ -8,8 +8,8 @@ public class RoomBooking extends Reservation {
     private ArrayList<Room> rooms;
 
 
-    public RoomBooking(int id, Owner owner, User user, String status, String paymentStatus, double totalPrice, String from, String to, ArrayList<Room> rooms, ArrayList<Use> uses, String note) throws Exception {
-        super(id,owner,user,status,paymentStatus,totalPrice,note);
+    public RoomBooking(String first,int id, Owner owner, User user, String status, String paymentStatus, double totalPrice, String from, String to, ArrayList<Room> rooms, ArrayList<Use> uses, String note) throws Exception {
+        super(first,id,owner,user,status,paymentStatus,totalPrice,note);
         this.from = from;
         this.to = to;
         this.from = from;

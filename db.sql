@@ -4,7 +4,6 @@ create table customer(
 	cus_ID int auto_increment,
     name varchar(20) not null,
     phone varchar(20) not null unique,
-    indentifier varchar(20) unique,
     coin int not null,
     type varchar(20) not null,
     primary key(cus_ID)
@@ -14,10 +13,12 @@ create table user(
 	user_ID int auto_increment,
     name varchar(20) not null,
     phone varchar(20) not null unique,
-    indentifier varchar(20) not null unique,
+    identifier varchar(20) not null unique,
     username varchar(20) not null unique,
+    dob date not null,
     password varchar(20) not null,
     role varchar(20) not null,
+    image varchar(20),
     status varchar(20) not null,
     primary key(user_ID)
     );
@@ -61,7 +62,7 @@ create table roombooking(
         type varchar(20) not null,
         capacity long not null,
         price double not null,
-        sale double not null,
+        sale long not null,
         image varchar(20),
         primary key(id)
         );
@@ -94,16 +95,16 @@ create table roombooking(
         );
         
 	insert into room(name,status,type,capacity,price,sale,image)
-    values	("A1.101","useable","vip",2,30.0,0,"Room1"),
-			("A1.202","useable","normal",4,20.5,0,"Room2"),
-            ("A1.303","useable","vip",4,60.59,0,"Room3"),
-            ("A1.404","useable","normal",10,50.0,0,"Room4"),
-            ("A1.505","useable","vip",2,30.0,0,"Room5"),
-            ("A2.101","useable","normal",4,20.5,0,"Room6"),
-            ("A2.202","useable","vip",2,30.0,0,"Room7"),
-            ("A2.303","useable","normal",10,50.0,0,"Room8"),
-            ("A2.404","useable","vip",2,30.0,0,"Room9"),
-            ("A2.505","useable","normal",2,7.6,0,"Room10");
+    values	("A1.101","useable","vip",2,30.0,50,"Room1.png"),
+			("A1.202","useable","normal",4,20.5,30,"Room2.png"),
+            ("A1.303","useable","vip",4,60.59,20,"Room3.png"),
+            ("A1.404","useable","normal",10,50.0,10,"Room4.png"),
+            ("A1.505","useable","vip",2,30.0,0,"Room5.png"),
+            ("A2.101","useable","normal",4,20.5,0,"Room6.png"),
+            ("A2.202","useable","vip",2,30.0,0,"Room7.png"),
+            ("A2.303","useable","normal",10,50.0,0,"Room8.png"),
+            ("A2.404","useable","vip",2,30.0,0,"Room9.png"),
+            ("A2.505","useable","normal",2,7.6,0,"Room10.png");
             
 insert into service(name,price,permission)
 values	("Swiming",5,"RB"),
@@ -116,8 +117,8 @@ values	("Swiming",5,"RB"),
         ("Massage",7,"BB");
     
 		
-insert into user(name,phone,indentifier,username,password,role,status)
-values	("Phan Anh Tu","0932059267","1234567","anhtu","123","manager","good"),
-		("Nguyen Lam","0932059266","12345678","nguyenlam","456","manager","good"),
-		("Quyen Huynh","0932059265","123456789","quyen","123","staff","good");
+insert into user(name,phone,identifier,username,dob,password,role,status,image)
+values	("Phan Anh Tu","0932059267","1234567","anhtu","2000-03-06","123","manager","good","mark.jpg"),
+		("Nguyen Lam","0932059266","12345678","nguyenlam","2000-03-06","456","manager","good","gate.jpg"),
+		("Quyen Huynh","0932059265","123456789","quyen","2000-03-06","123","staff","good","steve.jpg");
 

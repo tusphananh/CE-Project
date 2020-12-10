@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -43,7 +44,10 @@
                                                 <Image url="@../../../../../images/next.png" />
                                              </image>
                                           </ImageView>
-                                          <DatePicker fx:id="fromTextField" promptText="From" style="-fx-background-color: white; -fx-background-radius: 20;" />
+                                          <DatePicker fx:id="fromTextField" promptText="From" style="-fx-border-color: white; -fx-background-color: white;">
+                                             <effect>
+                                                <InnerShadow color="#ff010100" />
+                                             </effect></DatePicker>
                                        </children>
                                        <VBox.margin>
                                           <Insets />

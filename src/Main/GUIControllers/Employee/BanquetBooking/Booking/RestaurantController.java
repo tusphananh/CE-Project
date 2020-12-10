@@ -52,7 +52,7 @@ public class RestaurantController {
     }
 
     void loadService() throws IOException {
-        for (Service service: BanquetManagement.getServices()
+        for (Service service: BanquetBookingManagement.getServices()
         ) {
             FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/Employee/BanquetBooking/Booking/ServiceButton.fxml"));
             Parent servicePane = fxmlLoader.load();
@@ -64,12 +64,12 @@ public class RestaurantController {
     }
     void loadSelectedUses() throws IOException {
         selectedStack.getChildren().clear();
-        for (Use use: BanquetManagement.selectedUse
+        for (Use use: BanquetBookingManagement.selectedUse
         ) {
             FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/Employee/BanquetBooking/Booking/ServicePane.fxml"));
             Parent servicePane = fxmlLoader.load();
             ServicePaneController servicePaneController = fxmlLoader.getController();
-            servicePaneController.setPriceLabel(HotelManagement.moneyFormat(String.valueOf(use.getTotalPrice())));
+            servicePaneController.setPriceLabel(RoomBookingManagement.moneyFormat(String.valueOf(use.getTotalPrice())));
             servicePaneController.setNameLabel(use.getService().getName());
             servicePaneController.setAmountLabel(String.valueOf(use.getAmount()));
             selectedStack.getChildren().add(servicePane);
@@ -77,9 +77,9 @@ public class RestaurantController {
     }
 
     public void updateBasketButton(){
-        if (!BanquetManagement.selectedUse.isEmpty()){
+        if (!BanquetBookingManagement.selectedUse.isEmpty()){
             basketButton.setDisable(false);
-            basketButton.setText(BanquetManagement.selectedUse.size() + " Item");
+            basketButton.setText(BanquetBookingManagement.selectedUse.size() + " Item");
             Navigation.fadeOut(basketButton,300);
         }
         else {
@@ -127,13 +127,13 @@ public class RestaurantController {
             alert.show();
         }
         else {
-            BanquetManagement.setNote(noteTextField.getText());
-            BanquetManagement.setFrom(fromTextField.getEditor().getText());
-            BanquetManagement.setHour(hourTextField.getText());
-            BanquetManagement.setOwner(new Owner(nameTextField.getText(),phoneTextField.getText()));
+            BanquetBookingManagement.setNote(noteTextField.getText());
+            BanquetBookingManagement.setFrom(fromTextField.getEditor().getText());
+            BanquetBookingManagement.setHour(hourTextField.getText());
+            BanquetBookingManagement.setOwner(new Owner(nameTextField.getText(),phoneTextField.getText()));
 
-            BanquetManagement.addOwner();
-            BanquetManagement.addReservation();
+            BanquetBookingManagement.addOwner();
+            BanquetBookingManagement.addReservation();
             Navigation.getDayPickController().showBanquetBookingSuccess();
         }
     }

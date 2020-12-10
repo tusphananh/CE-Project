@@ -1,15 +1,10 @@
 package Main;
 
-import Main.Models.HotelManagement;
-import Main.Models.Identifier;
-import Main.Models.Owner;
-import Main.Models.Room;
-
-import java.util.Scanner;
+import Main.Models.RoomBookingManagement;
 
 
 public class TestCase {
-    static HotelManagement hotelManagement ;
+    static RoomBookingManagement roomBookingManagement;
     public static void main(String[] args) throws Exception {
 //        hotelManagement = new HotelManagement();
 //        hotelManagement.rooms.add(new Room("1", 1, 200000, Type.vip));

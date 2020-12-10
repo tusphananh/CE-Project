@@ -41,8 +41,8 @@ public class LoginController {
         user = data.getUserByPassword(usernameField.getText(), passwordField.getText());
         System.out.println("Logining");
         if (user != null){
-            HotelManagement.setUser(user);
-            BanquetManagement.setUser(user);
+            RoomBookingManagement.setUser(user);
+            BanquetBookingManagement.setUser(user);
             messagesText.setText(" Welcome back " + user.getName() + "!");
             messagesText.setFill(Color.web("FED755"));
             System.out.println("Success");

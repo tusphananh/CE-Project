@@ -1,7 +1,6 @@
 package Main.GUIControllers.Employee.BanquetBooking.Booking;
 
-import Main.Models.BanquetManagement;
-import Main.Models.HotelManagement;
+import Main.Models.BanquetBookingManagement;
 import Main.Models.Navigation;
 import Main.Models.Service;
 import javafx.event.ActionEvent;
@@ -32,14 +31,14 @@ public class ServiceButtonController {
 
     @FXML
     void add(ActionEvent event) throws IOException, ParseException {
-        BanquetManagement.addSelectedUse(service);
+        BanquetBookingManagement.addSelectedUse(service);
         Navigation.getRestaurantController().updateBasketButton();
         Navigation.getRestaurantController().loadSelectedUses();
     }
 
     @FXML
     void drop(ActionEvent event) throws IOException, ParseException {
-        BanquetManagement.dropSelectedUse(service);
+        BanquetBookingManagement.dropSelectedUse(service);
         Navigation.getRestaurantController().updateBasketButton();
         Navigation.getRestaurantController().loadSelectedUses();
     }

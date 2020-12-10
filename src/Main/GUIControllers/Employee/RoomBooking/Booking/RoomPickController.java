@@ -1,6 +1,6 @@
 package Main.GUIControllers.Employee.RoomBooking.Booking;
 
-import Main.Models.HotelManagement;
+import Main.Models.RoomBookingManagement;
 import Main.Models.Navigation;
 import Main.Models.Room;
 import javafx.animation.FadeTransition;
@@ -41,7 +41,7 @@ public class RoomPickController {
 
     @FXML
     public void initialize() throws IOException, InterruptedException {
-        availableRoom = HotelManagement.availableRooms;
+        availableRoom = RoomBookingManagement.availableRooms;
         showRooms(availableRoom);
         updateBasketButton();
     }
@@ -52,12 +52,12 @@ public class RoomPickController {
         RoomPanesController roomPanesController;
         for (Room r: arrayList
         ) {
+            System.out.println(r.toString());
             FXMLLoader loader = new FXMLLoader(Navigation.class.getResource("../fxml/Employee/RoomBooking/Booking/RoomPanes.fxml"));
             Parent parent = loader.load();
             roomPanesController = loader.getController();
             roomPanesController.setIdText(r.getName());
             roomPanesController.setCapacityText(String.valueOf(r.getCapacity()));
-            roomPanesController.setPriceText(String.valueOf(r.getPrice()));
             roomPanesController.setTypeText(r.getType());
             try {
                 roomPanesController.setImageView(new Image(getClass().getResourceAsStream("/images/" + r.images)));
@@ -66,12 +66,14 @@ public class RoomPickController {
                 System.out.println("Room ID " + r.getID() + " has invalid image");
             }
             roomPanesController.setRoom(r);
-            if (r.sale > 0.00){
+            if (r.sale > 0){
                 roomPanesController.showSale();
-                roomPanesController.setSaleText(String.valueOf(r.sale*100));
+                roomPanesController.setSaleText(String.valueOf(r.sale));
+                roomPanesController.setPriceText(r.getPrice() + " to " + r.getSalePrice());
             }
             else {
                 roomPanesController.hideSale();
+                roomPanesController.setPriceText(String.valueOf(r.getPrice()));
             }
             FlowPane.getChildren().add(parent);
             Navigation.fadeOut(FlowPane,reloadSpeed);
@@ -85,7 +87,7 @@ public class RoomPickController {
 
     @FXML
     public void sortByCapacity() throws IOException {
-        Collections.sort( HotelManagement.rooms, new Comparator<Room>() {
+        Collections.sort( RoomBookingManagement.rooms, new Comparator<Room>() {
             public int compare (Room o1, Room o2) {
                 if (o1.capacity > o2.capacity){
                     return -1;
@@ -103,7 +105,7 @@ public class RoomPickController {
 
     @FXML
     public void sortBySale() throws IOException {
-        Collections.sort( HotelManagement.rooms, new Comparator<Room>() {
+        Collections.sort( RoomBookingManagement.rooms, new Comparator<Room>() {
             public int compare (Room o1, Room o2) {
                 if (o1.sale > o2.sale){
                     return -1;
@@ -120,9 +122,9 @@ public class RoomPickController {
     }
 
     public void updateBasketButton(){
-        if (!HotelManagement.selectedRoom.isEmpty()){
+        if (!RoomBookingManagement.selectedRoom.isEmpty()){
             basketButton.setDisable(false);
-            basketButton.setText(HotelManagement.selectedRoom.size() + " ITEM");
+            basketButton.setText(RoomBookingManagement.selectedRoom.size() + " ITEM");
             Navigation.fadeOut(basketButton,300);
         }
         else {

@@ -3,7 +3,7 @@ package Main.Models;
 // Main.Main.Models.Owner Class
 public class Owner {
     private int id;
-    private String name, phone,type,identifier;
+    private String name, phone,type;
     private int coins;
 
     public Owner(int id , String name, String phone,int coins,String type) {

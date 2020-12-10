@@ -1,6 +1,6 @@
 package Main.GUIControllers.Employee.RoomBooking.Booking;
 
-import Main.Models.HotelManagement;
+import Main.Models.RoomBookingManagement;
 import Main.Models.Navigation;
 import Main.Models.Room;
 import javafx.event.ActionEvent;
@@ -43,14 +43,14 @@ public class RoomPanesController {
 
     @FXML
     public void reserve(ActionEvent actionEvent) throws Exception {
-        HotelManagement.addSelectedRoom(room);
+        RoomBookingManagement.addSelectedRoom(room);
         updateBasketButton();
     }
 
     @FXML
     public void drop(ActionEvent actionEvent) throws Exception {
-        if (!HotelManagement.selectedRoom.isEmpty()){
-            HotelManagement.dropSelectedRoom(room);
+        if (!RoomBookingManagement.selectedRoom.isEmpty()){
+            RoomBookingManagement.dropSelectedRoom(room);
             updateBasketButton();
         }
     }
@@ -69,7 +69,7 @@ public class RoomPanesController {
     }
 
     public void setPriceText(String priceText) {
-        this.priceText.setText(HotelManagement.moneyFormat(priceText));
+        this.priceText.setText(RoomBookingManagement.moneyFormat(priceText));
     }
 
     public void setTypeText(String typeText) {

@@ -2,11 +2,8 @@ package Main.Database;
 
 import Main.Models.*;
 
-import java.net.ServerSocket;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Set;
 
 public class Data {
     public ArrayList<Room> getRooms() throws SQLException {
@@ -16,7 +13,7 @@ public class Data {
         String sql = "SELECT * FROM room";
         ResultSet rs = stmt.executeQuery(sql);
         while(rs.next()){
-            Room room = new Room(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getLong(5),rs.getDouble(6),rs.getDouble(7),rs.getString(8));
+            Room room = new Room(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getLong(5),rs.getDouble(6),rs.getLong(7),rs.getString(8));
             rooms.add(room);
         }
         rs.close();
@@ -32,6 +29,20 @@ public class Data {
         ResultSet rs = stmt.executeQuery();
         while(rs.next()){
             Service service = new Service(rs.getInt(1),rs.getString(2),rs.getDouble(3));
+            services.add(service);
+        }
+        rs.close();
+        return services;
+    }
+
+    public ArrayList<Service> getServices() throws SQLException {
+        ArrayList<Service> services = new ArrayList<>();
+        Connection conn = JDBC.getConnection();
+        String sql = "SELECT * FROM service";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        while(rs.next()){
+            Service service = new Service(rs.getInt(1),rs.getString(2),rs.getDouble(3),rs.getString(4));
             services.add(service);
         }
         rs.close();
@@ -207,14 +218,14 @@ public class Data {
         String sql = "SELECT * FROM user where username like " + "\"" + username + "\" and password like" + "\"" + password + "\"";
         ResultSet rs = stmt.executeQuery(sql);
         while(rs.next()){
-            user = new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8));
+            user = new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10));
         }
         rs.close();
         conn.close();
         return user;
     }
 
-    public ArrayList<Room> getAvailableRooms(String from,String to) throws SQLException {
+    public ArrayList<Room> getInvalidRooms(String from, String to) throws SQLException {
         ArrayList<Room> rooms = new ArrayList<>();
         Connection conn = JDBC.getConnection();
         String sql = "SELECT contain.room_ID FROM contain\n" +
@@ -222,8 +233,8 @@ public class Data {
                 "on roombooking.first_id like reservation.first_id \n" +
                 "and roombooking.last_id = reservation.last_id \n" +
                 "where ( status like 'pending' or status like 'using') \n" +
-                "and (( roombooking.start_date between ? and ? ) \n " +
-                "or ( roombooking.end_date between ? and ? ))) \n" +
+                "and (( roombooking.start_date <= ? and roombooking.start_date > ? ) \n " +
+                "or ( roombooking.end_date > ? and roombooking.end_date <= ? ))) \n" +
                 "group by contain.room_ID ;";
         PreparedStatement preparedStatement = conn.prepareStatement(sql);
         preparedStatement.setString(1,from);
@@ -232,7 +243,7 @@ public class Data {
         preparedStatement.setString(4,to);
         ResultSet rs = preparedStatement.executeQuery();
         while(rs.next()){
-            rooms.add(HotelManagement.findRoom(String.valueOf(rs.getInt(1))));
+            rooms.add(RoomBookingManagement.findRoom(String.valueOf(rs.getInt(1))));
         }
         rs.close();
         conn.close();
@@ -246,7 +257,7 @@ public class Data {
         stmt.setInt(1,id);
         ResultSet rs = stmt.executeQuery();
         while (rs.next()){
-            rooms.add(HotelManagement.findRoom(String.valueOf(rs.getInt(1))));
+            rooms.add(RoomBookingManagement.findRoom(String.valueOf(rs.getInt(1))));
         }
         conn.close();
         return rooms;
@@ -262,10 +273,10 @@ public class Data {
         ResultSet rs = stmt.executeQuery();
         while (rs.next()){
             if (firstID.equals("RB")){
-                uses.add(new Use(HotelManagement.findService(String.valueOf(rs.getInt(1))),rs.getLong(2)));
+                uses.add(new Use(RoomBookingManagement.findService(String.valueOf(rs.getInt(1))),rs.getLong(2)));
             }
             else {
-                uses.add(new Use(BanquetManagement.findService(String.valueOf(rs.getInt(1))),rs.getLong(2)));
+                uses.add(new Use(BanquetBookingManagement.findService(String.valueOf(rs.getInt(1))),rs.getLong(2)));
             }
         }
         conn.close();
@@ -280,7 +291,7 @@ public class Data {
         stmt.setInt(1,id);
         ResultSet rs = stmt.executeQuery();
         while (rs.next()){
-            user = new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8));
+            user = new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10));
         }
         conn.close();
 
@@ -292,7 +303,7 @@ public class Data {
     public ArrayList<RoomBooking> getPendingReservationByStartDate(String from) throws Exception {
         ArrayList<RoomBooking> reservations = new ArrayList<>();
         Connection conn = JDBC.getConnection();
-        String sql = "SELECT reservation.last_id,reservation.cus_ID,reservation.user_ID,reservation.status,reservation.payment_status,reservation.total_price,roombooking.start_date,roombooking.end_date,reservation.note \n" +
+        String sql = "SELECT reservation.first_id,reservation.last_id,reservation.cus_ID,reservation.user_ID,reservation.status,reservation.payment_status,reservation.total_price,roombooking.start_date,roombooking.end_date,reservation.note \n" +
                 "FROM hotel.reservation join hotel.roombooking \n" +
                 "on ( reservation.first_id like 'RB' and reservation.last_id = roombooking.last_id and reservation.status like 'pending' )\n" +
                 "where start_date like ? ;";
@@ -300,11 +311,11 @@ public class Data {
         stmt.setString(1,from);
         ResultSet rs = stmt.executeQuery();
         while (rs.next()){
-            int id = rs.getInt(1);
-            RoomBooking reservation = new RoomBooking(id,getCustomerByID(rs.getInt(2))
-                    ,getUserByID(rs.getInt(3)),rs.getString(4),
-                    rs.getString(5),rs.getDouble(6),rs.getString(7),
-                    rs.getString(8),getContainByID(id),getUsesByID("RB",id),rs.getString(9));
+            int id = rs.getInt(2);
+            RoomBooking reservation = new RoomBooking(rs.getString(1),id,getCustomerByID(rs.getInt(3))
+                    ,getUserByID(rs.getInt(4)),rs.getString(5),
+                    rs.getString(6),rs.getDouble(7),rs.getString(8),
+                    rs.getString(9),getContainByID(id),getUsesByID("RB",id),rs.getString(10));
             reservations.add(reservation);
         }
         conn.close();
@@ -316,17 +327,17 @@ public class Data {
     public ArrayList<RoomBooking> getUsingReservation() throws Exception {
         ArrayList<RoomBooking> reservations = new ArrayList<>();
         Connection conn = JDBC.getConnection();
-        String sql = "SELECT reservation.last_id,reservation.cus_ID,reservation.user_ID,reservation.status,reservation.payment_status,reservation.total_price,roombooking.start_date,roombooking.end_date,reservation.note \n" +
+        String sql = "SELECT reservation.first_id,reservation.last_id,reservation.cus_ID,reservation.user_ID,reservation.status,reservation.payment_status,reservation.total_price,roombooking.start_date,roombooking.end_date,reservation.note \n" +
                 "FROM hotel.reservation join hotel.roombooking \n" +
                 "on ( reservation.first_id like 'RB' and reservation.last_id = roombooking.last_id and reservation.status like 'using' )";
         PreparedStatement stmt = conn.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
         while (rs.next()){
-            int id = rs.getInt(1);
-            RoomBooking reservation = new RoomBooking(id,getCustomerByID(rs.getInt(2))
-                    ,getUserByID(rs.getInt(3)),rs.getString(4),
-                    rs.getString(5),rs.getDouble(6),rs.getString(7),
-                    rs.getString(8),getContainByID(id),getUsesByID("RB",id),rs.getString(9));
+            int id = rs.getInt(2);
+            RoomBooking reservation = new RoomBooking(rs.getString(1),id,getCustomerByID(rs.getInt(3))
+                    ,getUserByID(rs.getInt(4)),rs.getString(5),
+                    rs.getString(6),rs.getDouble(7),rs.getString(8),
+                    rs.getString(9),getContainByID(id),getUsesByID("RB",id),rs.getString(10));
             reservations.add(reservation);
         }
         conn.close();
@@ -352,7 +363,7 @@ public class Data {
     public ArrayList<BanquetBooking> getPendingBanquetReservationByStartDate(String from) throws Exception {
         ArrayList<BanquetBooking> reservations = new ArrayList<>();
         Connection conn = JDBC.getConnection();
-        String sql = "SELECT reservation.last_id,reservation.cus_ID,reservation.user_ID,reservation.status,reservation.payment_status,reservation.total_price,banquetbooking.start_date,banquetbooking.start_hour,reservation.note\n" +
+        String sql = "SELECT reservation.first_id,reservation.last_id,reservation.cus_ID,reservation.user_ID,reservation.status,reservation.payment_status,reservation.total_price,banquetbooking.start_date,banquetbooking.start_hour,reservation.note\n" +
                 "                FROM hotel.reservation join hotel.banquetbooking \n" +
                 "                on ( reservation.first_id like 'BB' and reservation.last_id = banquetbooking.last_id and reservation.status like 'pending' )\n" +
                 "                where start_date like ? ";
@@ -360,11 +371,11 @@ public class Data {
         stmt.setString(1,from);
         ResultSet rs = stmt.executeQuery();
         while (rs.next()){
-            int id = rs.getInt(1);
-            BanquetBooking reservation = new BanquetBooking(id,getCustomerByID(rs.getInt(2))
-                    ,getUserByID(rs.getInt(3)),rs.getString(4),
-                    rs.getString(5),rs.getDouble(6),rs.getString(7),
-                    rs.getString(8),getUsesByID("BB",id),rs.getString(9));
+            int id = rs.getInt(2);
+            BanquetBooking reservation = new BanquetBooking(rs.getString(1),id,getCustomerByID(rs.getInt(3))
+                    ,getUserByID(rs.getInt(4)),rs.getString(5),
+                    rs.getString(6),rs.getDouble(7),rs.getString(8),
+                    rs.getString(9),getUsesByID("BB",id),rs.getString(10));
             reservations.add(reservation);
         }
         conn.close();
@@ -372,4 +383,242 @@ public class Data {
         return reservations;
     }
 
+    public ArrayList<Reservation> getReservationByPhone(String phone) throws Exception {
+        Owner owner = getCustomerByPhone(phone);
+        ArrayList<Reservation> reservations = new ArrayList<>();
+        Connection conn = JDBC.getConnection();
+        String sql = "select * from reservation where cus_ID = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1,owner.getId());
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()){
+            Reservation reservation = new Reservation(rs.getString(1),rs.getInt(2),owner,getUserByID(rs.getInt(4)),rs.getString(5),rs.getString(6),rs.getDouble(7),rs.getString(8));
+            reservations.add(reservation);
+        }
+
+        return reservations;
+    }
+
+    public Reservation getReservationByID(String first,int last) throws Exception {
+        Reservation reservation = null;
+        Connection conn = JDBC.getConnection();
+        String sql = "select * from reservation where first_id like ? and last_id = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1,first);
+        stmt.setInt(2,last);
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()){
+            reservation = new Reservation(rs.getString(1),rs.getInt(2),getCustomerByID(rs.getInt(3)),getUserByID(rs.getInt(4)),rs.getString(5),rs.getString(6),rs.getDouble(7),rs.getString(8));
+        }
+
+        return reservation;
+    }
+
+
+    public RoomBooking getRBbyRes(Reservation reservation) throws Exception {
+        RoomBooking roomBooking = null;
+        Connection conn = JDBC.getConnection();
+        String sql ="SELECT reservation.first_id,reservation.last_id,reservation.cus_ID,reservation.user_ID,reservation.status,reservation.payment_status,reservation.total_price,roombooking.start_date,roombooking.end_date,reservation.note\n" +
+                "                FROM hotel.reservation inner join hotel.roombooking\n" +
+                "                on ( reservation.first_id like roombooking.first_id and reservation.last_id = roombooking.last_id) where roombooking.last_id = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1,reservation.getId());
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()){
+            roomBooking = new RoomBooking(rs.getString(1),rs.getInt(2),reservation.getOwner()
+                    ,reservation.getUser(),rs.getString(5),
+                    rs.getString(6),rs.getDouble(7),rs.getString(8),
+                    rs.getString(9),getContainByID(reservation.getId()),getUsesByID("RB",reservation.getId()),rs.getString(10));
+        }
+        conn.close();
+
+        return roomBooking;
+    }
+
+    public BanquetBooking getBBbyRes(Reservation reservation) throws Exception {
+        BanquetBooking banquetBooking = null;
+        Connection conn = JDBC.getConnection();
+        String sql = "SELECT reservation.first_id,reservation.last_id,reservation.cus_ID,reservation.user_ID,reservation.status,reservation.payment_status,reservation.total_price,banquetbooking.start_date,banquetbooking.start_hour,reservation.note\n" +
+                "                FROM hotel.reservation join hotel.banquetbooking \n" +
+                "                on ( reservation.first_id like banquetbooking.first_id and reservation.last_id = banquetbooking.last_id ) \n" +
+                "                where banquetbooking.last_id = ? ";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1,reservation.getId());
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()){
+            banquetBooking = new BanquetBooking(rs.getString(1),reservation.getId(),reservation.getOwner()
+                    ,reservation.getUser(),rs.getString(5),
+                    rs.getString(6),rs.getDouble(7),rs.getString(8),
+                    rs.getString(9),getUsesByID("BB",reservation.getId()),rs.getString(10));
+        }
+        conn.close();
+
+        return banquetBooking;
+    }
+
+    public void editReservation(String firstID,int id,String status,String paymentStatus,String note) throws SQLException {
+        Connection conn = JDBC.getConnection();
+        String sql = "update reservation " +
+                "set status = ? , payment_status = ? ,note = ? where first_id like ? and last_id = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1,status);
+        stmt.setString(2,paymentStatus);
+        stmt.setString(3,note);
+        stmt.setString(4,firstID);
+        stmt.setInt(5,id);
+        stmt.executeUpdate();
+
+        conn.close();
+    }
+
+    public ArrayList<User> getUsers() throws SQLException {
+        ArrayList<User> users = new ArrayList<>();
+        Connection conn = JDBC.getConnection();
+        String sql = "select  * from user";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()){
+           User user = new User(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10));
+            users.add(user);
+        }
+        conn.close();
+        return users;
+    }
+
+    public void updateUser(int id,String name,String phone,String identifier,String username,String dob,String password,String role,String image,String status) throws SQLException {
+        Connection conn = JDBC.getConnection();
+        String sql = "update user " +
+                "set name = ? , phone = ? ,identifier = ? , username = ?,dob = ?,password = ?,role = ?,image = ? ,status = ? " +
+                "where user_ID = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1,name);
+        stmt.setString(2,phone);
+        stmt.setString(3,identifier);
+        stmt.setString(4,username);
+        stmt.setString(5,dob);
+        stmt.setString(6,password);
+        stmt.setString(7,role);
+        stmt.setString(8,image);
+        stmt.setString(9,status);
+        stmt.setInt(10,id);
+
+        stmt.executeUpdate();
+
+        conn.close();
+    }
+
+    public void addUser(String name,String phone,String identifier,String username,String dob,String password,String role,String image,String status) throws SQLException {
+        Connection conn = JDBC.getConnection();
+        String sql = "insert into user(name,phone,identifier,username,dob,password,role,status,image) " +
+                "values (?,?,?,?,?,?,?,?,?)";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1,name);
+        stmt.setString(2,phone);
+        stmt.setString(3,identifier);
+        stmt.setString(4,username);
+        stmt.setString(5,dob);
+        stmt.setString(6,password);
+        stmt.setString(7,role);
+        stmt.setString(8,image);
+        stmt.setString(9,status);
+
+        stmt.executeUpdate();
+
+        conn.close();
+    }
+
+    public void deleteUser(int id) throws SQLException {
+        Connection conn = JDBC.getConnection();
+        String sql = "delete from user where user_ID = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1,id);
+        stmt.executeUpdate();
+        conn.close();
+    }
+
+    public void deleteRoom(int id) throws SQLException {
+        Connection conn = JDBC.getConnection();
+        String sql = "delete from room where id = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1,id);
+        stmt.executeUpdate();
+        conn.close();
+    }
+
+    public void deleteService(int id) throws SQLException {
+        Connection conn = JDBC.getConnection();
+        String sql = "delete from service where id = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setInt(1,id);
+        stmt.executeUpdate();
+        conn.close();
+    }
+
+    public void updateRoom(int id,String name,String status,String type,long capacity,double price,double sale,String image) throws SQLException {
+        Connection conn = JDBC.getConnection();
+        String sql = "update room " +
+                "set name = ? , status = ? ,type = ? , capacity = ?,price = ?,sale = ?,image = ? " +
+                "where id = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1,name);
+        stmt.setString(2,status);
+        stmt.setString(3,type);
+        stmt.setLong(4,capacity);
+        stmt.setDouble(5,price);
+        stmt.setDouble(6,sale);
+        stmt.setString(7,image);
+        stmt.setInt(8,id);
+
+        stmt.executeUpdate();
+
+        conn.close();
+    }
+
+    public void addRoom(String name,String status,String type,long capacity,double price,double sale,String image) throws SQLException {
+        Connection conn = JDBC.getConnection();
+        String sql = "insert into room(name,status,type,capacity,price,sale,image) " +
+                "values (?,?,?,?,?,?,?)";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1,name);
+        stmt.setString(2,status);
+        stmt.setString(3,type);
+        stmt.setLong(4,capacity);
+        stmt.setDouble(5,price);
+        stmt.setDouble(6,sale);
+        stmt.setString(7,image);
+
+        stmt.executeUpdate();
+
+        conn.close();
+    }
+
+    public void updateService(int id,String name,double price,String permission) throws SQLException {
+        Connection conn = JDBC.getConnection();
+        String sql = "update service " +
+                "set name = ? ,price = ?,permission = ? " +
+                "where id = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1,name);
+        stmt.setDouble(2,price);
+        stmt.setString(3,permission);
+        stmt.setInt(4,id);
+
+        stmt.executeUpdate();
+
+        conn.close();
+    }
+
+    public void addService(String name,double price,String permission) throws SQLException {
+        Connection conn = JDBC.getConnection();
+        String sql = "insert into service(name,price,permission) " +
+                "values (?,?,?)";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1,name);
+        stmt.setDouble(2,price);
+        stmt.setString(3,permission);
+
+        stmt.executeUpdate();
+
+        conn.close();
+    }
 }

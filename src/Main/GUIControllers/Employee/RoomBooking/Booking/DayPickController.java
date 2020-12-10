@@ -1,6 +1,6 @@
 package Main.GUIControllers.Employee.RoomBooking.Booking;
 
-import Main.Models.HotelManagement;
+import Main.Models.RoomBookingManagement;
 import Main.Models.Navigation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -45,15 +45,15 @@ public class DayPickController {
 
     @FXML
     public void searchAvailableRoom(ActionEvent actionEvent) throws Exception {
-        HotelManagement.setFrom(fromTextField.getEditor().getText());
-        HotelManagement.setTo(toTextField.getEditor().getText());
+        RoomBookingManagement.setFrom(fromTextField.getEditor().getText());
+        RoomBookingManagement.setTo(toTextField.getEditor().getText());
         if (fromTextField.getValue() == null || toTextField.getValue() == null){
-            HotelManagement.showAlertInformation("Something goes wrong","Fill start and end date");
+            RoomBookingManagement.showAlertInformation("Something goes wrong","Fill start and end date");
         }
-        else if (HotelManagement.updateAvailableRooms()){
+        else if (RoomBookingManagement.updateAvailableRooms()){
              loadRoomPicker();
              showSlideRoomPicker();
-            System.out.println(HotelManagement.availableRooms
+            System.out.println(RoomBookingManagement.availableRooms
             .size());
         }
     }
@@ -201,8 +201,8 @@ public class DayPickController {
     }
 
     void loadRoomPicker() throws IOException {
-        HotelManagement.selectedRoom.clear();
-        HotelManagement.selectedUse.clear();
+        RoomBookingManagement.selectedRoom.clear();
+        RoomBookingManagement.selectedUse.clear();
         FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/Employee/RoomBooking/Booking/RoomPick.fxml"));
         roomPickerPane = fxmlLoader.load();
         roomPickerPane.setVisible(false);

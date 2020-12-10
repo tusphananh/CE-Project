@@ -22,7 +22,7 @@ public class CheckInController {
 
     void loadCheckPane() throws Exception {
         vstack.getChildren().clear();
-        for (BanquetBooking r: BanquetManagement.getPendingReservation()
+        for (BanquetBooking r: BanquetBookingManagement.getPendingReservation()
              ) {
             FXMLLoader loader = new FXMLLoader(Navigation.class.getResource("../fxml/Employee/BanquetBooking/CheckIn/CheckPane.fxml"));
             Parent parent = loader.load();

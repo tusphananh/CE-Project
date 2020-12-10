@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane fx:id="stackPane" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.GUIControllers.Manager.ManagerController">
+<StackPane fx:id="stackPane" alignment="TOP_LEFT" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.GUIControllers.Manager.ManagerController">
    <children>
       <VBox fx:id="mainPane" alignment="TOP_CENTER" onMouseClicked="#onMouseClicked" spacing="10.0" style="-fx-background-color: white;">
          <children>

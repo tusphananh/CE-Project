@@ -1,37 +1,41 @@
 package Main.GUIControllers.Manager;
 
-import Main.Models.HotelManagement;
+import Main.GUIControllers.Manager.Employee.EditEmployeeController;
+import Main.GUIControllers.Manager.Owner.EditOwnerController;
+import Main.GUIControllers.Manager.Reservation.EditReservationController;
+import Main.GUIControllers.Manager.Room.EditRoomController;
+import Main.GUIControllers.Manager.Service.EditServiceController;
 import Main.Models.Navigation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
+import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.util.StringConverter;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class ManagerController {
-    private double reloadSpeed = 500;
     static boolean navigateBool = false;
     private VBox slider;
+    private MainController mainController;
+    private EditServiceController editServiceController;
+    private EditRoomController editRoomController;
+    private EditEmployeeController editEmployeeController;
+    private EditReservationController editReservationController;
+    private EditOwnerController editOwnerController;
 
     @FXML
     private StackPane stackPane,mainStack;
 
     @FXML
-    private VBox mainPane,bookingPane;
+    private VBox mainPane;
 
     @FXML
     public void initialize() throws IOException, InterruptedException {
         loadSlider();
+        showMain();
         stackPane.setOpacity(0);
         Navigation.fadeOut(stackPane,1000);
     }
@@ -63,4 +67,72 @@ public class ManagerController {
         }
     }
 
+    protected void showMain() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/Manager/Main.fxml"));
+        Parent parent = fxmlLoader.load();
+        mainController = fxmlLoader.getController();
+        mainStack.getChildren().clear();
+        mainStack.getChildren().add(parent);
+    }
+    protected void showEditRoom() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/Manager/Room/EditRoom.fxml"));
+        Parent parent = fxmlLoader.load();
+        editRoomController = fxmlLoader.getController();
+        mainStack.getChildren().clear();
+        mainStack.getChildren().add(parent);
+    }
+    protected void showEditEmployee() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/Manager/Employee/EditEmployee.fxml"));
+        Parent parent = fxmlLoader.load();
+        editEmployeeController = fxmlLoader.getController();
+        mainStack.getChildren().clear();
+        mainStack.getChildren().add(parent);
+    }
+    protected void showEditReservation() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/Manager/Reservation/EditReservation.fxml"));
+        Parent parent = fxmlLoader.load();
+        editReservationController = fxmlLoader.getController();
+        mainStack.getChildren().clear();
+        mainStack.getChildren().add(parent);
+    }
+
+    protected void showEditService() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/Manager/Service/EditService.fxml"));
+        Parent parent = fxmlLoader.load();
+        editServiceController = fxmlLoader.getController();
+        mainStack.getChildren().clear();
+        mainStack.getChildren().add(parent);
+    }
+
+    protected void showEditOwner() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/Manager/Owner/EditCustomer.fxml"));
+        Parent parent = fxmlLoader.load();
+        editOwnerController = fxmlLoader.getController();
+        mainStack.getChildren().clear();
+        mainStack.getChildren().add(parent);
+    }
+
+    public MainController getMainController() {
+        return mainController;
+    }
+
+    public EditOwnerController getEditOwnerController() {
+        return editOwnerController;
+    }
+
+    public EditServiceController getEditServiceController() {
+        return editServiceController;
+    }
+
+    public EditRoomController getEditRoomController() {
+        return editRoomController;
+    }
+
+    public EditEmployeeController getEditEmployeeController() {
+        return editEmployeeController;
+    }
+
+    public EditReservationController getEditReservationController() {
+        return editReservationController;
+    }
 }

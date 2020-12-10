@@ -1,6 +1,5 @@
 package Main;
 
-import Main.Database.Data;
 import Main.Database.JDBC;
 import Main.Models.*;
 import javafx.application.Application;
@@ -9,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.io.IOException;
 import java.sql.SQLException;
 
 public class Main extends Application {
@@ -32,7 +30,7 @@ public class Main extends Application {
         }
     }
     private static void setUp() throws SQLException {
-        HotelManagement.loadRoom();
-        HotelManagement.loadService();
+        RoomBookingManagement.loadRoom();
+        RoomBookingManagement.loadService();
     }
 }

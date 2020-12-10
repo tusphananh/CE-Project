@@ -9,13 +9,15 @@ import java.util.concurrent.TimeUnit;
 public class Reservation implements Identifier {
     private String note = "";
     private int id;
+    private String first;
     public String status;
     public String paymentStatus;
     private Owner owner;
     private double totalPrice;
     private User user;
 
-    public Reservation(int id, Owner owner,User user,String status,String paymentStatus,double totalPrice,String note){
+    public Reservation(String first,int id, Owner owner,User user,String status,String paymentStatus,double totalPrice,String note){
+        this.first = first;
         this.id = id;
         this.owner = owner;
         this.status = status;
@@ -84,5 +86,9 @@ public class Reservation implements Identifier {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getFirst() {
+        return first;
     }
 }

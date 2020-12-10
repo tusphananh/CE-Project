@@ -29,18 +29,18 @@ public class ServiceButtonController{
 
     @FXML
     void add(ActionEvent event) throws IOException, ParseException {
-        HotelManagement.addSelectedUse(service);
+        RoomBookingManagement.addSelectedUse(service);
         Navigation.getBillController().loadServicesStack();
         Navigation.getBillController().loadTotalPrice();
-        System.out.println("Number of service : " + HotelManagement.selectedUse.size());
+        System.out.println("Number of service : " + RoomBookingManagement.selectedUse.size());
     }
 
     @FXML
     void drop(ActionEvent event) throws IOException, ParseException {
-        HotelManagement.dropSelectedUse(service);
+        RoomBookingManagement.dropSelectedUse(service);
         Navigation.getBillController().loadServicesStack();
         Navigation.getBillController().loadTotalPrice();
-        System.out.println("Number of service : " + HotelManagement.selectedUse.size());
+        System.out.println("Number of service : " + RoomBookingManagement.selectedUse.size());
     }
 
     public void setNameLabel(String nameLabel) {

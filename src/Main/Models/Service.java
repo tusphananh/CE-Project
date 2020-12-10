@@ -1,7 +1,7 @@
 package Main.Models;
 
 public class Service implements Identifier {
-    private String name;
+    private String name,permission;
     double price;
     private int id;
 
@@ -9,6 +9,17 @@ public class Service implements Identifier {
         this.id = id;
         this.name = name;
         this.price = price;
+    }
+
+    public Service(int id, String name , double price,String permission) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.permission = permission;
+    }
+
+    public String getPermission() {
+        return permission;
     }
 
     public double getPrice() {

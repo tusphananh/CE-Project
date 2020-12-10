@@ -1,6 +1,6 @@
 package Main.GUIControllers.Employee.RoomBooking.Booking;
 
-import Main.Models.HotelManagement;
+import Main.Models.RoomBookingManagement;
 import Main.Models.Navigation;
 import Main.Models.Room;
 import javafx.event.ActionEvent;
@@ -49,10 +49,10 @@ public class Bill_ItemController {
 
     @FXML
     void delete(ActionEvent event) throws Exception {
-        HotelManagement.dropSelectedRoom(room);
+        RoomBookingManagement.dropSelectedRoom(room);
         Navigation.getBillController().loadSelectedRoom();
-        if (HotelManagement.selectedRoom.isEmpty()){
-            HotelManagement.selectedUse.clear();
+        if (RoomBookingManagement.selectedRoom.isEmpty()){
+            RoomBookingManagement.selectedUse.clear();
             Navigation.getBillController().close();
         }
         Navigation.getBillController().loadTotalPrice();
@@ -69,11 +69,11 @@ public class Bill_ItemController {
     }
     private void loadDetail(ActionEvent actionEvent) throws IOException {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/Employee/RoomBooking/BillDetail.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/Employee/RoomBooking/Booking/BillDetail.fxml"));
         Parent parent = fxmlLoader.load();
         BillDetailController billDetailController = fxmlLoader.getController();
         billDetailController.setCapacityLabel(String.valueOf(room.getCapacity()));
-        billDetailController.setPriceLabel(HotelManagement.moneyFormat(String.valueOf(room.getPrice())));
+        billDetailController.setPriceLabel(RoomBookingManagement.moneyFormat(String.valueOf(room.getPrice())));
         billDetailController.setRoomIDLabel(room.getID());
         billDetailController.setTypeLabel(room.type);
         Scene scene = new Scene(parent);

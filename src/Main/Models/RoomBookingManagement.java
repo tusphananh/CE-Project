@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-public class HotelManagement {
+public class RoomBookingManagement {
     private static Data data = new Data();
     private static String from,to,note;
     private static Owner owner;
@@ -38,6 +38,10 @@ public class HotelManagement {
         data.updateStatus(status,paymentStatus,"RB",id);
     }
 
+    public static void updateCoin(Owner owner) throws SQLException {
+       data.updateCoin(owner);
+    }
+
     public static void addOwner() throws SQLException, ParseException {
         Owner existOwner = data.getCustomerByPhone(owner.getPhone());
         if(existOwner == null){
@@ -48,7 +52,7 @@ public class HotelManagement {
 
     public static void addReservation() throws Exception {
         int id = data.getSizeRoomBooking() + 1;
-        roomBooking = new RoomBooking(id,owner,user,"pending","pending",getTotalPrice(),from,to,selectedRoom,selectedUse,note);
+        roomBooking = new RoomBooking("RB",id,owner,user,"pending","pending",getTotalPrice(),from,to,selectedRoom,selectedUse,note);
         data.insertReservation("RB", roomBooking);
         data.insertRoomBooking(roomBooking);
         data.insertUse(roomBooking);
@@ -82,7 +86,7 @@ public class HotelManagement {
     public static double getTotalPrice() throws ParseException {
         totalPrice = 0;
         for (Room room : selectedRoom){
-            totalPrice = totalPrice + room.getPrice()*getDuration();
+            totalPrice = totalPrice + room.getSalePrice()*getDuration();
         }
         return totalPrice;
     }
@@ -103,7 +107,7 @@ public class HotelManagement {
                 }
             }
         }
-        HotelManagement.selectedRoom.add(room);
+        RoomBookingManagement.selectedRoom.add(room);
     }
 
     public static void dropSelectedRoom(Room room) throws Exception {
@@ -179,7 +183,7 @@ public class HotelManagement {
         availableRooms.clear();
         if (checkValidDate()){
             availableRooms.addAll(rooms);
-            for (Room room: data.getAvailableRooms(from,to)
+            for (Room room: data.getInvalidRooms(from,to)
                  ) {
                 availableRooms.remove(room);
             }
@@ -196,19 +200,19 @@ public class HotelManagement {
     }
 
     private static long getDuration() throws ParseException {
-        Date date1 = HotelManagement.getFormat().parse(from);
-        Date date2 = HotelManagement.getFormat().parse(to);
+        Date date1 = RoomBookingManagement.getFormat().parse(from);
+        Date date2 = RoomBookingManagement.getFormat().parse(to);
         // Different between 2 days in MiliSec
         long diffInMillies = Math.abs(date1.getTime() - date2.getTime());
         return TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
     }
 
     public static void setFrom(String from) {
-        HotelManagement.from = from;
+        RoomBookingManagement.from = from;
     }
 
     public static void setTo(String to) {
-        HotelManagement.to = to;
+        RoomBookingManagement.to = to;
     }
 
     public static String getFrom() {
@@ -220,7 +224,7 @@ public class HotelManagement {
     }
 
     public static void setOwner(Owner owner) {
-        HotelManagement.owner = owner;
+        RoomBookingManagement.owner = owner;
     }
 
     public static void setUser(User u) {
@@ -232,7 +236,7 @@ public class HotelManagement {
     }
 
     public static void setNote(String note) {
-        HotelManagement.note = note;
+        RoomBookingManagement.note = note;
     }
 }
 

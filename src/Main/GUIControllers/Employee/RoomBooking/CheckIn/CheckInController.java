@@ -1,6 +1,6 @@
 package Main.GUIControllers.Employee.RoomBooking.CheckIn;
 
-import Main.Models.HotelManagement;
+import Main.Models.RoomBookingManagement;
 import Main.Models.Navigation;
 import Main.Models.RoomBooking;
 import javafx.fxml.FXML;
@@ -24,7 +24,7 @@ public class CheckInController {
 
     void loadCheckPane() throws Exception {
         vstack.getChildren().clear();
-        for (RoomBooking r: HotelManagement.getPendingReservation()
+        for (RoomBooking r: RoomBookingManagement.getPendingReservation()
              ) {
             FXMLLoader loader = new FXMLLoader(Navigation.class.getResource("../fxml/Employee/RoomBooking/CheckIn/CheckPane.fxml"));
             Parent parent = loader.load();

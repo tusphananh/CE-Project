@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0" spacing="5.0" style="-fx-background-color: white; -fx-background-radius: 10;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.GUIControllers.Manager.Employee.EmployeePaneController">
+   <children>
+      <ImageView fx:id="imageView" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="name" text="Name" />
+      <Separator maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" />
+      <Label fx:id="role" text="Role" />
+      <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#edit" style="-fx-background-color: F3F3F3; -fx-background-radius: 10;" text="EDIT" />
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+   <effect>
+      <DropShadow color="#0000001a" />
+   </effect>
+</VBox>

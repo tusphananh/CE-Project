@@ -15,19 +15,30 @@
    <children>
       <HBox alignment="CENTER">
          <children>
-            <ImageView fitHeight="50.0" fitWidth="100.0" onMouseClicked="#hide" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="50.0" fitWidth="100.0" onMouseClicked="#hide" opacity="0.1" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/back.png" />
                </image>
             </ImageView>
          </children>
       </HBox>
+      <Button mnemonicParsing="false" onAction="#goMain" prefWidth="150.0" style="-fx-background-color: D3FFC9; -fx-background-radius: 20;" text="Main">
+         <effect>
+            <DropShadow color="#0000001a" offsetX="3.0" offsetY="3.0" />
+         </effect>
+         <opaqueInsets>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+         </padding>
+      </Button>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="RESERVATION">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Text>
-      <Button mnemonicParsing="false" prefWidth="150.0" style="-fx-background-color: white; -fx-background-radius: 20;" text="EDIT">
+      <Button mnemonicParsing="false" onAction="#editReservation" prefWidth="150.0" style="-fx-background-color: white; -fx-background-radius: 20;" text="Edit Reservaion">
          <effect>
             <DropShadow color="#0000001a" offsetX="3.0" offsetY="3.0" />
          </effect>
@@ -38,13 +49,13 @@
             <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
          </padding>
       </Button>
-      <Separator prefWidth="200.0" />
+      <Separator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ROOM">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Text>
-      <Button mnemonicParsing="false" prefWidth="150.0" style="-fx-background-color: white; -fx-background-radius: 20;" text="EDIT">
+      <Button mnemonicParsing="false" onAction="#editRoom" prefWidth="150.0" style="-fx-background-color: white; -fx-background-radius: 20;" text="Edit Room">
          <effect>
             <DropShadow color="#0000001a" offsetX="3.0" offsetY="3.0" />
          </effect>
@@ -55,13 +66,13 @@
             <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
          </padding>
       </Button>
-      <Separator prefWidth="200.0" />
+      <Separator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="SERVICE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Text>
-      <Button mnemonicParsing="false" prefWidth="150.0" style="-fx-background-color: white; -fx-background-radius: 20;" text="EDIT">
+      <Button mnemonicParsing="false" onAction="#editService" prefWidth="150.0" style="-fx-background-color: white; -fx-background-radius: 20;" text="Edit Service">
          <effect>
             <DropShadow color="#0000001a" offsetX="3.0" offsetY="3.0" />
          </effect>
@@ -72,13 +83,13 @@
             <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
          </padding>
       </Button>
-      <Separator prefWidth="200.0" />
+      <Separator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="EMPLOYEE">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Text>
-      <Button mnemonicParsing="false" prefWidth="150.0" style="-fx-background-color: white; -fx-background-radius: 20;" text="EDIT">
+      <Button mnemonicParsing="false" onAction="#editEmployee" prefWidth="150.0" style="-fx-background-color: white; -fx-background-radius: 20;" text="Edit Employee">
          <effect>
             <DropShadow color="#0000001a" offsetX="3.0" offsetY="3.0" />
          </effect>
@@ -89,14 +100,35 @@
             <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
          </padding>
       </Button>
-      <Button mnemonicParsing="false" onAction="#logout" style="-fx-background-color: white;">
+      <Separator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CUSTOMER">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Text>
+      <Button mnemonicParsing="false" onAction="#editOwner" prefWidth="150.0" style="-fx-background-color: white; -fx-background-radius: 20;" text="Edit Customer">
+         <effect>
+            <DropShadow color="#0000001a" offsetX="3.0" offsetY="3.0" />
+         </effect>
+         <opaqueInsets>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
+         </padding>
+      </Button>
+      <Separator maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="100.0" />
+      <Button mnemonicParsing="false" onAction="#logout" style="-fx-background-color: FFA0A0; -fx-background-radius: 10;" text="LOGOUT">
          <graphic>
-            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="20.0" fitWidth="20.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../images/logout.png" />
                </image>
             </ImageView>
          </graphic>
+         <effect>
+            <DropShadow color="#00000033" offsetX="3.0" offsetY="3.0" />
+         </effect>
       </Button>
    </children>
    <padding>

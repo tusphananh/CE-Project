@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.GUIControllers.Manager.Employee.EditEmployeeController">
+   <children>
+      <Label text="EMPLOYEE" textFill="#0000004d">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" style="-fx-background-color: white;" stylesheets="@../../../StyleCSS/StyleUI.css">
+         <content>
+            <FlowPane fx:id="flowPane" alignment="TOP_CENTER" hgap="20.0" vgap="20.0">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding></FlowPane>
+         </content>
+      </ScrollPane>
+      <Button mnemonicParsing="false" onAction="#addEmployee" style="-fx-background-color: white; -fx-background-radius: 20;" text="Add Employee">
+         <effect>
+            <DropShadow color="#0000001a" offsetX="3.0" offsetY="3.0" />
+         </effect>
+      </Button>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</VBox>

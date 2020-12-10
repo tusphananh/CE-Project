@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" spacing="10.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.GUIControllers.Manager.MainController">
+   <children>
+      <Label text="MAIN" textFill="#0000004d">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Label>
+      <Label text="Available Rooms" />
+      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" style="-fx-background-color: white;" stylesheets="@../../StyleCSS/StyleUI.css">
+         <content>
+            <FlowPane fx:id="roomStack" alignment="CENTER" hgap="20.0" vgap="30.0">
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </FlowPane>
+         </content>
+      </ScrollPane>
+      <Label text="Services Prepared" />
+      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" style="-fx-background-color: white;" stylesheets="@../../StyleCSS/StyleUI.css">
+         <content>
+            <VBox fx:id="serviceStack" />
+         </content>
+      </ScrollPane>
+      <Label text="Online Employee" />
+      <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" style="-fx-background-color: white;" stylesheets="@../../StyleCSS/StyleUI.css">
+         <content>
+            <VBox fx:id="employeeStack" />
+         </content>
+      </ScrollPane>
+   </children>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+</VBox>

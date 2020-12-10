@@ -17,6 +17,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -70,6 +71,20 @@ public class Navigation
         primaryStage.setScene(new Scene( FXMLLoader.load(Navigation.class.getResource("../fxml/Login.fxml"))));
         primaryStage.setX((screenBounds.getWidth() - primaryStage.getWidth())/2);
         primaryStage.setY((screenBounds.getHeight() - primaryStage.getHeight())/2);
+    }
+
+    public static void logout(javafx.event.ActionEvent actionEvent) throws IOException {
+        Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        primaryStage.close();
+        FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/Login.fxml"));
+        Parent parent = fxmlLoader.load();
+        Scene scene = new Scene(parent);
+        Stage stage = new Stage();
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.setResizable(false);
+        stage.centerOnScreen();
+        stage.setScene(scene);
+        stage.show();
     }
 
     public static void minimize(javafx.event.ActionEvent actionEvent){

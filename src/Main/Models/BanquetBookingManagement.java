@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class BanquetManagement {
+public class BanquetBookingManagement {
     private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     private static Data data = new Data();
     private static String from,note,hour;
@@ -60,7 +60,7 @@ public class BanquetManagement {
 
     public static void addReservation() throws Exception {
         int id = data.getSizeBanquetBooking() + 1;
-        reservation = new BanquetBooking(id,owner,user,"pending","pending",getTotalPrice(),from,hour,selectedUse,note);
+        reservation = new BanquetBooking("BB",id,owner,user,"pending","pending",getTotalPrice(),from,hour,selectedUse,note);
         data.insertReservation("BB",reservation);
         data.insertBanquetBooking(reservation);
         data.insertUse(reservation);
@@ -106,23 +106,23 @@ public class BanquetManagement {
     }
 
     public static void setNote(String note) {
-        BanquetManagement.note = note;
+        BanquetBookingManagement.note = note;
     }
 
     public static void setUser(User user) {
-        BanquetManagement.user = user;
+        BanquetBookingManagement.user = user;
     }
 
     public static void setFrom(String from) {
-        BanquetManagement.from = from;
+        BanquetBookingManagement.from = from;
     }
 
     public static void setOwner(Owner owner) {
-        BanquetManagement.owner = owner;
+        BanquetBookingManagement.owner = owner;
     }
 
     public static void setHour(String hour) {
-        BanquetManagement.hour = hour;
+        BanquetBookingManagement.hour = hour;
     }
 
     public static ArrayList<Service> getServices() {
