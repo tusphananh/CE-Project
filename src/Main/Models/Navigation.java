@@ -15,6 +15,7 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCombination;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -43,6 +44,8 @@ public class Navigation
         managerController = fxmlLoader.getController();
         Scene scene = new Scene(parent);
         Stage stage = new Stage();
+        stage.setFullScreen(true);
+        stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         stage.setScene(scene);
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
@@ -59,6 +62,8 @@ public class Navigation
         Scene scene = new Scene(parent);
         Stage stage = new Stage();
         stage.setScene(scene);
+        stage.setFullScreen(true);
+        stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         Screen screen = Screen.getPrimary();
         Rectangle2D bounds = screen.getVisualBounds();
         stage.setWidth(bounds.getWidth() / 1.5);

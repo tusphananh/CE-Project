@@ -41,8 +41,7 @@ public class LoginController {
         user = data.getUserByPassword(usernameField.getText(), passwordField.getText());
         System.out.println("Logining");
         if (user != null){
-            RoomBookingManagement.setUser(user);
-            BanquetBookingManagement.setUser(user);
+            data.updateLogInStatus(user);
             messagesText.setText(" Welcome back " + user.getName() + "!");
             messagesText.setFill(Color.web("FED755"));
             System.out.println("Success");
@@ -70,6 +69,7 @@ public class LoginController {
                             @Override
                             public void handle(ActionEvent event) {
                                 try {
+                                    ManagerManagement.setUser(user);
                                     Navigation.navigateNewManager(actionEvent);
                                 } catch (IOException e) {
                                     e.printStackTrace();
@@ -83,6 +83,8 @@ public class LoginController {
                             @Override
                             public void handle(ActionEvent event) {
                                 try {
+                                    RoomBookingManagement.setUser(user);
+                                    BanquetBookingManagement.setUser(user);
                                     Navigation.navigateNewEmployee(actionEvent);
                                 } catch (IOException e) {
                                     e.printStackTrace();

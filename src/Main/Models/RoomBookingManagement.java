@@ -34,6 +34,10 @@ public class RoomBookingManagement {
         selectedUse.clear();
     }
 
+    public static void updateLogOutStatus() throws SQLException {
+        data.updateLogOutStatus(user);
+    }
+
     public static void updateStatus(String status,String paymentStatus,int id) throws SQLException {
         data.updateStatus(status,paymentStatus,"RB",id);
     }
@@ -183,7 +187,7 @@ public class RoomBookingManagement {
         availableRooms.clear();
         if (checkValidDate()){
             availableRooms.addAll(rooms);
-            for (Room room: data.getInvalidRooms(from,to)
+            for (Room room: data.getPendingRooms(from,to)
                  ) {
                 availableRooms.remove(room);
             }

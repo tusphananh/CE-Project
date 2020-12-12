@@ -103,6 +103,7 @@ public class BanquetBookingManagement {
         from = "";
         note="";
         owner = null;
+        selectedUse.clear();
     }
 
     public static void setNote(String note) {

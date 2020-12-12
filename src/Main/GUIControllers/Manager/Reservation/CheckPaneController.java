@@ -67,6 +67,9 @@ public class CheckPaneController {
         else if (status.equals("fail")){
             this.status.setTextFill(Paint.valueOf("red"));
         }
+        else if (status.equals("pending")){
+            this.status.setTextFill(Paint.valueOf("cyan"));
+        }
         else {
             this.status.setTextFill(Paint.valueOf("orange"));
         }
