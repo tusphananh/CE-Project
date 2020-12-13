@@ -63,7 +63,7 @@ public class CheckPaneController {
 
     @FXML
     void confirm(ActionEvent event) throws Exception {
-        RoomBookingManagement.updateStatus("using","pending",reservation.getId());
+        RoomBookingManagement.updateStatus("using","success",reservation.getId());
         Navigation.getCheckInController().loadStack();
     }
 

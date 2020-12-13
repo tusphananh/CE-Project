@@ -142,8 +142,6 @@ public class DayPickController {
 
 
     public void showBooking() throws IOException {
-        fromTextField.getEditor().clear();
-        toTextField.getEditor().clear();
         loadRoomPicker();
         mainStack.getChildren().clear();
         bookingPane.setOpacity(0);
