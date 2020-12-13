@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="82.0" prefWidth="777.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Main.GUIControllers.Manager.UnpaidReservation.CheckPaneController">
+   <children>
+      <HBox alignment="CENTER" layoutX="14.0" layoutY="12.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="746.0" style="-fx-background-color: white; -fx-background-radius: 20; -fx-spacing: 10;">
+         <children>
+            <Text fx:id="nameText" strokeType="OUTSIDE" strokeWidth="0.0" text="Name" wrappingWidth="222.693359375" />
+            <Separator orientation="VERTICAL" />
+            <Text fx:id="phoneText" strokeType="OUTSIDE" strokeWidth="0.0" text="Phone" wrappingWidth="162.609375" />
+            <Separator orientation="VERTICAL" />
+            <Text fx:id="roomText" strokeType="OUTSIDE" strokeWidth="0.0" text="Room" wrappingWidth="92.396484375" />
+            <Separator orientation="VERTICAL" />
+            <HBox alignment="CENTER_RIGHT" prefHeight="28.0" prefWidth="78.0" style="-fx-spacing: 10;">
+               <children>
+                  <Button fx:id="cancelButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#cancel" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: white; -fx-background-radius: 10;" textFill="RED" wrapText="true">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fx:id="cacelImageView" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../images/cancel.png" />
+                           </image></ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="confirmButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#confirm" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: white; -fx-background-radius: 10;" textFill="#51db56" wrapText="true">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fx:id="confirmImageView" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../images/tick.png" />
+                           </image></ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
+            <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#detail" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+               <graphic>
+                  <ImageView fx:id="detailImageView" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../images/detail.png" />
+                     </image></ImageView>
+               </graphic>
+            </Button>
+         </children>
+         <effect>
+            <DropShadow color="#0000001a" height="20.0" offsetX="2.0" offsetY="3.0" radius="9.5" width="20.0" />
+         </effect>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+         </padding>
+      </HBox>
+      <ImageView fx:id="noteImage" fitHeight="30.0" fitWidth="30.0" layoutX="737.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 40;" />
+   </children>
+</Pane>

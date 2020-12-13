@@ -387,6 +387,7 @@ public class Data {
         return reservations;
     }
 
+
     public void updateStatus(String status,String paymentStatus,String firstID,int id) throws SQLException {
         Connection conn = JDBC.getConnection();
         String sql = "update reservation " +
@@ -717,6 +718,50 @@ public class Data {
         stmt.setInt(1,user.getId());
 
         stmt.executeUpdate();
+    }
+
+    public void updateUse(String first,int last,Use use) throws SQLException {
+        Connection conn = JDBC.getConnection();
+        String sql = "update uses set amount = ? where first_id like ? and last_id = ? and ser_id = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setLong(1,use.getAmount());
+        stmt.setString(2,first);
+        stmt.setInt(3,last);
+        stmt.setInt(4,use.getService().getId());
+        stmt.executeUpdate();
+    }
+
+    public void insertUse(String first,int last,Use use) throws SQLException {
+        Connection conn = JDBC.getConnection();
+        String sql = "insert into uses(first_id,last_id,ser_id,amount) values (?,?,?,?)";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setString(1,first);
+        stmt.setInt(2,last);
+        stmt.setInt(3,use.getService().getId());
+        stmt.setLong(4,use.getAmount());
+
+        stmt.executeUpdate();
+    }
+
+    public ArrayList<RoomBooking> getUnpaidReservation() throws Exception {
+        ArrayList<RoomBooking> reservations = new ArrayList<>();
+        Connection conn = JDBC.getConnection();
+        String sql = "SELECT reservation.first_id,reservation.last_id,reservation.cus_ID,reservation.user_ID,reservation.status,reservation.payment_status,reservation.total_price,roombooking.start_date,roombooking.end_date,reservation.note \n" +
+                "FROM hotel.reservation join hotel.roombooking \n" +
+                "on ( reservation.first_id like 'RB' and reservation.last_id = roombooking.last_id and reservation.payment_status like 'pending' )";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()){
+            int id = rs.getInt(2);
+            RoomBooking reservation = new RoomBooking(rs.getString(1),id,getCustomerByID(rs.getInt(3))
+                    ,getUserByID(rs.getInt(4)),rs.getString(5),
+                    rs.getString(6),rs.getDouble(7),rs.getString(8),
+                    rs.getString(9),getContainByID(id),getUsesByID("RB",id),rs.getString(10));
+            reservations.add(reservation);
+        }
+        conn.close();
+
+        return reservations;
     }
 }
 

@@ -12,6 +12,8 @@ import java.sql.SQLException;
 
 public class Main extends Application {
 
+    //VM Option:
+    //--module-path "path" --add-modules javafx.controls,javafx.fxml
 
     @Override
     public void start(Stage primaryStage) throws Exception {

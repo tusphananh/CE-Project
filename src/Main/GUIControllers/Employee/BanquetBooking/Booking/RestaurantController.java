@@ -4,9 +4,11 @@ import Main.Models.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
 import java.io.IOException;
@@ -119,9 +121,11 @@ public class RestaurantController {
     }
 
     @FXML
-    void showBill(ActionEvent event) throws Exception {
+    void showBill(ActionEvent actionEvent) throws Exception {
         if (nameTextField.getText().isEmpty() || phoneTextField.getText().isEmpty()){
+            Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
             Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initOwner(primaryStage);
             alert.setTitle("Information");
             alert.setHeaderText("Fill all customer information");
             alert.show();

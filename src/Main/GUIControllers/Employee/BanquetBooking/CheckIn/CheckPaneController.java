@@ -49,8 +49,10 @@ public class CheckPaneController {
     }
 
     @FXML
-    void cancel(ActionEvent event) throws Exception {
+    void cancel(ActionEvent actionEvent) throws Exception {
+        Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.initOwner(primaryStage);
         alert.setTitle("Cancel");
         alert.setHeaderText("Confirm");
         alert.setContentText("Do you want do cancel this reservation");

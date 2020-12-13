@@ -1,7 +1,10 @@
 package Main.Models;
 
 import Main.Database.Data;
+import javafx.event.ActionEvent;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.stage.Stage;
 
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -171,12 +174,11 @@ public class RoomBookingManagement {
     }
 
 
-    private static boolean checkValidDate() throws Exception {
+    public static boolean checkValidDate(String from , String to) throws Exception {
         Date f1 = format.parse(from);
         Date t1 = format.parse(to);
         if (f1.after(t1) || f1.equals(t1)){
             System.out.println("Why start day after end day");
-            showAlertInformation("Something wrong","Why start day after end day");
             return false;
         }
 
@@ -185,7 +187,7 @@ public class RoomBookingManagement {
 
     public static Boolean updateAvailableRooms() throws Exception {
         availableRooms.clear();
-        if (checkValidDate()){
+        if (checkValidDate(from,to)){
             availableRooms.addAll(rooms);
             for (Room room: data.getPendingRooms(from,to)
                  ) {
@@ -196,8 +198,10 @@ public class RoomBookingManagement {
         return false;
     }
 
-    public static void showAlertInformation(String title, String body){
+    public static void showAlertInformation(String title, String body, ActionEvent actionEvent){
+        Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.initOwner(primaryStage);
         alert.setTitle(title);
         alert.setHeaderText(body);
         alert.show();

@@ -7,6 +7,7 @@ import Main.Models.Reservation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -16,6 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -124,7 +126,9 @@ public class EditReservationController {
         }
         catch (Exception e){
             System.out.println(e.getMessage());
+            Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
             Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initOwner(primaryStage);
             alert.setTitle("Error");
             alert.setHeaderText("Null Information");
             alert.setContentText("Information not found");

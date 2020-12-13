@@ -32,7 +32,9 @@ public class NewServiceController {
     @FXML
     void confirm(ActionEvent actionEvent) throws SQLException, IOException {
         if (name.getText().isEmpty() || price.getText().isEmpty() ||permission.getText().isEmpty()){
+            Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
             Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initOwner(primaryStage);
             alert.setTitle("Information");
             alert.setHeaderText("Missing Information");
             alert.setContentText("Cant contain null value");

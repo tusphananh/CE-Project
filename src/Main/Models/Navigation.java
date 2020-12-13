@@ -7,6 +7,7 @@ import Main.GUIControllers.Employee.RoomBooking.Booking.BillController;
 import Main.GUIControllers.Employee.RoomBooking.Booking.DayPickController;
 import Main.GUIControllers.Employee.RoomBooking.Booking.SuccessController;
 import Main.GUIControllers.Employee.RoomBooking.Booking.RoomPickController;
+import Main.GUIControllers.Employee.Service.ServicePickController;
 import Main.GUIControllers.Manager.ManagerController;
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
@@ -35,7 +36,10 @@ public class Navigation
     private static CheckOutController checkOutController;
     private static RestaurantController restaurantController;
     private static ManagerController managerController;
+    private static ServicePickController servicePickController;
     private static Main.GUIControllers.Employee.BanquetBooking.CheckIn.CheckInController banquetCheckInController;
+
+
     public static void navigateNewManager(javafx.event.ActionEvent actionEvent) throws IOException {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         primaryStage.close();
@@ -195,7 +199,15 @@ public class Navigation
         return banquetCheckInController;
     }
 
+    public static ServicePickController getServicePickController() {
+        return servicePickController;
+    }
+
     public static ManagerController getManagerController() {
         return managerController;
+    }
+
+    public static void setServicePickController(ServicePickController servicePickController) {
+        Navigation.servicePickController = servicePickController;
     }
 }

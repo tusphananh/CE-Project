@@ -41,7 +41,9 @@ public class DetailController {
     @FXML
     void confirm(ActionEvent actionEvent) throws SQLException, IOException {
         if ( name.getText().isEmpty() ||phone.getText().isEmpty()){
+            Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
             Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.initOwner(primaryStage);
             alert.setTitle("Information");
             alert.setHeaderText("Missing Information");
             alert.setContentText("Cant contain null value");
@@ -55,7 +57,9 @@ public class DetailController {
 
     @FXML
     void delete(ActionEvent actionEvent) throws SQLException, IOException {
+        Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.initOwner(primaryStage);
         alert.setTitle("Deleter");
         alert.setHeaderText("Confirm");
         alert.setContentText("Do you want do delete this User");

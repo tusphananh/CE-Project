@@ -34,7 +34,9 @@ public class SliderController {
 
     @FXML
     void logout(ActionEvent actionEvent) throws IOException, SQLException {
+        Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.initOwner(primaryStage);
         alert.setTitle("Logout");
         alert.setHeaderText("Confirm");
         alert.setContentText("Do you want to LOGOUT");
@@ -78,6 +80,12 @@ public class SliderController {
     @FXML
     void goMain(ActionEvent event) throws IOException{
         Navigation.getManagerController().showMain();
+        Navigation.getManagerController().slideTransition();
+    }
+
+    @FXML
+    void unpaidReservation(ActionEvent actionEvent)throws IOException{
+        Navigation.getManagerController().showUnpaidReservation();
         Navigation.getManagerController().slideTransition();
     }
 

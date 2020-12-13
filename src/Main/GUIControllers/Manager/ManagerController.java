@@ -5,6 +5,7 @@ import Main.GUIControllers.Manager.Owner.EditOwnerController;
 import Main.GUIControllers.Manager.Reservation.EditReservationController;
 import Main.GUIControllers.Manager.Room.EditRoomController;
 import Main.GUIControllers.Manager.Service.EditServiceController;
+import Main.GUIControllers.Manager.UnpaidReservation.UnpaidReservationController;
 import Main.Models.Navigation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,6 +26,7 @@ public class ManagerController {
     private EditEmployeeController editEmployeeController;
     private EditReservationController editReservationController;
     private EditOwnerController editOwnerController;
+    private UnpaidReservationController unpaidReservationController;
 
     @FXML
     private StackPane stackPane,mainStack;
@@ -110,6 +112,18 @@ public class ManagerController {
         editOwnerController = fxmlLoader.getController();
         mainStack.getChildren().clear();
         mainStack.getChildren().add(parent);
+    }
+
+    protected void showUnpaidReservation() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/Manager/UnpaidReservation/UnpaidReservation.fxml"));
+        Parent parent = fxmlLoader.load();
+        unpaidReservationController = fxmlLoader.getController();
+        mainStack.getChildren().clear();
+        mainStack.getChildren().add(parent);
+    }
+
+    public UnpaidReservationController getUnpaidReservationController() {
+        return unpaidReservationController;
     }
 
     public MainController getMainController() {

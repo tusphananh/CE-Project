@@ -19,7 +19,7 @@ import java.time.format.DateTimeFormatter;
 public class DayPickController {
     private double reloadSpeed = 500;
     static boolean navigateBool = false;
-    private VBox checkInPane,checkOutPane,restaurantPane,roomPickerPane,successPane,banquetCheckInPane;
+    private VBox checkInPane,checkOutPane,restaurantPane,roomPickerPane,successPane,banquetCheckInPane,servicePane;
     private VBox slider;
 
     @FXML
@@ -48,13 +48,15 @@ public class DayPickController {
         RoomBookingManagement.setFrom(fromTextField.getEditor().getText());
         RoomBookingManagement.setTo(toTextField.getEditor().getText());
         if (fromTextField.getValue() == null || toTextField.getValue() == null){
-            RoomBookingManagement.showAlertInformation("Something goes wrong","Fill start and end date");
+            RoomBookingManagement.showAlertInformation("Something goes wrong","Fill start and end date",actionEvent);
+        }
+        else if (!RoomBookingManagement.checkValidDate(fromTextField.getEditor().getText(),toTextField.getEditor().getText())){
+            RoomBookingManagement.showAlertInformation("Something wrong","Why start day after end day",actionEvent);
         }
         else if (RoomBookingManagement.updateAvailableRooms()){
              loadRoomPicker();
              showSlideRoomPicker();
-            System.out.println(RoomBookingManagement.availableRooms
-            .size());
+            System.out.println(RoomBookingManagement.availableRooms.size());
         }
     }
     @FXML
@@ -170,6 +172,19 @@ public class DayPickController {
         mainStack.getChildren().add(restaurantPane);
         Navigation.fadeOut(restaurantPane,500);
     }
+    public void showServicePane() throws IOException {
+        loadServicePane();
+        mainStack.getChildren().clear();
+        servicePane.setOpacity(0);
+        mainStack.getChildren().add(servicePane);
+        Navigation.fadeOut(servicePane,500);
+    }
+
+    void loadServicePane() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/Employee/Service/ServicePick.fxml"));
+        servicePane = fxmlLoader.load();
+        Navigation.setServicePickController(fxmlLoader.getController());
+    }
 
     void loadBanquetCheckIn() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/Employee/BanquetBooking/CheckIn/CheckIn.fxml"));
@@ -220,27 +235,40 @@ public class DayPickController {
         Navigation.slideHorizontallyTransition(roomPickerPane,roomPickerPane.getWidth(),800);
     }
 
-    void loadRoomBookingSuccess() throws IOException {
+    private void loadRoomBookingSuccess() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/Employee/RoomBooking/Booking/Success.fxml"));
         successPane = fxmlLoader.load();
         successPane.setVisible(false);
         successPane.setOpacity(0);
         mainStack.getChildren().add(successPane);
     }
-    void loadBanquetBookingSuccess() throws IOException {
+    private void loadBanquetBookingSuccess() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/Employee/BanquetBooking/Booking/Success.fxml"));
         successPane = fxmlLoader.load();
         successPane.setVisible(false);
         successPane.setOpacity(0);
         mainStack.getChildren().add(successPane);
     }
-    void showRoomBookingSuccess() throws IOException {
+
+    private void loadServiceSuccess() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/Employee/Service/Success.fxml"));
+        successPane = fxmlLoader.load();
+        successPane.setVisible(false);
+        successPane.setOpacity(0);
+        mainStack.getChildren().add(successPane);
+    }
+    public void showRoomBookingSuccess() throws IOException {
         loadRoomBookingSuccess();
         successPane.setVisible(true);
         Navigation.fadeOut(successPane,500);
     }
     public void showBanquetBookingSuccess() throws IOException {
         loadBanquetBookingSuccess();
+        successPane.setVisible(true);
+        Navigation.fadeOut(successPane,500);
+    }
+    public void showServiceSuccess() throws IOException {
+        loadServiceSuccess();
         successPane.setVisible(true);
         Navigation.fadeOut(successPane,500);
     }

@@ -52,7 +52,9 @@ public class DetailController {
 
     @FXML
     void delete(ActionEvent actionEvent) throws SQLException, IOException {
+        Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.initOwner(primaryStage);
         alert.setTitle("Deleter");
         alert.setHeaderText("Confirm");
         alert.setContentText("Do you want do delete this User");

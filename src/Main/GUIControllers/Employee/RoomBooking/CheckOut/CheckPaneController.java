@@ -1,6 +1,5 @@
 package Main.GUIControllers.Employee.RoomBooking.CheckOut;
 
-import Main.GUIControllers.Employee.RoomBooking.CheckIn.DetailController;
 import Main.Models.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,6 +21,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Optional;
 
 public class CheckPaneController {
@@ -63,7 +63,41 @@ public class CheckPaneController {
     }
 
     @FXML
-    void confirm(ActionEvent event) throws Exception {
+    void confirm(ActionEvent actionEvent) throws Exception {
+        if (!reservation.getUses().isEmpty()){
+            Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+            FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/Employee/RoomBooking/CheckOut/ServiceBill.fxml"));
+            Parent parent = fxmlLoader.load();
+            ServiceBillController detailController = fxmlLoader.getController();
+            detailController.setReservation(reservation);
+            double total = 0;
+            for (Use use: reservation.getUses()
+            ) {
+                total = total + use.getTotalPrice();
+                HBox hBox = new HBox();
+                hBox.setSpacing(20);
+                hBox.getChildren().add(new Label(String.valueOf(use.getAmount())));
+                hBox.getChildren().add(new Label(use.getService().getName()));
+                hBox.getChildren().add(new Label(use.getTotalPrice() + " $"));
+                detailController.addStack(hBox);
+            }
+            detailController.setTotal(String.valueOf(total));
+            Scene scene = new Scene(parent);
+            scene.getStylesheets().add("Main/StyleCSS/StageStyle.css");
+            scene.setFill(Color.TRANSPARENT);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.initOwner(primaryStage);
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+        }
+        else {
+            updateSuccessReservation();
+        }
+    }
+
+    protected void updateSuccessReservation() throws Exception {
         RoomBookingManagement.updateStatus("success","success",reservation.getId());
         Owner owner = reservation.getOwner();
         owner.setCoins(owner.getCoins() + (int) reservation.getTotalPrice());
@@ -74,10 +108,10 @@ public class CheckPaneController {
     @FXML
     void detail(ActionEvent actionEvent) throws IOException {
         Stage primaryStage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/Employee/CheckIn/Detail.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Navigation.class.getResource("../fxml/Employee/RoomBooking/CheckOut/Detail.fxml"));
         Parent parent = fxmlLoader.load();
         DetailController detailController = fxmlLoader.getController();
-        detailController.setIdText(String.valueOf(reservation.getID()));
+        detailController.setIdText(String.valueOf(reservation.getId()));
         detailController.setNameText(reservation.getOwner().getName());
         detailController.setPhoneText(reservation.getOwner().getPhone());
         detailController.setDateText(reservation.getFrom() + " to " + reservation.getTo());

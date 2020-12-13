@@ -13,6 +13,10 @@ public class ManagerManagement {
     private static ArrayList<Service> services;
     private static User user;
 
+    public static ArrayList<RoomBooking> getUnpaidReservation() throws Exception {
+        return data.getUnpaidReservation();
+    }
+
     public static void updateLogOutStatus() throws SQLException {
         data.updateLogOutStatus(user);
     }
