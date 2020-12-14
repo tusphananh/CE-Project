@@ -87,7 +87,7 @@ public class RoomPickController {
 
     @FXML
     public void sortByCapacity() throws IOException {
-        Collections.sort( RoomBookingManagement.rooms, new Comparator<Room>() {
+        Collections.sort( RoomBookingManagement.availableRooms, new Comparator<Room>() {
             public int compare (Room o1, Room o2) {
                 if (o1.capacity > o2.capacity){
                     return -1;
@@ -105,7 +105,7 @@ public class RoomPickController {
 
     @FXML
     public void sortBySale() throws IOException {
-        Collections.sort( RoomBookingManagement.rooms, new Comparator<Room>() {
+        Collections.sort( RoomBookingManagement.availableRooms, new Comparator<Room>() {
             public int compare (Room o1, Room o2) {
                 if (o1.sale > o2.sale){
                     return -1;

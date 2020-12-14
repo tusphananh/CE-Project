@@ -64,7 +64,7 @@
                               </ImageView>
                               <VBox>
                                  <children>
-                                    <TextField fx:id="phoneTextField" promptText="Phone" style="-fx-background-color: white;" />
+                                    <TextField fx:id="phoneTextField" onKeyPressed="#enter" promptText="Phone" style="-fx-background-color: white;" />
                                     <Separator prefWidth="200.0" />
                                  </children>
                               </VBox>

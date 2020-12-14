@@ -28,6 +28,9 @@ public class BanquetBookingManagement {
     public static double totalPrice;
     private static BanquetBooking reservation;
 
+    public static Owner findCustomerByPhone(String phone) throws SQLException {
+        return data.getCustomerByPhone(phone);
+    }
 
     public static ArrayList<BanquetBooking> getPendingReservation() throws Exception {
         Date date = new Date();

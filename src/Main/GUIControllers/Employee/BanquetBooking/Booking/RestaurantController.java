@@ -7,11 +7,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -51,6 +54,16 @@ public class RestaurantController {
         datePickerConvert();
         basketButton.setOpacity(0);
         loadService();
+    }
+
+    @FXML
+    void enter(KeyEvent keyEvent) throws SQLException {
+        if(keyEvent.getCode() == KeyCode.ENTER){
+            Owner owner = RoomBookingManagement.findCustomerByPhone(phoneTextField.getText());
+            if ( owner != null){
+                nameTextField.setText(owner.getName());
+            }
+        }
     }
 
     void loadService() throws IOException {

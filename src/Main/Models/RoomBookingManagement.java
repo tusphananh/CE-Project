@@ -27,6 +27,10 @@ public class RoomBookingManagement {
     public static double totalPrice;
     private static RoomBooking roomBooking;
 
+    public static Owner findCustomerByPhone(String phone) throws SQLException {
+        return data.getCustomerByPhone(phone);
+    }
+
     private static void resetData(){
         roomBooking = null;
         from = "";

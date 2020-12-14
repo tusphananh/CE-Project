@@ -26,7 +26,7 @@
                   </Text>
                   <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="323.0" style="-fx-background-color: white; -fx-border-color: white;" stylesheets="@../../../../StyleCSS/StyleUI.css">
                      <content>
-                        <VBox fx:id="vstack" fillWidth="false" style="-fx-spacing: 5;">
+                        <VBox fx:id="vstack" alignment="TOP_CENTER" fillWidth="false" style="-fx-spacing: 5;">
                            <padding>
                               <Insets bottom="20.0" left="20.0" top="10.0" />
                            </padding>

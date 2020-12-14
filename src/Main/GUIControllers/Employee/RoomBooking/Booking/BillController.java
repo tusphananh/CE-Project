@@ -7,12 +7,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.ParseException;
 
 public class BillController {
@@ -55,6 +58,16 @@ public class BillController {
             bill_itemController.setPriceLabel(String.valueOf(r.getSalePrice()));
             bill_itemController.setTypeLabel(r.getType());
             vstack.getChildren().add(bill_itemPane);
+        }
+    }
+
+    @FXML
+    void enter(KeyEvent keyEvent) throws SQLException {
+        if(keyEvent.getCode() == KeyCode.ENTER){
+            Owner owner = RoomBookingManagement.findCustomerByPhone(phoneTextField.getText());
+            if ( owner != null){
+                nameTextField.setText(owner.getName());
+            }
         }
     }
 
